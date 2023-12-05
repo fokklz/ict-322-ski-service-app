@@ -1,14 +1,16 @@
 ﻿using SkiServiceApp.Models;
+using System.Collections.ObjectModel;
 
 namespace SkiServiceApp.Interfaces
 {
     public interface IStorageService
     {
-        List<StoredUserCredentials> StoredUsers { get; }
-        string? Token { get; }
+        ObservableCollection<StoredUserCredentials> StoredUsers { get; }
+        ObservableCollection<StoredUserCredentials> ReversedUsers { get; }
 
+        Task InitializeAsync();
         Task SaveChangesAsync();
-        void SetToken(string token);
         void StoreUser(string username, string token, string refreshToken);
+        void RemoveUserByRefreshToken(string refreshToken);
     }
 }

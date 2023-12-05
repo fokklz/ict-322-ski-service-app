@@ -1,9 +1,9 @@
-﻿using PropertyChanged;
-using SkiServiceApp.Common;
+﻿using SkiServiceApp.Common;
+using SkiServiceApp.Interfaces.API;
+using System.Diagnostics;
 
 namespace SkiServiceApp.ViewModels
 {
-    [AddINotifyPropertyChangedInterface]
     public class ListViewModel : BaseViewModel
     {
         public ListViewModel()

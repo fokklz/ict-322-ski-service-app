@@ -4,6 +4,8 @@ using SkiServiceApp.Interfaces;
 using SkiServiceApp.Interfaces.API;
 using SkiServiceApp.Services;
 using SkiServiceApp.Services.API;
+using SkiServiceApp.ViewModels;
+using SkiServiceApp.Views;
 using Syncfusion.Maui.Core.Hosting;
 
 namespace SkiServiceApp
@@ -30,6 +32,8 @@ namespace SkiServiceApp
 
 
             builder.Services.AddSingleton<IStorageService, StorageService>();
+            // all api services need the auth service
+            builder.Services.AddSingleton<IAuthService, AuthService>();
 
             // services without special dependencies
             builder.Services.AddSingleton<IServiceAPIService, ServiceAPIService>();
@@ -40,8 +44,24 @@ namespace SkiServiceApp
             builder.Services.AddSingleton<IUserAPIService, UserAPIService>();
             builder.Services.AddSingleton<IOrderAPIService, OrderAPIService>();
 
+            builder.Services.AddSingleton<AppShellViewModel>();
             builder.Services.AddSingleton<AppShell>();
+
+            builder.Services.AddSingleton<AppLoginViewModel>();
             builder.Services.AddSingleton<AppLogin>();
+
+            builder.Services.AddSingleton<DashboardViewModel>();
+            builder.Services.AddSingleton<DashboardPage>();
+
+            builder.Services.AddSingleton<ListViewModel>();
+            builder.Services.AddSingleton<ListPage>();
+
+            builder.Services.AddSingleton<UserListViewModel>();
+            builder.Services.AddSingleton<UserListPage>();
+
+            builder.Services.AddSingleton<SettingsViewModel>();
+            builder.Services.AddSingleton<SettingsPage>();
+
 
 #if DEBUG
             builder.Logging.AddDebug();

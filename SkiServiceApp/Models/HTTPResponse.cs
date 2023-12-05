@@ -1,12 +1,16 @@
 ﻿using Newtonsoft.Json;
 using SkiServiceApp.Interfaces;
 using SkiServiceModels.DTOs;
-using SkiServiceModels.DTOs.Responses;
 using System.Diagnostics;
 using System.Net;
 
 namespace SkiServiceApp.Models
 {
+    /// <summary>
+    /// Will be returned from the API service to streamline error handling as well as parsing
+    /// ParseSuccess and ParseError will return the parsed response/error
+    /// </summary>
+    /// <typeparam name="TResponse">The type of the response (only applies on success)</typeparam>
     public class HTTPResponse<TResponse> : IHTTPResponse<TResponse>
     {
         /// <summary>

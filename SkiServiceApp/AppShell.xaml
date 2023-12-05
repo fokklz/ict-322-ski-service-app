@@ -4,12 +4,73 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:SkiServiceApp"
-    Shell.FlyoutBehavior="Disabled"
+    xmlns:views="clr-namespace:SkiServiceApp.Views"
+    xmlns:viewModels="clr-namespace:SkiServiceApp.ViewModels"
+    xmlns:componenets="clr-namespace:SkiServiceApp.Components"
+    Shell.FlyoutBehavior="Flyout"
     Title="SkiServiceApp">
 
-    <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
+    <!-- 
+    To make things simple the Route should always be called like the Page class without the Page addon and lowercase, woords should be seperated by a dash
+    for example DashboardPage will get dashboard 
+    for example UserListPage will get user-list
+    -->
+    
+    <Shell.FlyoutHeader>
+        <VerticalStackLayout>
+            <Label 
+                Text="SkiService App"
+                FontSize="{x:OnPlatform Android=24, iOS=22, WinUI=16}"
+                HeightRequest="64"
+                HorizontalTextAlignment="Center"
+                VerticalTextAlignment="Center" />
+        </VerticalStackLayout>
+    </Shell.FlyoutHeader>
+
+    
+    <!-- Default Page -->
+    <FlyoutItem Title="Dashboard">
+        <FlyoutItem.Icon>
+            <FontImageSource 
+                Glyph="&#xf624;" 
+                FontFamily="FASolid"
+                Color="{AppThemeBinding Light={StaticResource Gray900}, Dark={StaticResource White}}" />
+        </FlyoutItem.Icon>
+        <ShellContent Route="dashboard" ContentTemplate="{DataTemplate views:DashboardPage}" />
+    </FlyoutItem>
+    <FlyoutItem Title="List">
+        <FlyoutItem.Icon>
+            <FontImageSource 
+                Glyph="&#xf03a;" 
+                FontFamily="FASolid"
+                Color="{AppThemeBinding Light={StaticResource Gray900}, Dark={StaticResource White}}" />
+        </FlyoutItem.Icon>
+        <ShellContent Route="list" ContentTemplate="{DataTemplate views:ListPage}" />
+    </FlyoutItem>
+    <FlyoutItem Title="UserList">
+        <FlyoutItem.Icon>
+            <FontImageSource 
+                Glyph="&#xf0ae;" 
+                FontFamily="FASolid"
+                Color="{AppThemeBinding Light={StaticResource Gray900}, Dark={StaticResource White}}"/>
+        </FlyoutItem.Icon>
+        <ShellContent Route="user-list" ContentTemplate="{DataTemplate views:UserListPage}" />
+    </FlyoutItem>
+
+    <!-- Add Routes without listing them on the shell (will be custom buttons in the footer) -->
+    <FlyoutItem FlyoutItemIsVisible="False">
+        <ShellContent Route="settings" ContentTemplate="{DataTemplate views:SettingsPage}" />
+    </FlyoutItem>
+
+    <Shell.FlyoutFooter>
+        <VerticalStackLayout>
+            <componenets:CustomFlyoutItem Title="Settings" Icon="&#xf013;" Route="settings" />
+            <componenets:CustomFlyoutItem Title="Logout" Icon="&#xf011;" CustomCommand="{Binding LogoutCommand}" />
+            <HorizontalStackLayout VerticalOptions="Center" HorizontalOptions="Center" Opacity="0.8" Margin="0,10,0,10">
+                <Label Text="Made by Robin and Fokko with " FontSize="12" />
+                <Label Text="&#xf004;" FontFamily="FASolid" Margin="2,1.2,0,0" />
+            </HorizontalStackLayout>
+        </VerticalStackLayout>
+    </Shell.FlyoutFooter>
 
 </Shell>

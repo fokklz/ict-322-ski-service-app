@@ -2,8 +2,14 @@
 
 namespace SkiServiceApp.Common
 {
+    /// <summary>
+    /// Should be to interact with ressources
+    /// </summary>
     internal class RessourceManager
     {
+        /// <summary>
+        /// Register Syncfusion license
+        /// </summary>
         public static void RegisterSyncfusionLicense()
         {
             var assembly = Assembly.GetExecutingAssembly();

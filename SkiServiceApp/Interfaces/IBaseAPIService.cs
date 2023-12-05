@@ -3,7 +3,13 @@ using SkiServiceModels.DTOs.Responses;
 
 namespace SkiServiceApp.Interfaces
 {
-    public interface IBaseAPIService<TCreateRequest, TUpdateRequest, TResponse>
+    public interface IBaseAPIServiceBase
+    {
+        HttpClient Client { get; }
+        void SetAuthorizationHeader(string? token);
+    }
+
+    public interface IBaseAPIService<TCreateRequest, TUpdateRequest, TResponse> : IBaseAPIServiceBase
         where TCreateRequest : class
         where TUpdateRequest : class
         where TResponse : class

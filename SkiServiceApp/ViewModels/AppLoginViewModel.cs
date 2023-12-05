@@ -1,31 +1,68 @@
 ﻿using PropertyChanged;
 using SkiServiceApp.Common;
-using SkiServiceApp.Interfaces.API;
-using SkiServiceModels.DTOs.Requests;
-using System.Diagnostics;
+using SkiServiceApp.Interfaces;
+using SkiServiceApp.Models;
+using SkiServiceModels.DTOs.Responses;
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.Windows.Input;
 
 namespace SkiServiceApp.ViewModels
 {
-    [AddINotifyPropertyChangedInterface]
     public class AppLoginViewModel : BaseViewModel
     {
-        private readonly IUserAPIService _userAPIService;
-        public ICommand LoginCommand { get; set; }
+        private readonly IAuthService _authService;
+        private readonly IStorageService _storageService;
+
+        public ObservableCollection<StoredUserCredentials> ReversedUsers => _storageService.ReversedUsers;
+
+        public bool HasReversedUsers { get; set; } = false;
 
         public bool IsLoginSuccess { get; set; }
-        public string Message { get; set; }
+        public string Message { get; set; } = string.Empty;
+
+        [DependsOn(nameof(IsLoginSuccess), nameof(Message))]
+        public bool IsErrorVisible => !IsLoginSuccess && !string.IsNullOrEmpty(Message);
+
+
         public string Username { get; set; }
         public string Password { get; set; }
 
         public bool RememberMe { get; set; } = true;
-        public bool IsErrorVisible => !IsLoginSuccess;
 
-        public AppLoginViewModel(IUserAPIService userService)
+        public Command<StoredUserCredentials> LoginWithUserCommand { get; set; }
+        public ICommand LoginCommand { get; set; }
+
+        public AppLoginViewModel(IAuthService authService, IStorageService storageService)
         {
-            _userAPIService = userService;
+            _authService = authService;
+            _storageService = storageService;
 
-            LoginCommand = new Command(Login);
+            LoginCommand = new Command(async () => {
+                // hide on screen keyboard before processing login
+                #if ANDROID || IOS
+                MainThread.BeginInvokeOnMainThread(Platforms.KeyboardHelper.HideKeyboard);
+                #endif
+                await Login(); 
+            });
+            LoginWithUserCommand = new Command<StoredUserCredentials>(async (u) => { 
+                await LoginUsingCredentials(u); 
+            });
+
+            ReversedUsers_CollectionChanged(null, null);
+            ReversedUsers.CollectionChanged += ReversedUsers_CollectionChanged;
+        }
+
+        private void ReversedUsers_CollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
+        {
+            if (!ReversedUsers.Any())
+            {
+                HasReversedUsers = false;
+            }
+            else
+            {
+                HasReversedUsers = true;
+            }
         }
 
         public void ResetLoginState()
@@ -37,22 +74,13 @@ namespace SkiServiceApp.ViewModels
             RememberMe = true;
         }
 
-
-        public async void Login()
+        private async Task _handleLogin(HTTPResponse<LoginResponse> res, ICommand command)
         {
-            var res = await _userAPIService.LoginAsync(new LoginRequest()
-            {
-                Username = Username,
-                Password = Password,
-                RememberMe = RememberMe
-            });
-
-            Debug.WriteLine($"Login war {res.IsSuccess} - {res.StatusCode}");
             if (res.IsSuccess)
             {
                 IsLoginSuccess = true;
-                Message = "Login successful";
-                (Application.Current as App).SwitchToMainApp();
+                Message = string.Empty;
+                command?.Execute(null);
             }
             else
             {
@@ -60,6 +88,18 @@ namespace SkiServiceApp.ViewModels
                 IsLoginSuccess = false;
                 Message = error?.MessageCode ?? "Server Error";
             }
+        }
+
+        public async Task LoginUsingCredentials(StoredUserCredentials credentials)
+        {
+            var (res, command) = await _authService.LoginAsyncWithToken(credentials.Token, credentials.RefreshToken);
+            await _handleLogin(res, command);
+        }
+
+        public async Task Login()
+        {
+            var (res, command) = await _authService.LoginAsync(Username, Password, RememberMe);
+            await _handleLogin(res, command);
         }
     }
 }

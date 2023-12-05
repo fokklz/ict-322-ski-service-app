@@ -1,6 +1,5 @@
 ﻿using Microsoft.Extensions.Configuration;
 using SkiServiceApp.Common;
-using SkiServiceApp.Interfaces;
 using SkiServiceApp.Interfaces.API;
 using SkiServiceApp.Models;
 using SkiServiceModels.DTOs.Requests;
@@ -10,11 +9,8 @@ namespace SkiServiceApp.Services.API
 {
     public class UserAPIService : BaseAPIService<CreateUserRequest, UpdateUserRequest, UserResponse>, IUserAPIService
     {
-        private readonly IStorageService _storageService;
-
-        public UserAPIService(IConfiguration configuration, IStorageService storageService) : base(configuration, "users")
+        public UserAPIService(IConfiguration configuration) : base(configuration, "users")
         {
-            _storageService = storageService;
         }
 
         /// <summary>
@@ -22,31 +18,22 @@ namespace SkiServiceApp.Services.API
         /// - The reveived token is stored in the storage service
         /// </summary>
         /// <param name="request">The login information to use</param>
-        /// <returns>The login response of the API (handled - more to be used for messaging and such)</returns>
+        /// <returns>The login response</returns>
         public async Task<HTTPResponse<LoginResponse>> LoginAsync(LoginRequest request)
         {
             var res = await _sendRequest(HttpMethod.Post, _url("login"), request);
-            var loginResponse = new HTTPResponse<LoginResponse>(res);
-            if (loginResponse.IsSuccess)
-            {
-                // we directly process the token here, since we need to store it in the storage service
-                var parsed = await loginResponse.ParseSuccess();
-                if (parsed != null && parsed.Auth != null && parsed.Auth.Token != null)
-                {
-                    if (parsed.Auth.RefreshToken != null)
-                    {
-                        _storageService.StoreUser(request.Username, parsed.Auth.Token, parsed.Auth.RefreshToken);
-                    }
+            return new HTTPResponse<LoginResponse>(res);
+        }
 
-                    _storageService.SetToken(parsed.Auth.Token);
-                    await _storageService.SaveChangesAsync();
-                    return loginResponse;
-                }
-
-                // TODO: this should be handled better
-                throw new Exception("Failed to parse token from login response");
-            }
-            return loginResponse;
+        /// <summary>
+        /// Refresh a user's token
+        /// </summary>
+        /// <param name="request">The refresh-login information to use</param>
+        /// <returns>The login response</returns>
+        public async Task<HTTPResponse<LoginResponse>> RefreshAsync(RefreshRequest request)
+        {
+            var res = await _sendRequest(HttpMethod.Post, _url("refresh"), request);
+            return new HTTPResponse<LoginResponse>(res);
         }
 
         /// <summary>

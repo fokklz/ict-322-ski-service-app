@@ -4,6 +4,7 @@ using SkiServiceApp.Interfaces;
 using SkiServiceApp.Models;
 using SkiServiceModels.DTOs.Responses;
 using System.Diagnostics;
+using System.Net.Http.Headers;
 using System.Text;
 
 namespace SkiServiceApp.Common
@@ -30,6 +31,8 @@ namespace SkiServiceApp.Common
         /// The individual endpoint for the API-Controller of interest
         /// </summary>
         protected readonly string _endpoint;
+
+        public HttpClient Client => _httpClient;
 
         /// <summary>
         /// The HttpClient instance used to send requests to the API
@@ -67,6 +70,45 @@ namespace SkiServiceApp.Common
             {
                 Console.WriteLine("WARNING: API:BaseURL not found in appsettings.json. Using default value: " + _defaultBaseUrl);
                 _baseUrl = _defaultBaseUrl;
+            }
+
+            // Set the authorization header if the user is logged in
+            // there may be a better way to do this - for now this works
+            var app = Application.Current as App;
+            if (app != null)
+            {
+                if (app.IsLoggedIn) _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", app.Token);
+                app.PropertyChanged += (sender, e) =>
+                {
+                    if (e.PropertyName == nameof(app.Token))
+                    {
+                        if (app.IsLoggedIn)
+                        {
+                            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", app.Token);
+                        }
+                        else
+                        {
+                            _httpClient.DefaultRequestHeaders.Authorization = null;
+                        }
+                    }
+                };
+            }
+            
+        }
+
+        /// <summary>
+        /// Set the authorization header for the HttpClient with the given token
+        /// </summary>
+        /// <param name="token"></param>
+        public void SetAuthorizationHeader(string? token)
+        {
+            if(token != null)
+            {
+                _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            }
+            else
+            {
+                _httpClient.DefaultRequestHeaders.Authorization = null;
             }
         }
 

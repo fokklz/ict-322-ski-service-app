@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:SkiServiceApp.Components"
+             x:Class="SkiServiceApp.Components.CustomFlyoutItem"
+             x:Name="self">
+    <ContentView.GestureRecognizers>
+        <TapGestureRecognizer
+                Tapped="TapGestureRecognizer_Tapped"
+                NumberOfTapsRequired="1" />
+    </ContentView.GestureRecognizers>
+
+    <Grid
+        BackgroundColor="Transparent"
+        HeightRequest="49">
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="{x:OnPlatform iOS=50, Default=54, Android=70}" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Image 
+            Grid.Column="0" 
+            Margin="{x:OnPlatform Android='14,0,0,0'}"
+            HorizontalOptions="{x:OnPlatform Android=Start, Default=Center}"
+            VerticalOptions="Center" >
+            <Image.Source>
+                <FontImageSource 
+                    Glyph="{Binding Source={x:Reference self}, Path=Icon}" 
+                    FontFamily="{Binding Source={x:Reference self}, Path=FontFamily}"
+                    Color="{AppThemeBinding Light={StaticResource Gray900}, Dark={StaticResource White}}" />
+            </Image.Source>
+        </Image>
+
+        <Label
+            Grid.Column="1"
+            Text="{Binding Source={x:Reference self}, Path=Title}"
+            FontSize="{x:OnPlatform Android=14, iOS=Small}"
+            TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"
+            VerticalOptions="Center"
+            HorizontalOptions="StartAndExpand" />
+    </Grid>
+</ContentView>

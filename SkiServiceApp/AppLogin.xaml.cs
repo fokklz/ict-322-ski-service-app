@@ -5,11 +5,11 @@ namespace SkiServiceApp;
 
 public partial class AppLogin : ContentPage
 {
-	public AppLogin(IUserAPIService userAPIService)
+	public AppLogin(AppLoginViewModel viewModel)
 	{
 		InitializeComponent();
-		BindingContext = new AppLoginViewModel(userAPIService);
-	}
+        BindingContext = viewModel;
+    }
 
     /// <summary>
     /// Reset the login state when the page appears.
