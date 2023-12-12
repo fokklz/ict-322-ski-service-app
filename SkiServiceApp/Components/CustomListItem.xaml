@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SkiServiceApp.Components.CustomListItem">
+    <Frame Padding="10" Margin="10,0,10,15" CornerRadius="5" BorderColor="Black">
+        <Grid ColumnSpacing="10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <StackLayout Grid.Column="0" Spacing="5">
+                <Label Text="{Binding PriorityService}" FontAttributes="Bold"/>
+                <Label Text="{Binding RemainingDaysAssignment}"/>
+            </StackLayout>
+
+            <Button Grid.Column="1" Text="Übernehmen" Command="{Binding AssignCommand}" CommandParameter="{Binding Id}" VerticalOptions="End" />
+        </Grid>
+    </Frame>
+</ContentView>
