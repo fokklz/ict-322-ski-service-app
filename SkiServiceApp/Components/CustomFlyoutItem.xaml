@@ -23,7 +23,9 @@
             Grid.Column="0" 
             Margin="{x:OnPlatform Android='14,0,0,0'}"
             HorizontalOptions="{x:OnPlatform Android=Start, Default=Center}"
-            VerticalOptions="Center" >
+            VerticalOptions="Center"
+            HeightRequest="{x:OnPlatform Android=24, iOS=22, WinUI=16}"
+            WidthRequest="{x:OnPlatform Android=24, iOS=22, WinUI=16}" >
             <Image.Source>
                 <FontImageSource 
                     Glyph="{Binding Source={x:Reference self}, Path=Icon}" 

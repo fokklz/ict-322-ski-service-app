@@ -6,6 +6,8 @@ namespace SkiServiceApp.Common
     /// <summary>
     /// Not yet fully sure how this will be done, since we use Fody.PropertyChanged
     /// For now, this works as is for each ViewModel as a base class
+    /// 
+    /// It is used to notify the UI that a property has changed & will be automatically applied to all public get/set Properties of the class
     /// </summary>
     public class BaseViewModel : INotifyPropertyChanged
     {

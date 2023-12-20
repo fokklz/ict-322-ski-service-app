@@ -8,6 +8,7 @@ namespace SkiServiceApp.Interfaces.API
     {
         Task<HTTPResponse<LoginResponse>> LoginAsync(LoginRequest request);
         Task<HTTPResponse<LoginResponse>> RefreshAsync(RefreshRequest request);
+        Task<HTTPResponse<UserResponse>> RevokeAsync();
         Task<HTTPResponse<UserResponse>> UnlockUser(int userId);
     }
 }

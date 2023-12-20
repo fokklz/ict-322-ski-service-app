@@ -35,16 +35,22 @@ namespace SkiServiceApp
             // service with dependencies on the above services
             builder.Services.AddSingleton<IUserAPIService, UserAPIService>();
             builder.Services.AddSingleton<IOrderAPIService, OrderAPIService>();
+
             builder.Services.AddSingleton<AppShellViewModel>();
             builder.Services.AddSingleton<AppShell>();
+
             builder.Services.AddSingleton<AppLoginViewModel>();
             builder.Services.AddSingleton<AppLogin>();
+
             builder.Services.AddSingleton<DashboardViewModel>();
             builder.Services.AddSingleton<DashboardPage>();
+
             builder.Services.AddSingleton<ListViewModel>();
             builder.Services.AddSingleton<ListPage>();
+
             builder.Services.AddSingleton<UserListViewModel>();
             builder.Services.AddSingleton<UserListPage>();
+
             builder.Services.AddSingleton<SettingsViewModel>();
             builder.Services.AddSingleton<SettingsPage>();
 #if DEBUG
@@ -52,5 +58,6 @@ namespace SkiServiceApp
 #endif
             return builder.Build();
         }
+
     }
 }
