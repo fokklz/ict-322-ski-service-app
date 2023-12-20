@@ -75,12 +75,8 @@ namespace SkiServiceApp.ViewModels
                 return;
             }
 
-            // Navigieren Sie zur Detailansicht und übergeben Sie das ServiceDataModel-Objekt.
-            var navigationParameter = new Dictionary<string, object>
-            {
-                { "Service", service }
-            };
-            await Shell.Current.GoToAsync(nameof(ServiceDetailView), navigationParameter);
+            // Navigieren Sie zur Detailansicht und übergeben Sie die ServiceId als Query-Parameter.
+            await Shell.Current.GoToAsync($"{nameof(ServiceDetailView)}?ServiceId={service.Id}");
         }
 
 

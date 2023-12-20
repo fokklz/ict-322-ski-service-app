@@ -9,12 +9,12 @@ namespace SkiServiceApp.ViewModels
 {
     public class ServiceDetailViewModel : BaseViewModel
     {
-        private ServiceDataModel _serviceData;
+        private ServiceDataModel _service;
 
-        public ServiceDataModel ServiceData
+        public ServiceDataModel Service
         {
-            get => _serviceData;
-            set => SetProperty(ref _serviceData, value);
+            get => _service;
+            set => SetProperty(ref _service, value);
         }
 
         public ICommand CancelCommand { get; private set; }
@@ -28,9 +28,22 @@ namespace SkiServiceApp.ViewModels
             StatusCommand = new Command(ExecuteStatusCommand);
         }
 
-        public void LoadServiceDetails(ServiceDataModel serviceData)
+        public void LoadServiceDetails(int serviceId)
         {
-            ServiceData = serviceData;
+            var testData = new ServiceDataModel
+            {
+                Id = serviceId,
+                Priority = "Standard",
+                Service = "Grosser Service",
+                RemainingDays = "5",
+                isAssigned = true,
+                CustomerName = "Max Jupiter",
+                Email = "max.jupiter@example.com",
+                PhoneNumber = "0761726172",
+                SubmissionDate = new DateTime(2023, 12, 11)
+            };
+
+            Service = testData;
         }
 
         private void ExecuteCancelCommand()
