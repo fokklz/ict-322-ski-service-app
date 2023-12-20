@@ -21,8 +21,30 @@ namespace SkiServiceApp.ViewModels
 
         private void LoadData()
         {
-            // Test Daten
-            Items.Add(new ServiceDataModel { Priority = "Standard", Service = "Kleiner Service", RemainingDays = "3", IsAssigned = "Nicht zugewiesen" });
+            Items.Add(new ServiceDataModel
+            {
+                Id = 3,
+                Priority = "Standard",
+                Service = "Kleiner Service",
+                RemainingDays = "3",
+                isAssigned = false,
+                CustomerName = "Max Mustermann",
+                Email = "max.mustermann@example.com",
+                PhoneNumber = "0123456789",
+                SubmissionDate = new DateTime(2023, 12, 11)
+            });
+            Items.Add(new ServiceDataModel
+            {
+                Id = 5,
+                Priority = "Hoch",
+                Service = "Großer Service",
+                RemainingDays = "5",
+                isAssigned = false,
+                CustomerName = "Erika Musterfrau",
+                Email = "erika.musterfrau@example.com",
+                PhoneNumber = "0987654321",
+                SubmissionDate = new DateTime(2023, 12, 12)
+            });
         }
 
         private void AssignItem(int id)

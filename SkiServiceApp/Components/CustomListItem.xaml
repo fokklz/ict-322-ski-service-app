@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModels="clr-namespace:SkiServiceApp.ViewModels;assembly=SkiServiceApp"
              x:Class="SkiServiceApp.Components.CustomListItem">
     <Frame Padding="10" Margin="10,0,10,15" CornerRadius="5" BorderColor="Black">
         <Grid ColumnSpacing="10">
@@ -14,7 +15,20 @@
                 <Label Text="{Binding RemainingDaysAssignment}"/>
             </StackLayout>
 
-            <Button Grid.Column="1" Text="Übernehmen" Command="{Binding AssignCommand}" CommandParameter="{Binding Id}" VerticalOptions="End" />
+			<!-- if Service is unassigned -->
+			<Button Grid.Column="1" Text="Übernehmen"
+                    IsVisible="{Binding isAssigned, Converter={StaticResource InverseBoolConverter}}"
+                    Command="{Binding AssignCommand}" CommandParameter="{Binding Id}"
+                    VerticalOptions="End" />
+
+			<!-- if Service is assigned -->
+			<StackLayout Grid.Column="1" IsVisible="{Binding isAssigned}">
+				<Button Text="Ändern" Command="{Binding ChangeCommand}" CommandParameter="{Binding Id}" />
+                <Button Text="Bearbeiten"
+                    Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:UserListViewModel}}, Path=EditCommand}"
+                    CommandParameter="{Binding .}" />
+
+            </StackLayout>
         </Grid>
     </Frame>
 </ContentView>

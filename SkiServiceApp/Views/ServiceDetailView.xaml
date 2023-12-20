@@ -1,0 +1,57 @@
+﻿<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SkiServiceApp.Views.ServiceDetailView"
+             Title="Detailansicht">
+
+    <Grid RowSpacing="0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <VerticalStackLayout Grid.Row="0" Spacing="20" Padding="15">
+            <Label Text="{Binding Service}"
+                   FontSize="24"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center" />
+            <Label Text="{Binding Priority} - {Binding Status}"
+                   FontSize="20"
+                   HorizontalOptions="Center"
+                   Margin="0,0,0,10" />
+
+            <Frame BorderColor="Black" Padding="10" CornerRadius="5">
+                <Grid RowSpacing="10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Label Grid.Row="0" Grid.Column="0" Text="Kundenname" FontAttributes="Bold" />
+                    <Label Grid.Row="0" Grid.Column="1" Text="{Binding CustomerName}" />
+
+                    <Label Grid.Row="1" Grid.Column="0" Text="E-mail" FontAttributes="Bold" />
+                    <Label Grid.Row="1" Grid.Column="1" Text="{Binding Email}" />
+
+                    <Label Grid.Row="2" Grid.Column="0" Text="Telefon" FontAttributes="Bold" />
+                    <Label Grid.Row="2" Grid.Column="1" Text="{Binding PhoneNumber}" />
+
+                    <Label Grid.Row="3" Grid.Column="0" Text="Gestellt am." FontAttributes="Bold" />
+                    <Label Grid.Row="3" Grid.Column="1" Text="{Binding SubmissionDateFormatted}" />
+                </Grid>
+            </Frame>
+        </VerticalStackLayout>
+
+        <StackLayout Grid.Row="1" VerticalOptions="End" Spacing="10" Padding="15">
+            <Button Text="Stornieren" Command="{Binding CancelCommand}" Style="{StaticResource PrimaryButton}" />
+            <Button Text="Ändern" Command="{Binding EditCommand}" Style="{StaticResource PrimaryButton}" />
+            <Button Text="InBearbeitung" Command="{Binding ProcessCommand}" Style="{StaticResource PrimaryButton}" />
+        </StackLayout>
+    </Grid>
+
+</ContentPage>
