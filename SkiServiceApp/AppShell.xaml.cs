@@ -10,7 +10,7 @@ namespace SkiServiceApp
         public AppShell(AppShellViewModel viewModel)
         {
             InitializeComponent();
-            Routing.RegisterRoute(nameof(ServiceDetailView), typeof(ServiceDetailView));
+            Routing.RegisterRoute(nameof(OrderDetailPage), typeof(OrderDetailPage));
             BindingContext = viewModel;
         }
     }

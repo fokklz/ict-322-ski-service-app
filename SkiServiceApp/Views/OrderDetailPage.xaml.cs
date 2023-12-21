@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace SkiServiceApp.Views
 {
     [QueryProperty(nameof(ServiceId), nameof(ServiceId))]
-    public partial class ServiceDetailView : ContentPage
+    public partial class OrderDetailPage : ContentPage
     {
         private int _serviceId;
 
@@ -24,16 +24,16 @@ namespace SkiServiceApp.Views
                 {
                     _serviceId = value;
                     OnPropertyChanged(nameof(ServiceId));
-                    var vm = (ServiceDetailViewModel)this.BindingContext;
+                    var vm = (OrderDetailViewModel)this.BindingContext;
                     vm?.LoadServiceDetails(_serviceId);
                 }
             }
         }
 
-        public ServiceDetailView()
+        public OrderDetailPage()
         {
             InitializeComponent();
-            BindingContext = new ServiceDetailViewModel();
+            BindingContext = new OrderDetailViewModel();
         }
     }
 

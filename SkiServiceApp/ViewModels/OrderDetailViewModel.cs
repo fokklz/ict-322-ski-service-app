@@ -4,14 +4,15 @@ using System.Windows.Input;
 using System.Threading.Tasks;
 using System.Diagnostics;
 using SkiServiceApp.Resources.Helper;
+using SkiServiceModels.DTOs.Responses;
 
 namespace SkiServiceApp.ViewModels
 {
-    public class ServiceDetailViewModel : BaseViewModel
+    public class OrderDetailViewModel : BaseViewModel
     {
-        private ServiceDataModel _service;
+        private OrderResponse _service;
 
-        public ServiceDataModel Service
+        public OrderResponse Service
         {
             get => _service;
             set => SetProperty(ref _service, value);
@@ -21,7 +22,7 @@ namespace SkiServiceApp.ViewModels
         public ICommand EditCommand { get; private set; }
         public ICommand StatusCommand { get; private set; }
 
-        public ServiceDetailViewModel()
+        public OrderDetailViewModel()
         {
             CancelCommand = new Command(ExecuteCancelCommand);
             EditCommand = new Command(ExecuteEditCommand);
@@ -30,20 +31,7 @@ namespace SkiServiceApp.ViewModels
 
         public void LoadServiceDetails(int serviceId)
         {
-            var testData = new ServiceDataModel
-            {
-                Id = serviceId,
-                Priority = "Standard",
-                Service = "Grosser Service",
-                RemainingDays = "5",
-                isAssigned = true,
-                CustomerName = "Max Jupiter",
-                Email = "max.jupiter@example.com",
-                PhoneNumber = "0761726172",
-                SubmissionDate = new DateTime(2023, 12, 11)
-            };
-
-            Service = testData;
+            // Data
         }
 
         private void ExecuteCancelCommand()
