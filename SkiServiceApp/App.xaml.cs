@@ -31,7 +31,9 @@ namespace SkiServiceApp
             MainAppLogin = serviceProvider.GetService<AppLogin>();
             // ensure the login page will only turn visible with the animation
             // setting opacity to 0 will hide it until the animation is called
+# if ANDROID || IOS
             MainAppLogin.Opacity = 0;
+#endif
 
             MainPage = MainAppLogin;
 
@@ -125,6 +127,8 @@ namespace SkiServiceApp
         /// <returns>Nothing</returns>
         private async Task _animatePageTransition(Page newPage, bool isAppearing)
         {
+
+#if ANDROID || IOS
             if (isAppearing)
             {
                 // Fade out and scale down the current page
@@ -150,6 +154,7 @@ namespace SkiServiceApp
                     newPage.ScaleTo(1, 250)
                 );
             }
+#endif
         }
     }
 }
