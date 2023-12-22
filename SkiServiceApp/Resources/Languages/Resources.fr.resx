@@ -118,95 +118,96 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AppLogin.LatestLoginLabel" xml:space="preserve">
-    <value>Zuletzt angemeldet:</value>
+    <value>Dernière connexion: </value>
   </data>
   <data name="AppLogin.LatestUsedLabel" xml:space="preserve">
-    <value>Zuletzt verwendet am: </value>
+    <value>Dernière utilisation: </value>
   </data>
   <data name="AppLogin.PasswordLabel" xml:space="preserve">
-    <value>Passwort</value>
+    <value>Mot de passe </value>
   </data>
   <data name="AppLogin.SigninButton" xml:space="preserve">
-    <value>Einloggen</value>
+    <value>Connexion </value>
   </data>
   <data name="AppLogin.SigninLabel" xml:space="preserve">
-    <value>Anmelden</value>
+    <value>Connexion </value>
   </data>
   <data name="AppLogin.UsernameLabel" xml:space="preserve">
-    <value>Benutzername</value>
+    <value>Nom d'utilisateur </value>
   </data>
   <data name="AppShell.FlyoutItem.DashboardButton" xml:space="preserve">
-    <value>Dashboard</value>
+    <value>Tableau de bord </value>
   </data>
   <data name="AppShell.FlyoutItem.ListButton" xml:space="preserve">
-    <value>Liste</value>
+    <value>Liste </value>
   </data>
   <data name="AppShell.FlyoutItem.LogoutButton" xml:space="preserve">
-    <value>Ausloggen</value>
+    <value>Annulation </value>
   </data>
   <data name="AppShell.FlyoutItem.SettingsButton" xml:space="preserve">
-    <value>Einstellungen</value>
+    <value>Configuration </value>
   </data>
   <data name="AppShell.FlyoutItem.UserListButton" xml:space="preserve">
-    <value>Deine Aufträge</value>
+    <value>Tes Tâches</value>
   </data>
   <data name="CANNOT_UNLOCK_SELF" xml:space="preserve">
-    <value>Du kannst deinen eigenen Account nicht freigeben. Wende dich an den Administrator.</value>
-    <comment>Fehlermeldung, falls du deinen eigenen Benutzer entblocken willst</comment>
+    <value>Vous ne pouvez pas débloquer votre propre compte. Veuillez contacter l'administrateur. </value>
+    <comment>Si vous souhaitez déverrouiller vos propres utilisateurs, un message d'erreur apparaîtra </comment>
   </data>
   <data name="CustomListItem.ApplyButton" xml:space="preserve">
-    <value>Übernehmen</value>
+    <value>Application </value>
   </data>
   <data name="CustomListItem.ChangeButton" xml:space="preserve">
-    <value>Ändern</value>
+    <value>Changement </value>
   </data>
   <data name="ENTRY_NOT_FOUND" xml:space="preserve">
-    <value>Eintrag konnte nicht gefunden werden.</value>
-    <comment>Fehlermeldung, falls ein Auftrag oder ähnliches nicht gefunden werden konnte</comment>
+    <value>Aucune entrée trouvée. </value>
+    <comment>Afficher un message d'erreur si aucun travail, etc. n'est trouvé </comment>
   </data>
   <data name="INVALID_CREDENTIALS" xml:space="preserve">
-    <value>Der eingegebene Benutzername oder Passwort ist falsch.</value>
-    <comment>Fehlermeldung, falls Benutzername oder Passwort beim Einloggen falsch sind</comment>
+    <value>Le nom d'utilisateur ou le mot de passe entré est incorrect. </value>
+    <comment>Afficher un message d'erreur si le nom d'utilisateur ou le mot de passe est incorrect lors de la connexion </comment>
   </data>
   <data name="OrderDetailPage.CancelButton" xml:space="preserve">
-    <value>Stornieren</value>
+    <value>Annulé </value>
   </data>
   <data name="OrderDetailPage.ChangeButton" xml:space="preserve">
-    <value>Ändern</value>
+    <value>Changement </value>
   </data>
   <data name="OrderDetailPage.CustomernameLabel" xml:space="preserve">
-    <value>Kundenname</value>
+    <value>Nom du client </value>
   </data>
   <data name="OrderDetailPage.DateLabel" xml:space="preserve">
-    <value>Gestellt am:</value>
+    <value>Date de publication: </value>
   </data>
   <data name="OrderDetailPage.EmailLabel" xml:space="preserve">
-    <value>E-Mail</value>
+    <value>Courrier électronique </value>
   </data>
   <data name="OrderDetailPage.PhoneLabel" xml:space="preserve">
-    <value>Telefon</value>
+    <value>Téléphone </value>
   </data>
   <data name="SettingsPage.AlwaysSaveLoginLabel" xml:space="preserve">
-    <value>Login immer speichern</value>
+    <value>Toujours enregistrer le nom de connexion </value>
   </data>
   <data name="SettingsPage.CancelInListViewLabel" xml:space="preserve">
-    <value>Stornieren in Listenansicht</value>
+    <value>Annuler dans la vue en liste </value>
   </data>
   <data name="SettingsPage.LogoutOnAllDevicesButton" xml:space="preserve">
-    <value>Auf ALLEN Geräten ausloggen</value>
+    <value>Annulation de tout le matériel </value>
   </data>
   <data name="SettingsPage.ThemeLabel" xml:space="preserve">
-    <value>Theme</value>
+    <value>Thème </value>
   </data>
   <data name="SettingsPage_LanguageLabel" xml:space="preserve">
-    <value>Sprache</value>
+    <value>Langue</value>
   </data>
   <data name="USER_LOCKED" xml:space="preserve">
-    <value>Dieser Account ist blockiert. Wende dich an den Administrator.</value>
-    <comment>Fehlermeldung, falls der Benutzer blockiert ist</comment>
+    <value>Ce compte a été bloqué. Veuillez contacter l'administrateur. </value>
+    <comment> 
+Afficher un message d'erreur si l'utilisateur est bloqué </comment>
   </data>
   <data name="USER_NOT_LOCKED" xml:space="preserve">
-    <value>Der Benutzer ist nicht geblockt.</value>
-    <comment>Fehlermeldung, falls ein Benutzer entblockt werden soll, der noch nicht geblockt ist</comment>
+    <value>L'utilisateur n'est pas bloqué. </value>
+    <comment>Un message d'erreur s'affiche si vous souhaitez déverrouiller un utilisateur non bloqué</comment>
   </data>
 </root>

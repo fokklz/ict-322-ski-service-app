@@ -2,6 +2,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:components="clr-namespace:SkiServiceApp.Components;assembly=SkiServiceApp"
              xmlns:viewModels="clr-namespace:SkiServiceApp.ViewModels;assembly=SkiServiceApp"
+             xmlns:res="clr-namespace:SkiServiceApp.Resources.Languages"
              x:Class="SkiServiceApp.Views.UserListPage"
              Title="UserListPage">
 

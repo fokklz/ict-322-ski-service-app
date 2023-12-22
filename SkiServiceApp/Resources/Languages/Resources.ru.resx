@@ -118,95 +118,96 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AppLogin.LatestLoginLabel" xml:space="preserve">
-    <value>Zuletzt angemeldet:</value>
+    <value>Последний вход: </value>
   </data>
   <data name="AppLogin.LatestUsedLabel" xml:space="preserve">
-    <value>Zuletzt verwendet am: </value>
+    <value>Последнее использование: </value>
   </data>
   <data name="AppLogin.PasswordLabel" xml:space="preserve">
-    <value>Passwort</value>
+    <value>пароль </value>
   </data>
   <data name="AppLogin.SigninButton" xml:space="preserve">
-    <value>Einloggen</value>
+    <value>войти </value>
   </data>
   <data name="AppLogin.SigninLabel" xml:space="preserve">
-    <value>Anmelden</value>
+    <value>войти </value>
   </data>
   <data name="AppLogin.UsernameLabel" xml:space="preserve">
-    <value>Benutzername</value>
+    <value>имя пользователя </value>
   </data>
   <data name="AppShell.FlyoutItem.DashboardButton" xml:space="preserve">
-    <value>Dashboard</value>
+    <value>панель приборов </value>
   </data>
   <data name="AppShell.FlyoutItem.ListButton" xml:space="preserve">
-    <value>Liste</value>
+    <value>Список </value>
   </data>
   <data name="AppShell.FlyoutItem.LogoutButton" xml:space="preserve">
-    <value>Ausloggen</value>
+    <value>аннулировать </value>
   </data>
   <data name="AppShell.FlyoutItem.SettingsButton" xml:space="preserve">
-    <value>Einstellungen</value>
+    <value>настройка </value>
   </data>
   <data name="AppShell.FlyoutItem.UserListButton" xml:space="preserve">
-    <value>Deine Aufträge</value>
+    <value>Ваша задача </value>
   </data>
   <data name="CANNOT_UNLOCK_SELF" xml:space="preserve">
-    <value>Du kannst deinen eigenen Account nicht freigeben. Wende dich an den Administrator.</value>
-    <comment>Fehlermeldung, falls du deinen eigenen Benutzer entblocken willst</comment>
+    <value>Отменить блокировку собственного аккаунта нельзя. Пожалуйста, свяжитесь с администратором. </value>
+    <comment>Если вы хотите разблокировать вашего пользователя, появится сообщение об ошибке </comment>
   </data>
   <data name="CustomListItem.ApplyButton" xml:space="preserve">
-    <value>Übernehmen</value>
+    <value>применение </value>
   </data>
   <data name="CustomListItem.ChangeButton" xml:space="preserve">
-    <value>Ändern</value>
+    <value>изменять </value>
   </data>
   <data name="ENTRY_NOT_FOUND" xml:space="preserve">
-    <value>Eintrag konnte nicht gefunden werden.</value>
-    <comment>Fehlermeldung, falls ein Auftrag oder ähnliches nicht gefunden werden konnte</comment>
+    <value>Запись не найдена. </value>
+    <comment>Показывать сообщение об ошибке, если задание не найдено и т.д. </comment>
   </data>
   <data name="INVALID_CREDENTIALS" xml:space="preserve">
-    <value>Der eingegebene Benutzername oder Passwort ist falsch.</value>
-    <comment>Fehlermeldung, falls Benutzername oder Passwort beim Einloggen falsch sind</comment>
+    <value>Неверное имя пользователя или пароль. </value>
+    <comment>Показывать сообщение об ошибке, если имя пользователя или пароль неверны при входе в систему </comment>
   </data>
   <data name="OrderDetailPage.CancelButton" xml:space="preserve">
-    <value>Stornieren</value>
+    <value>отмена </value>
   </data>
   <data name="OrderDetailPage.ChangeButton" xml:space="preserve">
-    <value>Ändern</value>
+    <value>изменять </value>
   </data>
   <data name="OrderDetailPage.CustomernameLabel" xml:space="preserve">
-    <value>Kundenname</value>
+    <value>Наименование клиента </value>
   </data>
   <data name="OrderDetailPage.DateLabel" xml:space="preserve">
-    <value>Gestellt am:</value>
+    <value>Дата выхода: </value>
   </data>
   <data name="OrderDetailPage.EmailLabel" xml:space="preserve">
-    <value>E-Mail</value>
+    <value>электронная почта </value>
   </data>
   <data name="OrderDetailPage.PhoneLabel" xml:space="preserve">
-    <value>Telefon</value>
+    <value>Телефон </value>
   </data>
   <data name="SettingsPage.AlwaysSaveLoginLabel" xml:space="preserve">
-    <value>Login immer speichern</value>
+    <value>Сохранять логин всегда </value>
   </data>
   <data name="SettingsPage.CancelInListViewLabel" xml:space="preserve">
-    <value>Stornieren in Listenansicht</value>
+    <value>Отменить в виде списка </value>
   </data>
   <data name="SettingsPage.LogoutOnAllDevicesButton" xml:space="preserve">
-    <value>Auf ALLEN Geräten ausloggen</value>
+    <value>списать все оборудование </value>
   </data>
   <data name="SettingsPage.ThemeLabel" xml:space="preserve">
-    <value>Theme</value>
+    <value>Тема </value>
   </data>
   <data name="SettingsPage_LanguageLabel" xml:space="preserve">
-    <value>Sprache</value>
+    <value>Язык</value>
   </data>
   <data name="USER_LOCKED" xml:space="preserve">
-    <value>Dieser Account ist blockiert. Wende dich an den Administrator.</value>
-    <comment>Fehlermeldung, falls der Benutzer blockiert ist</comment>
+    <value>Этот аккаунт заблокирован. Пожалуйста, свяжитесь с администратором. </value>
+    <comment> 
+Показывать сообщение об ошибке, если пользователь заблокирован </comment>
   </data>
   <data name="USER_NOT_LOCKED" xml:space="preserve">
-    <value>Der Benutzer ist nicht geblockt.</value>
-    <comment>Fehlermeldung, falls ein Benutzer entblockt werden soll, der noch nicht geblockt ist</comment>
+    <value>Пользователи не были заблокированы. </value>
+    <comment>Показывать сообщение об ошибке, если вы хотите разблокировать незаблокированного пользователя</comment>
   </data>
 </root>

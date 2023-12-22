@@ -4,6 +4,7 @@
              xmlns:local="clr-namespace:SkiServiceApp"
              xmlns:viewModel="clr-namespace:SkiServiceApp.ViewModels"
              xmlns:model="clr-namespace:SkiServiceApp.Models"
+             xmlns:res="clr-namespace:SkiServiceApp.Resources.Languages"
              x:Class="SkiServiceApp.AppLogin"
              Title="AppLogin">
 
@@ -39,7 +40,7 @@
         <!-- Start of Content -->
         <VerticalStackLayout Style="{StaticResource Header}">
             <Label 
-                Text="Anmelden" 
+                Text="{x:Static res:Resources.AppLogin_SigninLabel}"
                 Style="{StaticResource HeaderLabel}"/>
         </VerticalStackLayout>
 
@@ -70,14 +71,14 @@
         <!-- Start of form -->
         <VerticalStackLayout Margin="0,0,0,10">
             <Label 
-                Text="Benutzername" 
+                Text="{x:Static res:Resources.AppLogin_UsernameLabel}" 
                 Margin="4,0,0,-4"/>
             <Entry 
                 Text="{Binding Username, Mode=TwoWay}" />
         </VerticalStackLayout>
         <VerticalStackLayout Margin="0,0,0,10">
             <Label 
-                Text="Passwort" 
+                Text="{x:Static res:Resources.AppLogin_PasswordLabel}"
                 Margin="4,0,0,-4"/>
             <Entry 
                 Text="{Binding Password, Mode=TwoWay}" 
@@ -85,7 +86,7 @@
         </VerticalStackLayout>
         <Button 
             Command="{Binding LoginCommand}" 
-            Text="Login" 
+            Text="{x:Static res:Resources.AppLogin_SigninButton}" 
             HorizontalOptions="End"/>
 
         <!-- Lower part of the login screen -->
@@ -93,7 +94,7 @@
             <Border Style="{StaticResource Divier}" />
             <VerticalStackLayout Style="{StaticResource Header}">
                 <Label 
-                    Text="Zuvor angemeldet" 
+                    Text="{x:Static res:Resources.AppLogin_LatestLoginLabel}" 
                     Style="{StaticResource HeaderLabel}"/>
             </VerticalStackLayout>
 
@@ -116,7 +117,7 @@
                             <!-- Last login -->
                             <HorizontalStackLayout Grid.Row="1">
                                 <Label 
-                                    Text="Zuletzt verwendet am " 
+                                    Text="{x:Static res:Resources.AppLogin_LatestUsedLabel}"
                                     Opacity="0.4" />
                                 <Label 
                                     Text="{Binding LastLogin, StringFormat='{0:dd.MM.yyyy}'}"

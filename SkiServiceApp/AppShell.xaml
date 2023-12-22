@@ -7,6 +7,7 @@
     xmlns:views="clr-namespace:SkiServiceApp.Views"
     xmlns:viewModels="clr-namespace:SkiServiceApp.ViewModels"
     xmlns:componenets="clr-namespace:SkiServiceApp.Components"
+    xmlns:res="clr-namespace:SkiServiceApp.Resources.Languages"
     Shell.FlyoutBehavior="Flyout"
     Title="SkiServiceApp">
 
@@ -29,7 +30,7 @@
 
 
     <!-- Default Page -->
-    <FlyoutItem Title="Dashboard">
+    <FlyoutItem Title="{x:Static res:Resources.AppShell_FlyoutItem_DashboardButton}">
         <FlyoutItem.Icon>
             <FontImageSource 
                 Glyph="&#xf624;" 
@@ -38,7 +39,7 @@
         </FlyoutItem.Icon>
         <ShellContent Route="dashboard" ContentTemplate="{DataTemplate views:DashboardPage}" />
     </FlyoutItem>
-    <FlyoutItem Title="List">
+    <FlyoutItem Title="{x:Static res:Resources.AppShell_FlyoutItem_ListButton}">
         <FlyoutItem.Icon>
             <FontImageSource 
                 Glyph="&#xf03a;" 
@@ -47,7 +48,7 @@
         </FlyoutItem.Icon>
         <ShellContent Route="list" ContentTemplate="{DataTemplate views:ListPage}" />
     </FlyoutItem>
-    <FlyoutItem Title="UserList">
+    <FlyoutItem Title="{x:Static res:Resources.AppShell_FlyoutItem_UserListButton}">
         <FlyoutItem.Icon>
             <FontImageSource 
                 Glyph="&#xf0ae;" 
@@ -64,8 +65,8 @@
 
     <Shell.FlyoutFooter>
         <VerticalStackLayout>
-            <componenets:CustomFlyoutItem Title="Settings" Icon="&#xf013;" Route="settings" />
-            <componenets:CustomFlyoutItem Title="Logout" Icon="&#xf011;" CustomCommand="{Binding LogoutCommand}" />
+            <componenets:CustomFlyoutItem Title="{x:Static res:Resources.AppShell_FlyoutItem_SettingsButton}" Icon="&#xf013;" Route="settings" />
+            <componenets:CustomFlyoutItem Title="{x:Static res:Resources.AppShell_FlyoutItem_LogoutButton}" Icon="&#xf011;" CustomCommand="{Binding LogoutCommand}" />
             <HorizontalStackLayout VerticalOptions="Center" HorizontalOptions="Center" Opacity="0.8" Margin="0,10,0,10">
                 <Label Text="Made by Robin and Fokko with " FontSize="12" />
                 <Label Text="&#xf004;" FontFamily="FASolid" Margin="2,1.2,0,0" />

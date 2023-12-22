@@ -118,95 +118,96 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AppLogin.LatestLoginLabel" xml:space="preserve">
-    <value>Zuletzt angemeldet:</value>
+    <value>Ostatnie logowanie: </value>
   </data>
   <data name="AppLogin.LatestUsedLabel" xml:space="preserve">
-    <value>Zuletzt verwendet am: </value>
+    <value>Ostatnie użycie: </value>
   </data>
   <data name="AppLogin.PasswordLabel" xml:space="preserve">
-    <value>Passwort</value>
+    <value>Hasło: </value>
   </data>
   <data name="AppLogin.SigninButton" xml:space="preserve">
-    <value>Einloggen</value>
+    <value>Zaloguj się </value>
   </data>
   <data name="AppLogin.SigninLabel" xml:space="preserve">
-    <value>Anmelden</value>
+    <value>Zaloguj się </value>
   </data>
   <data name="AppLogin.UsernameLabel" xml:space="preserve">
-    <value>Benutzername</value>
+    <value>Nazwa użytkownika </value>
   </data>
   <data name="AppShell.FlyoutItem.DashboardButton" xml:space="preserve">
-    <value>Dashboard</value>
+    <value>Deska rozdzielcza </value>
   </data>
   <data name="AppShell.FlyoutItem.ListButton" xml:space="preserve">
-    <value>Liste</value>
+    <value>Lista </value>
   </data>
   <data name="AppShell.FlyoutItem.LogoutButton" xml:space="preserve">
-    <value>Ausloggen</value>
+    <value>Wyloguj się </value>
   </data>
   <data name="AppShell.FlyoutItem.SettingsButton" xml:space="preserve">
-    <value>Einstellungen</value>
+    <value>Ustawienia: </value>
   </data>
   <data name="AppShell.FlyoutItem.UserListButton" xml:space="preserve">
-    <value>Deine Aufträge</value>
+    <value>Twoja misja. </value>
   </data>
   <data name="CANNOT_UNLOCK_SELF" xml:space="preserve">
-    <value>Du kannst deinen eigenen Account nicht freigeben. Wende dich an den Administrator.</value>
-    <comment>Fehlermeldung, falls du deinen eigenen Benutzer entblocken willst</comment>
+    <value>Nie możesz anulować zablokowanego konta. Skontaktuj się z administratorem. </value>
+    <comment>Jeśli chcesz odblokować własnych użytkowników, pojawi się komunikat o błędzie </comment>
   </data>
   <data name="CustomListItem.ApplyButton" xml:space="preserve">
-    <value>Übernehmen</value>
+    <value>Aplikacja </value>
   </data>
   <data name="CustomListItem.ChangeButton" xml:space="preserve">
-    <value>Ändern</value>
+    <value>Zmień się. </value>
   </data>
   <data name="ENTRY_NOT_FOUND" xml:space="preserve">
-    <value>Eintrag konnte nicht gefunden werden.</value>
-    <comment>Fehlermeldung, falls ein Auftrag oder ähnliches nicht gefunden werden konnte</comment>
+    <value>Nie znaleziono wpisu. </value>
+    <comment>Wyświetlany jest komunikat o błędzie, jeśli nie znaleziono zadania itp. </comment>
   </data>
   <data name="INVALID_CREDENTIALS" xml:space="preserve">
-    <value>Der eingegebene Benutzername oder Passwort ist falsch.</value>
-    <comment>Fehlermeldung, falls Benutzername oder Passwort beim Einloggen falsch sind</comment>
+    <value>Podana nazwa użytkownika lub hasło są niepoprawne. </value>
+    <comment>Komunikat o błędzie jest wyświetlany, jeśli nazwa użytkownika lub hasło są niepoprawne podczas logowania </comment>
   </data>
   <data name="OrderDetailPage.CancelButton" xml:space="preserve">
-    <value>Stornieren</value>
+    <value>Odwołaj to. </value>
   </data>
   <data name="OrderDetailPage.ChangeButton" xml:space="preserve">
-    <value>Ändern</value>
+    <value>Zmień się. </value>
   </data>
   <data name="OrderDetailPage.CustomernameLabel" xml:space="preserve">
-    <value>Kundenname</value>
+    <value>Nazwa klienta </value>
   </data>
   <data name="OrderDetailPage.DateLabel" xml:space="preserve">
-    <value>Gestellt am:</value>
+    <value>Data wydania: </value>
   </data>
   <data name="OrderDetailPage.EmailLabel" xml:space="preserve">
-    <value>E-Mail</value>
+    <value>E-mail </value>
   </data>
   <data name="OrderDetailPage.PhoneLabel" xml:space="preserve">
-    <value>Telefon</value>
+    <value>-Telefon. </value>
   </data>
   <data name="SettingsPage.AlwaysSaveLoginLabel" xml:space="preserve">
-    <value>Login immer speichern</value>
+    <value>Zawsze zapisuj nazwę logowania </value>
   </data>
   <data name="SettingsPage.CancelInListViewLabel" xml:space="preserve">
-    <value>Stornieren in Listenansicht</value>
+    <value>Anuluj w widoku listy </value>
   </data>
   <data name="SettingsPage.LogoutOnAllDevicesButton" xml:space="preserve">
-    <value>Auf ALLEN Geräten ausloggen</value>
+    <value>Wyloguj wszystkie urządzenia </value>
   </data>
   <data name="SettingsPage.ThemeLabel" xml:space="preserve">
-    <value>Theme</value>
+    <value>W temacie </value>
   </data>
   <data name="SettingsPage_LanguageLabel" xml:space="preserve">
-    <value>Sprache</value>
+    <value>Język</value>
   </data>
   <data name="USER_LOCKED" xml:space="preserve">
-    <value>Dieser Account ist blockiert. Wende dich an den Administrator.</value>
-    <comment>Fehlermeldung, falls der Benutzer blockiert ist</comment>
+    <value>To konto zostało zablokowane. Skontaktuj się z administratorem. </value>
+    <comment> 
+Wyświetlany jest komunikat o błędzie, jeśli użytkownik jest zablokowany </comment>
   </data>
   <data name="USER_NOT_LOCKED" xml:space="preserve">
-    <value>Der Benutzer ist nicht geblockt.</value>
-    <comment>Fehlermeldung, falls ein Benutzer entblockt werden soll, der noch nicht geblockt ist</comment>
+    <value>Użytkownik nie jest zablokowany. </value>
+    <comment>Jeśli chcesz odblokować niezablokowanego użytkownika, wyświetlany jest komunikat o błędzie</comment>
   </data>
 </root>

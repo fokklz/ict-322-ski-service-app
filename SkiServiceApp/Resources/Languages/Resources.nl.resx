@@ -118,95 +118,96 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AppLogin.LatestLoginLabel" xml:space="preserve">
-    <value>Zuletzt angemeldet:</value>
+    <value>Laatste aanmelding: </value>
   </data>
   <data name="AppLogin.LatestUsedLabel" xml:space="preserve">
-    <value>Zuletzt verwendet am: </value>
+    <value>Laatste gebruik: </value>
   </data>
   <data name="AppLogin.PasswordLabel" xml:space="preserve">
-    <value>Passwort</value>
+    <value>Wachtwoord </value>
   </data>
   <data name="AppLogin.SigninButton" xml:space="preserve">
-    <value>Einloggen</value>
+    <value>Aanmelden </value>
   </data>
   <data name="AppLogin.SigninLabel" xml:space="preserve">
-    <value>Anmelden</value>
+    <value>Aanmelden </value>
   </data>
   <data name="AppLogin.UsernameLabel" xml:space="preserve">
-    <value>Benutzername</value>
+    <value>Gebruikersnaam </value>
   </data>
   <data name="AppShell.FlyoutItem.DashboardButton" xml:space="preserve">
-    <value>Dashboard</value>
+    <value>Dashboard </value>
   </data>
   <data name="AppShell.FlyoutItem.ListButton" xml:space="preserve">
-    <value>Liste</value>
+    <value>Lijst </value>
   </data>
   <data name="AppShell.FlyoutItem.LogoutButton" xml:space="preserve">
-    <value>Ausloggen</value>
+    <value>Afschrijving </value>
   </data>
   <data name="AppShell.FlyoutItem.SettingsButton" xml:space="preserve">
-    <value>Einstellungen</value>
+    <value>Instellingen </value>
   </data>
   <data name="AppShell.FlyoutItem.UserListButton" xml:space="preserve">
-    <value>Deine Aufträge</value>
+    <value>Uw missie </value>
   </data>
   <data name="CANNOT_UNLOCK_SELF" xml:space="preserve">
-    <value>Du kannst deinen eigenen Account nicht freigeben. Wende dich an den Administrator.</value>
-    <comment>Fehlermeldung, falls du deinen eigenen Benutzer entblocken willst</comment>
+    <value>U kunt uw account niet annuleren. Neem contact op met uw beheerder. </value>
+    <comment>Als u uw eigen gebruiker wilt ontgrendelen, verschijnt er een foutmelding </comment>
   </data>
   <data name="CustomListItem.ApplyButton" xml:space="preserve">
-    <value>Übernehmen</value>
+    <value>Toepassing </value>
   </data>
   <data name="CustomListItem.ChangeButton" xml:space="preserve">
-    <value>Ändern</value>
+    <value>Verandering </value>
   </data>
   <data name="ENTRY_NOT_FOUND" xml:space="preserve">
-    <value>Eintrag konnte nicht gefunden werden.</value>
-    <comment>Fehlermeldung, falls ein Auftrag oder ähnliches nicht gefunden werden konnte</comment>
+    <value>Geen vermeldingen gevonden. </value>
+    <comment>Als u geen taak kunt vinden, enz., Wordt een foutmelding weergegeven </comment>
   </data>
   <data name="INVALID_CREDENTIALS" xml:space="preserve">
-    <value>Der eingegebene Benutzername oder Passwort ist falsch.</value>
-    <comment>Fehlermeldung, falls Benutzername oder Passwort beim Einloggen falsch sind</comment>
+    <value>De ingevoerde gebruikersnaam of wachtwoord is onjuist. </value>
+    <comment>Als de gebruikersnaam of het wachtwoord onjuist is bij het inloggen, wordt een foutmelding weergegeven </comment>
   </data>
   <data name="OrderDetailPage.CancelButton" xml:space="preserve">
-    <value>Stornieren</value>
+    <value>Annulering </value>
   </data>
   <data name="OrderDetailPage.ChangeButton" xml:space="preserve">
-    <value>Ändern</value>
+    <value>Verandering </value>
   </data>
   <data name="OrderDetailPage.CustomernameLabel" xml:space="preserve">
-    <value>Kundenname</value>
+    <value>Naam van de klant </value>
   </data>
   <data name="OrderDetailPage.DateLabel" xml:space="preserve">
-    <value>Gestellt am:</value>
+    <value>Datum van bekendmaking: </value>
   </data>
   <data name="OrderDetailPage.EmailLabel" xml:space="preserve">
-    <value>E-Mail</value>
+    <value>E-mail </value>
   </data>
   <data name="OrderDetailPage.PhoneLabel" xml:space="preserve">
-    <value>Telefon</value>
+    <value>Telefoon </value>
   </data>
   <data name="SettingsPage.AlwaysSaveLoginLabel" xml:space="preserve">
-    <value>Login immer speichern</value>
+    <value>Sla altijd de login op </value>
   </data>
   <data name="SettingsPage.CancelInListViewLabel" xml:space="preserve">
-    <value>Stornieren in Listenansicht</value>
+    <value>Annuleren in de lijstweergave </value>
   </data>
   <data name="SettingsPage.LogoutOnAllDevicesButton" xml:space="preserve">
-    <value>Auf ALLEN Geräten ausloggen</value>
+    <value>Annulering van alle apparatuur </value>
   </data>
   <data name="SettingsPage.ThemeLabel" xml:space="preserve">
-    <value>Theme</value>
+    <value>Onderwerp </value>
   </data>
   <data name="SettingsPage_LanguageLabel" xml:space="preserve">
-    <value>Sprache</value>
+    <value>Taal</value>
   </data>
   <data name="USER_LOCKED" xml:space="preserve">
-    <value>Dieser Account ist blockiert. Wende dich an den Administrator.</value>
-    <comment>Fehlermeldung, falls der Benutzer blockiert ist</comment>
+    <value>Dit account is geblokkeerd. Neem contact op met uw beheerder. </value>
+    <comment> 
+Als de gebruiker wordt geblokkeerd, wordt een foutmelding weergegeven </comment>
   </data>
   <data name="USER_NOT_LOCKED" xml:space="preserve">
-    <value>Der Benutzer ist nicht geblockt.</value>
-    <comment>Fehlermeldung, falls ein Benutzer entblockt werden soll, der noch nicht geblockt ist</comment>
+    <value>De gebruiker is niet geblokkeerd. </value>
+    <comment>Als u een niet-geblokkeerde gebruiker wilt ontgrendelen, wordt een foutmelding weergegeven</comment>
   </data>
 </root>

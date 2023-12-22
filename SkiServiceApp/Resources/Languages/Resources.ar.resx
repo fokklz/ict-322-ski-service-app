@@ -118,95 +118,96 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AppLogin.LatestLoginLabel" xml:space="preserve">
-    <value>Zuletzt angemeldet:</value>
+    <value>آخر تسجيل دخول : </value>
   </data>
   <data name="AppLogin.LatestUsedLabel" xml:space="preserve">
-    <value>Zuletzt verwendet am: </value>
+    <value>آخر استخدام : </value>
   </data>
   <data name="AppLogin.PasswordLabel" xml:space="preserve">
-    <value>Passwort</value>
+    <value>كلمة السر </value>
   </data>
   <data name="AppLogin.SigninButton" xml:space="preserve">
-    <value>Einloggen</value>
+    <value>تسجيل الدخول </value>
   </data>
   <data name="AppLogin.SigninLabel" xml:space="preserve">
-    <value>Anmelden</value>
+    <value>تسجيل الدخول </value>
   </data>
   <data name="AppLogin.UsernameLabel" xml:space="preserve">
-    <value>Benutzername</value>
+    <value>اسم المستخدم </value>
   </data>
   <data name="AppShell.FlyoutItem.DashboardButton" xml:space="preserve">
-    <value>Dashboard</value>
+    <value>لوحة القيادة </value>
   </data>
   <data name="AppShell.FlyoutItem.ListButton" xml:space="preserve">
-    <value>Liste</value>
+    <value>قائمة </value>
   </data>
   <data name="AppShell.FlyoutItem.LogoutButton" xml:space="preserve">
-    <value>Ausloggen</value>
+    <value>الشطب </value>
   </data>
   <data name="AppShell.FlyoutItem.SettingsButton" xml:space="preserve">
-    <value>Einstellungen</value>
+    <value>إعداد </value>
   </data>
   <data name="AppShell.FlyoutItem.UserListButton" xml:space="preserve">
-    <value>Deine Aufträge</value>
+    <value>مهمتكم </value>
   </data>
   <data name="CANNOT_UNLOCK_SELF" xml:space="preserve">
-    <value>Du kannst deinen eigenen Account nicht freigeben. Wende dich an den Administrator.</value>
-    <comment>Fehlermeldung, falls du deinen eigenen Benutzer entblocken willst</comment>
+    <value>لا يمكنك إلغاء حظر حسابك. يرجى الاتصال بالمسؤول. </value>
+    <comment>إذا كنت تريد فتح المستخدم الخاص بك، فستظهر رسالة خطأ </comment>
   </data>
   <data name="CustomListItem.ApplyButton" xml:space="preserve">
-    <value>Übernehmen</value>
+    <value>التطبيق </value>
   </data>
   <data name="CustomListItem.ChangeButton" xml:space="preserve">
-    <value>Ändern</value>
+    <value>التغيير </value>
   </data>
   <data name="ENTRY_NOT_FOUND" xml:space="preserve">
-    <value>Eintrag konnte nicht gefunden werden.</value>
-    <comment>Fehlermeldung, falls ein Auftrag oder ähnliches nicht gefunden werden konnte</comment>
+    <value>لم يتم العثور على إدخال. </value>
+    <comment>إذا لم يتم العثور على المهمة، إلخ، يتم عرض رسالة خطأ </comment>
   </data>
   <data name="INVALID_CREDENTIALS" xml:space="preserve">
-    <value>Der eingegebene Benutzername oder Passwort ist falsch.</value>
-    <comment>Fehlermeldung, falls Benutzername oder Passwort beim Einloggen falsch sind</comment>
+    <value>اسم المستخدم أو كلمة المرور التي تم إدخالها غير صحيحة. </value>
+    <comment>إذا كان اسم المستخدم أو كلمة المرور غير صحيحين عند تسجيل الدخول، فسيتم عرض رسالة خطأ </comment>
   </data>
   <data name="OrderDetailPage.CancelButton" xml:space="preserve">
-    <value>Stornieren</value>
+    <value>ملغاة </value>
   </data>
   <data name="OrderDetailPage.ChangeButton" xml:space="preserve">
-    <value>Ändern</value>
+    <value>التغيير </value>
   </data>
   <data name="OrderDetailPage.CustomernameLabel" xml:space="preserve">
-    <value>Kundenname</value>
+    <value>اسم العميل </value>
   </data>
   <data name="OrderDetailPage.DateLabel" xml:space="preserve">
-    <value>Gestellt am:</value>
+    <value>تاريخ الإصدار : </value>
   </data>
   <data name="OrderDetailPage.EmailLabel" xml:space="preserve">
-    <value>E-Mail</value>
+    <value>البريد الإلكتروني </value>
   </data>
   <data name="OrderDetailPage.PhoneLabel" xml:space="preserve">
-    <value>Telefon</value>
+    <value>الهاتف </value>
   </data>
   <data name="SettingsPage.AlwaysSaveLoginLabel" xml:space="preserve">
-    <value>Login immer speichern</value>
+    <value>احفظ اسم تسجيل الدخول دائمًا </value>
   </data>
   <data name="SettingsPage.CancelInListViewLabel" xml:space="preserve">
-    <value>Stornieren in Listenansicht</value>
+    <value>إلغاء بوصة قائمة عرض </value>
   </data>
   <data name="SettingsPage.LogoutOnAllDevicesButton" xml:space="preserve">
-    <value>Auf ALLEN Geräten ausloggen</value>
+    <value>شطب جميع المعدات </value>
   </data>
   <data name="SettingsPage.ThemeLabel" xml:space="preserve">
-    <value>Theme</value>
+    <value>الموضوع </value>
   </data>
   <data name="SettingsPage_LanguageLabel" xml:space="preserve">
-    <value>Sprache</value>
+    <value>لغة</value>
   </data>
   <data name="USER_LOCKED" xml:space="preserve">
-    <value>Dieser Account ist blockiert. Wende dich an den Administrator.</value>
-    <comment>Fehlermeldung, falls der Benutzer blockiert ist</comment>
+    <value>تم حظر هذا الحساب. يرجى الاتصال بالمسؤول. </value>
+    <comment> 
+عرض رسالة خطأ إذا تم حظر المستخدم </comment>
   </data>
   <data name="USER_NOT_LOCKED" xml:space="preserve">
-    <value>Der Benutzer ist nicht geblockt.</value>
-    <comment>Fehlermeldung, falls ein Benutzer entblockt werden soll, der noch nicht geblockt ist</comment>
+    <value>لم يتم حظر المستخدم. </value>
+    <comment>يتم عرض رسالة خطأ إذا كنت تريد فتح مستخدم غير محظور</comment>
   </data>
 </root>

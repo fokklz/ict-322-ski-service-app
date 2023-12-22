@@ -9,6 +9,7 @@ namespace SkiServiceApp.Models
     public class SettingsModel
     {
         public string Theme { get; set; }
+        public string Language { get; set; }
         public bool CancelInListView { get; set; }
         public bool AlwaysSaveLogin { get; set; }
         public bool AskBeforeLogout { get; set; }

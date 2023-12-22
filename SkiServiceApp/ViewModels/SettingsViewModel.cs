@@ -3,7 +3,9 @@ using SkiServiceApp.Common;
 using SkiServiceApp.Interfaces;
 using SkiServiceApp.Interfaces.API;
 using System.Collections.ObjectModel;
+using System.Globalization;
 using System.Windows.Input;
+using SkiServiceApp.Resources.Helper;
 
 namespace SkiServiceApp.ViewModels
 {
@@ -13,8 +15,12 @@ namespace SkiServiceApp.ViewModels
         private readonly IAuthService _authService;
 
         public ObservableCollection<string> Themes { get; set; } = new ObservableCollection<string> { "System", "Dark", "Light" };
+        public ObservableCollection<string> Languages { get; set; } = new ObservableCollection<string> { "عربي", "Deutsch", "English", "Español", "Français", "Italiano", "Nederlands", "Polski", "Português", "Русский", "Türkçe" };
         [OnChangedMethod(nameof(ChangeTheme))]
         public string SelectedTheme { get; set; } = Preferences.Get("Theme", "System");
+
+        [OnChangedMethod(nameof(ChangeLanguage))]
+        public string SelectedLanguage { get; set; } = Preferences.Get("Language", "Deutsch");
 
         [OnChangedMethod(nameof(ChangeCancelInListView))]
         public bool CancelInListView { get; set; } = Preferences.Get("CancelInListView", false);
@@ -51,6 +57,13 @@ namespace SkiServiceApp.ViewModels
                     _ => AppTheme.Unspecified
                 };
             }
+        }
+
+        private void ChangeLanguage()
+        {
+            Preferences.Set("Language", SelectedLanguage);
+            var code = LanguageCodeHelper.GetLanguageCode(SelectedLanguage);
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo(code);
         }
 
         private void ChangeCancelInListView()

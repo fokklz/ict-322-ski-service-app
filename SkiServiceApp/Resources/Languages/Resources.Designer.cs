@@ -61,11 +61,128 @@ namespace SkiServiceApp.Resources.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Zuletzt angemeldet:.
+        /// </summary>
+        public static string AppLogin_LatestLoginLabel {
+            get {
+                return ResourceManager.GetString("AppLogin.LatestLoginLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Zuletzt verwendet am: .
+        /// </summary>
+        public static string AppLogin_LatestUsedLabel {
+            get {
+                return ResourceManager.GetString("AppLogin.LatestUsedLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Passwort.
+        /// </summary>
+        public static string AppLogin_PasswordLabel {
+            get {
+                return ResourceManager.GetString("AppLogin.PasswordLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Einloggen.
+        /// </summary>
+        public static string AppLogin_SigninButton {
+            get {
+                return ResourceManager.GetString("AppLogin.SigninButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Anmelden.
+        /// </summary>
+        public static string AppLogin_SigninLabel {
+            get {
+                return ResourceManager.GetString("AppLogin.SigninLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Benutzername.
+        /// </summary>
+        public static string AppLogin_UsernameLabel {
+            get {
+                return ResourceManager.GetString("AppLogin.UsernameLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Dashboard.
+        /// </summary>
+        public static string AppShell_FlyoutItem_DashboardButton {
+            get {
+                return ResourceManager.GetString("AppShell.FlyoutItem.DashboardButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Liste.
+        /// </summary>
+        public static string AppShell_FlyoutItem_ListButton {
+            get {
+                return ResourceManager.GetString("AppShell.FlyoutItem.ListButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ausloggen.
+        /// </summary>
+        public static string AppShell_FlyoutItem_LogoutButton {
+            get {
+                return ResourceManager.GetString("AppShell.FlyoutItem.LogoutButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Einstellungen.
+        /// </summary>
+        public static string AppShell_FlyoutItem_SettingsButton {
+            get {
+                return ResourceManager.GetString("AppShell.FlyoutItem.SettingsButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Deine Aufträge.
+        /// </summary>
+        public static string AppShell_FlyoutItem_UserListButton {
+            get {
+                return ResourceManager.GetString("AppShell.FlyoutItem.UserListButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Du kannst deinen eigenen Account nicht freigeben. Wende dich an den Administrator..
         /// </summary>
         public static string CANNOT_UNLOCK_SELF {
             get {
                 return ResourceManager.GetString("CANNOT_UNLOCK_SELF", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Übernehmen.
+        /// </summary>
+        public static string CustomListItem_ApplyButton {
+            get {
+                return ResourceManager.GetString("CustomListItem.ApplyButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ändern.
+        /// </summary>
+        public static string CustomListItem_ChangeButton {
+            get {
+                return ResourceManager.GetString("CustomListItem.ChangeButton", resourceCulture);
             }
         }
         
@@ -84,6 +201,105 @@ namespace SkiServiceApp.Resources.Languages {
         public static string INVALID_CREDENTIALS {
             get {
                 return ResourceManager.GetString("INVALID_CREDENTIALS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Stornieren.
+        /// </summary>
+        public static string OrderDetailPage_CancelButton {
+            get {
+                return ResourceManager.GetString("OrderDetailPage.CancelButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ändern.
+        /// </summary>
+        public static string OrderDetailPage_ChangeButton {
+            get {
+                return ResourceManager.GetString("OrderDetailPage.ChangeButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Kundenname.
+        /// </summary>
+        public static string OrderDetailPage_CustomernameLabel {
+            get {
+                return ResourceManager.GetString("OrderDetailPage.CustomernameLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Gestellt am:.
+        /// </summary>
+        public static string OrderDetailPage_DateLabel {
+            get {
+                return ResourceManager.GetString("OrderDetailPage.DateLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to E-Mail.
+        /// </summary>
+        public static string OrderDetailPage_EmailLabel {
+            get {
+                return ResourceManager.GetString("OrderDetailPage.EmailLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Telefon.
+        /// </summary>
+        public static string OrderDetailPage_PhoneLabel {
+            get {
+                return ResourceManager.GetString("OrderDetailPage.PhoneLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Login immer speichern.
+        /// </summary>
+        public static string SettingsPage_AlwaysSaveLoginLabel {
+            get {
+                return ResourceManager.GetString("SettingsPage.AlwaysSaveLoginLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Stornieren in Listenansicht.
+        /// </summary>
+        public static string SettingsPage_CancelInListViewLabel {
+            get {
+                return ResourceManager.GetString("SettingsPage.CancelInListViewLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sprache.
+        /// </summary>
+        public static string SettingsPage_LanguageLabel {
+            get {
+                return ResourceManager.GetString("SettingsPage_LanguageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Auf ALLEN Geräten ausloggen.
+        /// </summary>
+        public static string SettingsPage_LogoutOnAllDevicesButton {
+            get {
+                return ResourceManager.GetString("SettingsPage.LogoutOnAllDevicesButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Theme.
+        /// </summary>
+        public static string SettingsPage_ThemeLabel {
+            get {
+                return ResourceManager.GetString("SettingsPage.ThemeLabel", resourceCulture);
             }
         }
         

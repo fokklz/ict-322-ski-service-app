@@ -1,5 +1,6 @@
 ﻿<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:res="clr-namespace:SkiServiceApp.Resources.Languages"
              x:Class="SkiServiceApp.Views.OrderDetailPage"
              Title="Detailansicht">
 
@@ -32,24 +33,24 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
 
-                    <Label Grid.Row="0" Grid.Column="0" Text="Kundenname" FontAttributes="Bold" />
+                    <Label Grid.Row="0" Grid.Column="0" Text="{x:Static res:Resources.OrderDetailPage_CustomernameLabel}" FontAttributes="Bold" />
                     <Label Grid.Row="0" Grid.Column="1" Text="{Binding CustomerName}" />
 
-                    <Label Grid.Row="1" Grid.Column="0" Text="E-mail" FontAttributes="Bold" />
+                    <Label Grid.Row="1" Grid.Column="0" Text="{x:Static res:Resources.OrderDetailPage_EmailLabel}" FontAttributes="Bold" />
                     <Label Grid.Row="1" Grid.Column="1" Text="{Binding Email}" />
 
-                    <Label Grid.Row="2" Grid.Column="0" Text="Telefon" FontAttributes="Bold" />
+                    <Label Grid.Row="2" Grid.Column="0" Text="{x:Static res:Resources.OrderDetailPage_PhoneLabel}" FontAttributes="Bold" />
                     <Label Grid.Row="2" Grid.Column="1" Text="{Binding PhoneNumber}" />
 
-                    <Label Grid.Row="3" Grid.Column="0" Text="Gestellt am." FontAttributes="Bold" />
+                    <Label Grid.Row="3" Grid.Column="0" Text="{x:Static res:Resources.OrderDetailPage_DateLabel}" FontAttributes="Bold" />
                     <Label Grid.Row="3" Grid.Column="1" Text="{Binding SubmissionDateFormatted}" />
                 </Grid>
             </Frame>
         </VerticalStackLayout>
 
         <StackLayout Grid.Row="1" VerticalOptions="End" Spacing="10" Padding="15">
-            <Button Text="Stornieren" Command="{Binding CancelCommand}" Style="{StaticResource PrimaryButton}" />
-            <Button Text="Ändern" Command="{Binding EditCommand}" Style="{StaticResource PrimaryButton}" />
+            <Button Text="{x:Static res:Resources.OrderDetailPage_CancelButton}" Command="{Binding CancelCommand}" Style="{StaticResource PrimaryButton}" />
+            <Button Text="{x:Static res:Resources.OrderDetailPage_ChangeButton}" Command="{Binding EditCommand}" Style="{StaticResource PrimaryButton}" />
             <Button Text="InBearbeitung" Command="{Binding ProcessCommand}" Style="{StaticResource PrimaryButton}" />
         </StackLayout>
     </Grid>

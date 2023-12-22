@@ -2,8 +2,10 @@
 using SkiServiceApp.Common;
 using SkiServiceApp.Interfaces;
 using SkiServiceApp.Interfaces.API;
+using SkiServiceApp.Resources.Helper;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Globalization;
 using System.Runtime.CompilerServices;
 
 namespace SkiServiceApp
@@ -25,6 +27,10 @@ namespace SkiServiceApp
         public App(IServiceProvider serviceProvider, IStorageService storageService)
         {
             InitializeComponent();
+            // Set App Language
+            var savedLanguageCode = Preferences.Get("Language", "Deutsch");
+            var code = LanguageCodeHelper.GetLanguageCode(savedLanguageCode);
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo(code);
             _serviceProvider = serviceProvider;
 
             MainAppShell = serviceProvider.GetService<AppShell>();
