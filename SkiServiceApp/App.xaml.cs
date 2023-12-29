@@ -40,23 +40,6 @@ namespace SkiServiceApp
         }
 
         /// <summary>
-        /// Login the user with the given token
-        /// </summary>
-        /// <param name="token">The token to apply to the application</param>
-        public void Login(string token, string refreshToken, int userId)
-        {
-            
-        }
-
-        /// <summary>
-        /// Logout the user
-        /// </summary>
-        public void Logout()
-        {
-            AuthManager.Logout();
-        }
-
-        /// <summary>
         /// Switch to the main app
         /// </summary>
         /// <returns>Nothing</returns>

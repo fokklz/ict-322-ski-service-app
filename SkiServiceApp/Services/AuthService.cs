@@ -37,9 +37,13 @@ namespace SkiServiceApp.Services
                 var parsed = await res.ParseSuccess();
                 if (parsed != null && parsed.Auth != null && parsed.Auth.Token != null)
                 {
-                    var refreshToken = parsed.Auth.RefreshToken ?? parsed.Auth.Token;
-                    _storageService.StoreUser(parsed.Username, parsed.Auth.Token, refreshToken);
-                    await _storageService.SaveChangesAsync();
+                    var refreshToken = parsed.Auth.RefreshToken;
+                    if (refreshToken != null)
+                    {
+                        _storageService.StoreUser(parsed.Username, parsed.Auth.Token, refreshToken);
+                        await _storageService.SaveChangesAsync();
+                    }
+                    
                     AuthManager.Login(parsed.Auth.Token, refreshToken, parsed.Id);
 
                     // keep UI work on main thread
@@ -51,6 +55,7 @@ namespace SkiServiceApp.Services
                 if (!string.IsNullOrEmpty(oldRefreshToken))
                 {
                     _storageService.RemoveUserByRefreshToken(oldRefreshToken);
+                    await _storageService.SaveChangesAsync();
                 }
             }   
 

@@ -1,0 +1,350 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+	<!-- 
+		Microsoft ResX Schema
+
+		Version 1.3
+
+		The primary goals of this format is to allow a simple XML format 
+		that is mostly human readable. The generation and parsing of the 
+		various data types are done through the TypeConverter classes 
+		associated with the data types.
+
+		Example:
+
+		... ado.net/XML headers & schema ...
+		<resheader name="resmimetype">text/microsoft-resx</resheader>
+		<resheader name="version">1.3</resheader>
+		<resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+		<resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+		<data name="Name1">this is my long string</data>
+		<data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+		<data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+			[base64 mime encoded serialized .NET Framework object]
+		</data>
+		<data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+			[base64 mime encoded string representing a byte array form of the .NET Framework object]
+		</data>
+
+		There are any number of "resheader" rows that contain simple 
+		name/value pairs.
+
+		Each data row contains a name, and value. The row also contains a 
+		type or mimetype. Type corresponds to a .NET class that support 
+		text/value conversion through the TypeConverter architecture. 
+		Classes that don't support this are serialized and stored with the 
+		mimetype set.
+
+		The mimetype is used for serialized objects, and tells the 
+		ResXResourceReader how to depersist the object. This is currently not 
+		extensible. For a given mimetype the value must be set accordingly:
+
+		Note - application/x-microsoft.net.object.binary.base64 is the format 
+		that the ResXResourceWriter will generate, however the reader can 
+		read any of the formats listed below.
+
+		mimetype: application/x-microsoft.net.object.binary.base64
+		value   : The object must be serialized with 
+			: System.Serialization.Formatters.Binary.BinaryFormatter
+			: and then encoded with base64 encoding.
+
+		mimetype: application/x-microsoft.net.object.soap.base64
+		value   : The object must be serialized with 
+			: System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+			: and then encoded with base64 encoding.
+
+		mimetype: application/x-microsoft.net.object.bytearray.base64
+		value   : The object must be serialized into a byte array 
+			: using a System.ComponentModel.TypeConverter
+			: and then encoded with base64 encoding.
+	-->
+	
+	<xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+		<xsd:element name="root" msdata:IsDataSet="true">
+			<xsd:complexType>
+				<xsd:choice maxOccurs="unbounded">
+					<xsd:element name="data">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+								<xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+							</xsd:sequence>
+							<xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+							<xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+							<xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="resheader">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+							</xsd:sequence>
+							<xsd:attribute name="name" type="xsd:string" use="required" />
+						</xsd:complexType>
+					</xsd:element>
+				</xsd:choice>
+			</xsd:complexType>
+		</xsd:element>
+	</xsd:schema>
+	<resheader name="resmimetype">
+		<value>text/microsoft-resx</value>
+	</resheader>
+	<resheader name="version">
+		<value>1.3</value>
+	</resheader>
+	<resheader name="reader">
+		<value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+	<resheader name="writer">
+		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+	<data name="AppLogin.LastLoginsLabel" xml:space="preserve">
+    <value>Laatst ingelogd:</value>
+	</data>
+	<data name="AppLogin.LastUsedLabel" xml:space="preserve">
+	<value>Laatst gebruikt op:</value>
+	</data>
+	<data name="AppLogin.PasswordLabel" xml:space="preserve">
+	<value>Wachtwoord</value>
+	</data>
+	<data name="AppLogin.SigninButton" xml:space="preserve">
+	<value>Inloggen</value>
+	</data>
+	<data name="AppLogin.SigninLabel" xml:space="preserve">
+	<value>Inloggen</value>
+	</data>
+	<data name="AppLogin.UsernameLabel" xml:space="preserve">
+	<value>Gebruikersnaam</value>
+	</data>
+	<data name="AppShell.FlyoutItem.DashboardButton" xml:space="preserve">
+	<value>Dashboard</value>
+	</data>
+	<data name="AppShell.FlyoutItem.DetailsPageButton" xml:space="preserve">
+	<value>Orderinformatie</value>
+	</data>
+	<data name="AppShell.FlyoutItem.ListButton" xml:space="preserve">
+	<value>Alle orders</value>
+	</data>
+	<data name="AppShell.FlyoutItem.LogoutButton" xml:space="preserve">
+	<value>Uitloggen</value>
+	</data>
+	<data name="AppShell.FlyoutItem.SettingsButton" xml:space="preserve">
+	<value>Instellingen</value>
+	</data>
+	<data name="AppShell.FlyoutItem.UserListButton" xml:space="preserve">
+	<value>Jouw orders</value>
+	</data>
+	<data name="AppShell.Love" xml:space="preserve">
+	<value>Gemaakt door Robin en Fokko met</value>
+	</data>
+	<data name="AppShell.Title" xml:space="preserve">
+	<value>SkiService App</value>
+	</data>
+	<data name="Backend.Error.CANNOT_UNLOCK_SELF" xml:space="preserve">
+	<value>U kunt uw eigen account niet ontgrendelen. Neem contact op met de beheerder.</value>
+	<comment>Error message if you want to unlock your own user</comment>
+	</data>
+	<data name="Backend.Error.ENTRY_NOT_FOUND" xml:space="preserve">
+	<value>Item kon niet gevonden worden.</value>
+	<comment>Error message if an order or similar could not be found</comment>
+	</data>
+	<data name="Backend.Error.INVALID_CREDENTIALS" xml:space="preserve">
+	<value>De ingevoerde gebruikersnaam of wachtwoord is onjuist.</value>
+	<comment>Error message if the username or password is incorrect when logging in</comment>
+	</data>
+	<data name="Backend.Error.USER_LOCKED" xml:space="preserve">
+	<value>Dit account is vergrendeld. Neem contact op met de beheerder.</value>
+	<comment>Error message if the user is locked</comment>
+	</data>
+	<data name="Backend.Error.USER_NOT_LOCKED" xml:space="preserve">
+	<value>De gebruiker is niet vergrendeld.</value>
+	<comment>Error message if a user is to be unlocked who is not yet locked</comment>
+	</data>
+	<data name="Backend.NextState.2" xml:space="preserve">
+	<value>Begin</value>
+	</data>
+	<data name="Backend.NextState.3" xml:space="preserve">
+	<value>Afronden</value>
+	</data>
+	<data name="Backend.Priority.1" xml:space="preserve">
+	<value>Laag</value>
+	</data>
+	<data name="Backend.Priority.2" xml:space="preserve">
+	<value>Standaard</value>
+	</data>
+	<data name="Backend.Priority.3" xml:space="preserve">
+	<value>Hoog</value>
+	</data>
+	<data name="Backend.Service.1" xml:space="preserve">
+	<value>Kleine Service</value>
+	</data>
+	<data name="Backend.Service.2" xml:space="preserve">
+	<value>Grote Service</value>
+	</data>
+	<data name="Backend.Service.3" xml:space="preserve">
+	<value>Racing Ski Service</value>
+	</data>
+	<data name="Backend.Service.4" xml:space="preserve">
+	<value>Binding Montage en Afstelling</value>
+	</data>
+	<data name="Backend.Service.5" xml:space="preserve">
+	<value>Skivellen op maat snijden per paar</value>
+	</data>
+	<data name="Backend.Service.6" xml:space="preserve">
+	<value>Hot Waxing</value>
+	</data>
+	<data name="Backend.State.1" xml:space="preserve">
+	<value>Open</value>
+	</data>
+	<data name="Backend.State.2" xml:space="preserve">
+	<value>In behandeling</value>
+	</data>
+	<data name="Backend.State.3" xml:space="preserve">
+	<value>Afgerond</value>
+	</data>
+	<data name="CancelDialog.Submit" xml:space="preserve">
+	<value>Annuleren</value>
+	</data>
+	<data name="CancelDialog.SubTitleMiddle" xml:space="preserve">
+	<value>voor</value>
+	</data>
+	<data name="CancelDialog.SubTitlePre" xml:space="preserve">
+	<value>Order verwijderen</value>
+	</data>
+	<data name="CancelDialog.SubTitleSub" xml:space="preserve">
+	<value>bevestigen.</value>
+	</data>
+	<data name="CancelDialog.Title" xml:space="preserve">
+	<value>Order annuleren?</value>
+	</data>
+	<data name="CustomListItem.ApplyButton" xml:space="preserve">
+	<value>Toepassen</value>
+	</data>
+	<data name="CustomListItem.CancelButton" xml:space="preserve">
+	<value>Annuleren</value>
+	</data>
+	<data name="CustomListItem.ChangeButton" xml:space="preserve">
+	<value>Wijzigen</value>
+	</data>
+	<data name="CustomListItem.DaysLeft" xml:space="preserve">
+	<value>dagen over</value>
+	</data>
+	<data name="CustomListItem.Unassigned" xml:space="preserve">
+	<value>Niet toegewezen</value>
+	</data>
+	<data name="Dashboard.Chart.Done" xml:space="preserve">
+	<value>Gedaan</value>
+	</data>
+	<data name="Dashboard.Chart.Open" xml:space="preserve">
+	<value>Open</value>
+	</data>
+	<data name="Dashboard.Chart.You" xml:space="preserve">
+	<value>Jouw Orders</value>
+	</data>
+	<data name="Dashboard.SecondarySummary.Pre" xml:space="preserve">
+	<value>Je hebt momenteel</value>
+	</data>
+	<data name="Dashboard.SecondarySummary.Sub" xml:space="preserve">
+	<value>open orders</value>
+	</data>
+	<data name="Dashboard.Summary.Middle" xml:space="preserve">
+	<value>van</value>
+	</data>
+	<data name="Dashboard.Summary.Pre" xml:space="preserve">
+	<value>Je hebt</value>
+	</data>
+	<data name="Dashboard.Summary.Sub" xml:space="preserve">
+	<value>verwerkte afgeronde orders</value>
+	</data>
+	<data name="Dialog.Cancel" xml:space="preserve">
+	<value>Annuleren</value>
+	</data>
+	<data name="Dialog.Submit" xml:space="preserve">
+	<value>Bevestigen</value>
+	</data>
+	<data name="Dialog.Title" xml:space="preserve">
+	<value>Standaardtitel</value>
+	</data>
+	<data name="LogoutDialog.Danger" xml:space="preserve">
+	<value>Niet Opslaan</value>
+	</data>
+	<data name="LogoutDialog.Submit" xml:space="preserve">
+	<value>Opslaan</value>
+	</data>
+	<data name="LogoutDialog.Text" xml:space="preserve">
+	<value>Moet dit account bewaard blijven in de lijst voor snelle inlog zodat de volgende inlog met één klik kan plaatsvinden?</value>
+	</data>
+	<data name="LogoutDialog.Title" xml:space="preserve">
+	<value>Permanent uitloggen</value>
+	</data>
+	<data name="ModifyDialog.EmailLabel" xml:space="preserve">
+	<value>E-mailadres</value>
+	</data>
+	<data name="ModifyDialog.NameLabel" xml:space="preserve">
+	<value>Naam</value>
+	</data>
+	<data name="ModifyDialog.PhoneLabel" xml:space="preserve">
+	<value>Telefoon</value>
+	</data>
+	<data name="ModifyDialog.PriorityLabel" xml:space="preserve">
+	<value>Prioriteit</value>
+	</data>
+	<data name="ModifyDialog.ServiceLabel" xml:space="preserve">
+	<value>Dienst</value>
+	</data>
+	<data name="ModifyDialog.StateLabel" xml:space="preserve">
+	<value>Status</value>
+	</data>
+	<data name="ModifyDialog.Submit" xml:space="preserve">
+	<value>Opslaan</value>
+	</data>
+	<data name="ModifyDialog.Title" xml:space="preserve">
+	<value>Order wijzigen</value>
+	</data>
+	<data name="OrderDetailPage.CancelButton" xml:space="preserve">
+	<value>Annuleren</value>
+	</data>
+	<data name="OrderDetailPage.ChangeButton" xml:space="preserve">
+	<value>Wijzigen</value>
+	</data>
+	<data name="OrderDetailPage.CustomerNameLabel" xml:space="preserve">
+	<value>Klantnaam</value>
+	</data>
+	<data name="OrderDetailPage.DateLabel" xml:space="preserve">
+	<value>Ingediend op:</value>
+	</data>
+	<data name="OrderDetailPage.EmailLabel" xml:space="preserve">
+	<value>E-mail</value>
+	</data>
+	<data name="OrderDetailPage.PhoneLabel" xml:space="preserve">
+	<value>Telefoon</value>
+	</data>
+	<data name="OrderDetailPage.PreDaysLeft" xml:space="preserve">
+	<value>Er zijn nog</value>
+	</data>
+	<data name="SettingsPage.AlwaysSaveLoginLabel" xml:space="preserve">
+	<value>Altijd inloggen bewaren</value>
+	</data>
+	<data name="SettingsPage.CancelInListViewLabel" xml:space="preserve">
+	<value>Annuleren in lijstweergave</value>
+	</data>
+	<data name="SettingsPage.LanguageLabel" xml:space="preserve">
+	<value>Taal</value>
+	</data>
+	<data name="SettingsPage.LogoutOnAllDevicesButton" xml:space="preserve">
+	<value>Uitloggen op ALLE apparaten</value>
+	</data>
+	<data name="SettingsPage.Theme.Dark" xml:space="preserve">
+	<value>Donker</value>
+	</data>
+	<data name="SettingsPage.Theme.Light" xml:space="preserve">
+	<value>Licht</value>
+	</data>
+	<data name="SettingsPage.Theme.System" xml:space="preserve">
+	<value>Systeem</value>
+	</data>
+	<data name="SettingsPage.ThemeLabel" xml:space="preserve">
+	<value>Thema</value>
+	</data>
+
+</root>

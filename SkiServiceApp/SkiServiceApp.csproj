@@ -100,15 +100,18 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <EmbeddedResource Update="Resources\Languages\Resources.en.resx">
+	    <Generator></Generator>
+	  </EmbeddedResource>
+	  <EmbeddedResource Update="Resources\Languages\Resources.es.resx">
+	    <Generator></Generator>
+	  </EmbeddedResource>
+	  <EmbeddedResource Update="Resources\Languages\Resources.fr.resx">
+	    <Generator></Generator>
+	  </EmbeddedResource>
 	  <EmbeddedResource Update="Resources\Languages\Resources.resx">
 	    <Generator>PublicResXFileCodeGenerator</Generator>
 	    <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-	  </EmbeddedResource>
-	  <EmbeddedResource Update="Resources\Languages\Resources.sv.resx">
-	    <Generator>PublicResXFileCodeGenerator</Generator>
-	  </EmbeddedResource>
-	  <EmbeddedResource Update="Resources\Languages\Resources.zh-Hant.resx">
-	    <Generator>PublicResXFileCodeGenerator</Generator>
 	  </EmbeddedResource>
 	</ItemGroup>
 	

@@ -1,8 +1,11 @@
 ﻿using PropertyChanged;
 using SkiServiceApp.Common;
 using SkiServiceApp.Common.Events;
+using SkiServiceApp.Interfaces.API;
 using SkiServiceApp.Services;
+using SkiServiceModels.DTOs.Requests;
 using SkiServiceModels.DTOs.Responses;
+using System.Diagnostics;
 
 namespace SkiServiceApp.Models
 {
@@ -12,6 +15,7 @@ namespace SkiServiceApp.Models
     [AddINotifyPropertyChangedInterface]
     public class CustomListItem
     {
+        private readonly IOrderAPIService _orderAPIService;
         /// <summary>
         /// The raw order data received from the API
         /// </summary>
@@ -80,6 +84,8 @@ namespace SkiServiceApp.Models
         {
             Order = orderResponse;
 
+            _orderAPIService = ServiceLocator.GetService<IOrderAPIService>();
+
             Update();
             Localization.LanguageChanged += UpdateLanguage;
         }
@@ -116,6 +122,40 @@ namespace SkiServiceApp.Models
             Service = Localization.Instance.GetResource($"Backend.Service.{Order.Service.Id}");
             PrettyTitle = $"{Order.Name}  -  {Service}";
             NextState = Localization.Instance.GetResource($"Backend.NextState.{Order.State.Id + 1}");
+        }
+
+        /// <summary>
+        /// Apply for the order, will update the order in the backend and then update the UI with the new data aswell
+        /// Allows for a done callback to be passed, which will be called after the order has been updated (allowing to hook a resorting)
+        /// </summary>
+        /// <param name="done"></param>
+        public void Apply(Action done = null)
+        {
+            Task.Run(async () =>
+            {
+                var newOrderResponse = await _orderAPIService.UpdateAsync(Order.Id, new UpdateOrderRequest
+                {
+                    ServiceId = Order.Service.Id,
+                    PriorityId = Order.Priority.Id,
+                    StateId = Order.State.Id,
+                    UserId = AuthManager.UserId
+                });
+
+                if (newOrderResponse.IsSuccess)
+                {
+                    var parsed = await newOrderResponse.ParseSuccess();
+                    MainThread.BeginInvokeOnMainThread(() =>
+                    {
+                        Order = parsed;
+                        Update();
+
+                        if (done != null)
+                        {
+                            done.Invoke();
+                        }
+                    });
+                }
+            });
         }
     }
 }

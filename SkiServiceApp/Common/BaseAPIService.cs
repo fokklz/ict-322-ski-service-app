@@ -72,25 +72,6 @@ namespace SkiServiceApp.Common
                 Console.WriteLine("WARNING: API:BaseURL not found in appsettings.json. Using default value: " + _defaultBaseUrl);
                 _baseUrl = _defaultBaseUrl;
             }
-
-            AuthManager.LoginChanged += AuthManager_LoginChanged;
-        }
-
-        /// <summary>
-        /// Update the authorization header when the login state changes
-        /// </summary>
-        /// <param name="sender">The sender of the Event</param>
-        /// <param name="e"></param>
-        private void AuthManager_LoginChanged(object? sender, LoginChangedEventArgs e)
-        {
-            if (e.IsLoggedIn)
-            {
-                _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", e.Token);
-            }
-            else
-            {
-                _httpClient.DefaultRequestHeaders.Authorization = null;
-            }
         }
 
         /// <summary>
@@ -118,6 +99,16 @@ namespace SkiServiceApp.Common
         protected async Task<HttpResponseMessage?> _sendRequest(HttpMethod method, string url, object? data = null)
         {
             var request = new HttpRequestMessage(method, url);
+            if (AuthManager.IsLoggedIn)
+            {
+                //request.Headers.Add("Authorization", "Bearer " + AuthManager.Token);
+                _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", AuthManager.Token);
+            }
+            else
+            {
+                _httpClient.DefaultRequestHeaders.Authorization = null;
+            }
+
             if (data != null)
             {
                 var json = JsonConvert.SerializeObject(data);

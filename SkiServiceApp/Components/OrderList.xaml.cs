@@ -45,7 +45,7 @@ public partial class OrderList : ContentView, INotifyPropertyChanged
 
     public BatchObservableCollection<CustomListItem> OrdersList { get; set; }
 
-    public ICommand ApplyCommand => new Command<int>(async (id) => await Apply(id));
+    public ICommand ApplyCommand => new Command<int>(Apply);
     public ICommand ModifyCommand => new Command<int>(async (id) => await Modify(id));
 
     public ICommand CancelCommand => new Command<int>(async (id) => await Cancel(id));
@@ -69,6 +69,7 @@ public partial class OrderList : ContentView, INotifyPropertyChanged
                 "List" => _orderService.AppyListFilter(),
                 _ => _orderService.ApplyDashboardFilter(),
             };
+            OnPropertyChanged(nameof(OrdersList));
         };
     }
 
@@ -96,22 +97,24 @@ public partial class OrderList : ContentView, INotifyPropertyChanged
         }
     }
 
-    public async Task Apply(int id)
+    public void Apply(int id)
     {
         var orderItem = OrdersList.Where(x => x.Order.Id == id).First();
-        await _orderAPIService.UpdateAsync(id, new UpdateOrderRequest
+        orderItem.Apply(() =>
         {
-            ServiceId = orderItem.Order.Service.Id,
-            PriorityId = orderItem.Order.Priority.Id,
-            StateId = orderItem.Order.State.Id,
-            UserId = AuthManager.UserId
-        });
-        _ = Task.Run(_orderService.Update);
+            OrdersList = Location switch
+            {
+                "UserList" => _orderService.ApplyUserListFilter(OrdersList),
+                "List" => _orderService.AppyListFilter(OrdersList),
+                _ => _orderService.ApplyDashboardFilter(OrdersList),
+            };
+            OnPropertyChanged(nameof(OrdersList));
 
-        if (Location.Equals("Dashboard"))
-        {
-            DashboardChartViewModel.Update.Invoke();
-        }
+            if (Location.Equals("Dashboard"))
+            {
+                DashboardChartViewModel.Update.Invoke();
+            }
+        });
     }
 
     public async Task Cancel(int id)

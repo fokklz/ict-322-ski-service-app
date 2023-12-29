@@ -41,13 +41,13 @@ namespace SkiServiceApp.Common
         /// <param name="token">The Token to use for API Requests</param>
         /// <param name="refreshToken">The refreshToken for the user</param>
         /// <param name="userId">THe userId of the user</param>
-        public static void Login(string token, string refreshToken, int userId)
+        public static void Login(string token, string? refreshToken, int userId)
         {
             RefreshToken = refreshToken;
             Token = token;
             UserId = userId;
             IsLoggedIn = true;
-            LoginChanged.Invoke(null, new LoginChangedEventArgs(token, userId));
+            LoginChanged?.Invoke(null, new LoginChangedEventArgs(token, userId));
         }
 
         /// <summary>
@@ -59,7 +59,7 @@ namespace SkiServiceApp.Common
             Token = null;
             UserId = null;
             IsLoggedIn = false;
-            LoginChanged.Invoke(null, new LoginChangedEventArgs());
+            LoginChanged?.Invoke(null, new LoginChangedEventArgs());
         }
     }
 }

@@ -11,12 +11,12 @@ public partial class DashboardPage : ContentPage
 	{
 		InitializeComponent();
 		BindingContext = viewModel;
-        OrderList.Update();
     }
 
 	protected override void OnAppearing()
 	{
         base.OnAppearing();
-		DashboardChartViewModel.Update.Invoke();
+        OrderList.Update();
+        DashboardChartViewModel.Update.Invoke();
     }
 }

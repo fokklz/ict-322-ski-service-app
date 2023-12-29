@@ -3,6 +3,7 @@ using SkiServiceApp.Common.Extensions;
 using SkiServiceApp.Interfaces.API;
 using SkiServiceApp.Models;
 using System.ComponentModel;
+using static Android.Graphics.ImageDecoder;
 
 namespace SkiServiceApp.Services
 {
@@ -36,9 +37,9 @@ namespace SkiServiceApp.Services
             }
         }
 
-        public BatchObservableCollection<CustomListItem> ApplyDashboardFilter()
+        public BatchObservableCollection<CustomListItem> ApplyDashboardFilter(BatchObservableCollection<CustomListItem> source = null)
         {
-            var filtered = Orders.Where(x => x.Order.State.Id != 3 && !x.Order.IsDeleted && (x.Order.User is null || x.Order.User.Id == AuthManager.UserId)).ToList();
+            var filtered = (source ?? Orders).Where(x => x.Order.State.Id != 3 && !x.Order.IsDeleted && (x.Order.User is null || x.Order.User.Id == AuthManager.UserId)).ToList();
             var final = filtered
                 .OrderBy(x => x.Order.User is null)
                 .ThenBy(x => x.DaysLeft)
@@ -49,9 +50,9 @@ namespace SkiServiceApp.Services
             return DashboardOrders;
         }
 
-        public BatchObservableCollection<CustomListItem> AppyListFilter()
+        public BatchObservableCollection<CustomListItem> AppyListFilter(BatchObservableCollection<CustomListItem> source = null)
         {
-            var filtered = Orders.Where(x => x.Order.State.Id != 3 && !x.Order.IsDeleted && x.Order.User is null).ToList();
+            var filtered = (source ?? Orders).Where(x => x.Order.State.Id != 3 && !x.Order.IsDeleted && x.Order.User is null).ToList();
 
             var final = filtered
                 .OrderBy(x => x.DaysLeft)
@@ -62,9 +63,9 @@ namespace SkiServiceApp.Services
             return ListOrders;
         }
 
-        public BatchObservableCollection<CustomListItem> ApplyUserListFilter()
+        public BatchObservableCollection<CustomListItem> ApplyUserListFilter(BatchObservableCollection<CustomListItem> source = null)
         {
-            var filtered = Orders.Where(x => x.Order.User is not null && !x.Order.IsDeleted && x.Order.User.Id == AuthManager.UserId).ToList();
+            var filtered = (source ?? Orders).Where(x => x.Order.User is not null && !x.Order.IsDeleted && x.Order.User.Id == AuthManager.UserId).ToList();
             var final = filtered
                 .OrderBy(x => x.Order.State.Id)
                 .ThenBy(x => x.DaysLeft)
