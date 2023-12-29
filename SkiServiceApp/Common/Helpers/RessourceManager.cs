@@ -3,9 +3,9 @@
 namespace SkiServiceApp.Common
 {
     /// <summary>
-    /// Should be to interact with ressources
+    /// Should be used to interact with ressources
     /// </summary>
-    internal class RessourceManager
+    public class RessourceManager
     {
         /// <summary>
         /// Register Syncfusion license

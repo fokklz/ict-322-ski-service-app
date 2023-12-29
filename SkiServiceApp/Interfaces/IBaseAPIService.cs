@@ -6,7 +6,6 @@ namespace SkiServiceApp.Interfaces
     public interface IBaseAPIServiceBase
     {
         HttpClient Client { get; }
-        void SetAuthorizationHeader(string? token);
     }
 
     public interface IBaseAPIService<TCreateRequest, TUpdateRequest, TResponse> : IBaseAPIServiceBase

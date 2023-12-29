@@ -10,26 +10,12 @@ using SkiServiceModels.DTOs.Responses;
 
 namespace SkiServiceApp.ViewModels
 {
-    public class UserListViewModel : BaseViewModel
+    public class UserListViewModel : BaseNotifyHandler
     {
-        public ObservableCollection<OrderResponse> Items { get; private set; } = new ObservableCollection<OrderResponse>();
-
-        public ICommand EditCommand { get; private set; }
-        public ICommand CancelCommand { get; private set; }
-        public ICommand StatusCommand { get; private set; }
-
         public UserListViewModel()
         {
-            EditCommand = new Command<OrderResponse>(NavigateToDetailAsync);
-            //CancelCommand = new Command<OrderResponse>(Change);
-
-            LoadData();
         }
 
-        private void LoadData()
-        {
-            // Data
-        }
 
         private async void NavigateToDetailAsync(OrderResponse service)
         {
@@ -44,9 +30,5 @@ namespace SkiServiceApp.ViewModels
         }
 
 
-        private void Change(OrderResponse service)
-        {
-            // Change Command
-        }
     }
 }

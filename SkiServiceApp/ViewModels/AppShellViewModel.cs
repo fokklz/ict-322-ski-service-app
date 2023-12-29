@@ -1,10 +1,12 @@
 ﻿using SkiServiceApp.Common;
+using SkiServiceApp.Components.Dialogs;
 using SkiServiceApp.Interfaces;
+using SkiServiceApp.Services;
 using System.Windows.Input;
 
 namespace SkiServiceApp.ViewModels
 {
-    public class AppShellViewModel : BaseViewModel
+    public class AppShellViewModel : BaseNotifyHandler
     {
         private readonly IAuthService _authService;
 

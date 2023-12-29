@@ -4,7 +4,7 @@ using SkiServiceModels.DTOs.Responses;
 
 namespace SkiServiceApp.Interfaces.API
 {
-    public interface IOrderAPIService : IBaseAPIService<CreateOrderRequest, UpdateOrderRequest, OrderResponse>
+    public interface IOrderAPIService : IBaseAPIService<CreateOrderRequest, UpdateOrderRequest, OrderResponseAdmin>
     {
         Task<HTTPResponse<List<OrderResponse>>> GetAllByPriorityIdAsync(int priorityId);
         Task<HTTPResponse<List<OrderResponse>>> GetAllByServiceIdAsync(int serviceId);

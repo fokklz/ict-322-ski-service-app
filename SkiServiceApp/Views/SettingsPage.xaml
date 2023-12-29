@@ -3,8 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:res="clr-namespace:SkiServiceApp.Resources.Languages"
              x:Class="SkiServiceApp.Views.SettingsPage"
-             Title="SettingsPage">
-
+             Title="{Binding Source={StaticResource localization}, Path=AppShell_FlyoutItem_SettingsButton}">
+    
     <Grid Padding="20" HorizontalOptions="Center" VerticalOptions="FillAndExpand">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -13,56 +13,72 @@
 
         <!-- Settings Controls im oberen Bereich des Grids -->
         <StackLayout Grid.Row="0" WidthRequest="350" HorizontalOptions="StartAndExpand">
-            <Grid HeightRequest="50">
+            <Grid Padding="0,8" >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="43"/>
+                </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width=".7*"/>
-                    <ColumnDefinition Width=".3*"/>
+                    <ColumnDefinition Width=".6*"/>
+                    <ColumnDefinition Width=".4*"/>
                 </Grid.ColumnDefinitions>
-                <Label Text="{x:Static res:Resources.SettingsPage_ThemeLabel}" VerticalOptions="Center"/>
-                <Picker 
-                    Grid.Column="1"
-                    ItemsSource="{Binding Themes}"
-                    SelectedItem="{Binding SelectedTheme}" 
-                    VerticalOptions="Center"/>
+                <Label Text="{Binding Source={StaticResource localization}, Path=SettingsPage_ThemeLabel}" VerticalOptions="Center"/>
+                <Frame Grid.Column="1" Style="{StaticResource InputFrame}">
+                    <Picker 
+                        ItemsSource="{Binding Themes}"
+                        ItemDisplayBinding="{Binding DisplayText}"
+                        SelectedItem="{Binding SelectedTheme}" 
+                        VerticalOptions="Center" />
+                </Frame>
             </Grid>
 
-            <Grid HeightRequest="50">
+            <Grid Padding="0,8">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="43"/>
+                </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width=".7*"/>
-                    <ColumnDefinition Width=".3*"/>
+                    <ColumnDefinition Width=".6*"/>
+                    <ColumnDefinition Width=".4*"/>
                 </Grid.ColumnDefinitions>
-                <Label Text="{x:Static res:Resources.SettingsPage_LanguageLabel}" VerticalOptions="Center"/>
-                <Picker 
-                    Grid.Column="1"
-                    ItemsSource="{Binding Languages}"
-                    SelectedItem="{Binding SelectedLanguage}" 
-                    VerticalOptions="Center"/>
+                <Label Text="{Binding Source={StaticResource localization}, Path=SettingsPage_LanguageLabel}" VerticalOptions="Center"/>
+                <Frame Grid.Column="1" Style="{StaticResource InputFrame}">
+                    <Picker 
+                        ItemsSource="{Binding Languages}"
+                        SelectedItem="{Binding SelectedLanguage}" 
+                        VerticalOptions="Center" />
+                </Frame>
             </Grid>
 
-            <Grid HeightRequest="50">
+            <Grid Padding="0,8">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="43"/>
+                </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width=".7*"/>
-                    <ColumnDefinition Width=".3*"/>
+                    <ColumnDefinition Width=".6*"/>
+                    <ColumnDefinition Width=".4*"/>
                 </Grid.ColumnDefinitions>
 
-                <Label Text="{x:Static res:Resources.SettingsPage_CancelInListViewLabel}" VerticalOptions="Center" />
-                <Switch IsToggled="{Binding CancelInListView}" Grid.Column="1" VerticalOptions="Center" />
+                <Label Text="{Binding Source={StaticResource localization}, Path=SettingsPage_CancelInListViewLabel}" VerticalOptions="Center" />
+                <Switch IsToggled="{Binding CancelInListView}" Style="{StaticResource WinUISwitchStyle}" Grid.Column="1" VerticalOptions="Center" />
             </Grid>
 
-            <Grid HeightRequest="50">
+            <Grid Padding="0,8">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="43"/>
+                </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width=".7*"/>
-                    <ColumnDefinition Width=".3*"/>
+                    <ColumnDefinition Width=".6*"/>
+                    <ColumnDefinition Width=".4*"/>
                 </Grid.ColumnDefinitions>
 
-                <Label Text="{x:Static res:Resources.SettingsPage_AlwaysSaveLoginLabel}" VerticalOptions="Center"/>
-                <Switch IsToggled="{Binding AlwaysSaveLogin}" Grid.Column="1" VerticalOptions="Center"/>
+                <Label Text="{Binding Source={StaticResource localization}, Path=SettingsPage_AlwaysSaveLoginLabel}" VerticalOptions="Center"/>
+                <Switch IsToggled="{Binding AlwaysSaveLogin}" Style="{StaticResource WinUISwitchStyle}" Grid.Column="1" VerticalOptions="Center" />
             </Grid>
         </StackLayout>
 
         <!-- Logout Button im unteren Bereich des Grids -->
-        <Button Text="{x:Static res:Resources.SettingsPage_LogoutOnAllDevicesButton}"
+        <Button Text="{Binding Source={StaticResource localization}, Path=SettingsPage_LogoutOnAllDevicesButton}"
                 Command="{Binding LogoutOnAllDevicesCommand}"
+                Style="{StaticResource PrimaryButton}"
                 Grid.Row="1"
                 HorizontalOptions="Center"
                 VerticalOptions="End"

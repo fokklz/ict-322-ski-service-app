@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
+using SkiServiceApp.Common.Events;
 using SkiServiceApp.Interfaces;
 using SkiServiceApp.Models;
 using SkiServiceModels.DTOs.Responses;
@@ -72,39 +73,19 @@ namespace SkiServiceApp.Common
                 _baseUrl = _defaultBaseUrl;
             }
 
-            // Set the authorization header if the user is logged in
-            // there may be a better way to do this - for now this works
-            var app = Application.Current as App;
-            if (app != null)
-            {
-                if (app.IsLoggedIn) _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", app.Token);
-                app.PropertyChanged += (sender, e) =>
-                {
-                    if (e.PropertyName == nameof(app.Token))
-                    {
-                        if (app.IsLoggedIn)
-                        {
-                            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", app.Token);
-                        }
-                        else
-                        {
-                            _httpClient.DefaultRequestHeaders.Authorization = null;
-                        }
-                    }
-                };
-            }
-            
+            AuthManager.LoginChanged += AuthManager_LoginChanged;
         }
 
         /// <summary>
-        /// Set the authorization header for the HttpClient with the given token
+        /// Update the authorization header when the login state changes
         /// </summary>
-        /// <param name="token"></param>
-        public void SetAuthorizationHeader(string? token)
+        /// <param name="sender">The sender of the Event</param>
+        /// <param name="e"></param>
+        private void AuthManager_LoginChanged(object? sender, LoginChangedEventArgs e)
         {
-            if(token != null)
+            if (e.IsLoggedIn)
             {
-                _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+                _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", e.Token);
             }
             else
             {

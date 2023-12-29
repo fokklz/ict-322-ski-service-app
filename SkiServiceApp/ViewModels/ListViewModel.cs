@@ -8,26 +8,11 @@ using SkiServiceModels.DTOs.Responses;
 
 namespace SkiServiceApp.ViewModels
 {
-    public class ListViewModel : BaseViewModel
+    public class ListViewModel : BaseNotifyHandler
     {
-        public ObservableCollection<OrderResponse> Items { get; private set; } = new ObservableCollection<OrderResponse>();
-
-        public ICommand AssignCommand { get; private set; }
 
         public ListViewModel()
         {
-            AssignCommand = new Command<int>(AssignItem);
-            LoadData();
-        }
-
-        private void LoadData()
-        {
-            // Data
-        }
-
-        private void AssignItem(int id)
-        {
-            Debug.WriteLine($"Item mit ID {id} zugewiesen.");
         }
     }
 }

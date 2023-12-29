@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SkiServiceApp.Components.OrderList"
+             x:Name="self">
+
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <Style x:Key="HeadlineLabel" TargetType="Label">
+                <Setter Property="FontSize" Value="16" />
+                <Setter Property="FontAttributes" Value="Bold" />
+            </Style>
+            <Style x:Key="SubHeadlineLabel" TargetType="Label">
+                <Setter Property="FontSize" Value="14" />
+            </Style>
+        </ResourceDictionary>
+    </ContentView.Resources>
+    
+    <CollectionView 
+        ItemsSource="{Binding Source={x:Reference self}, Path=OrdersList}" 
+        Margin="5,10,5,0">
+        <CollectionView.ItemTemplate>
+            <DataTemplate>
+                <Frame  
+                    Padding="15" 
+                    Margin="10,0,10,15" 
+                    CornerRadius="5" 
+                    BorderColor="{AppThemeBinding Dark={StaticResource OffBlack}, Light={StaticResource Grey100}}" 
+                    BackgroundColor="{AppThemeBinding Dark={StaticResource Grey900}, Light={StaticResource Grey50}}"
+                    HasShadow="False">
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer 
+                            Command="{Binding Source={x:Reference self}, Path=ModifyCommand}"
+                            CommandParameter="{Binding Order.Id}"/>
+                    </Frame.GestureRecognizers>
+                    <Grid  ColumnSpacing="10" >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+
+                        <VerticalStackLayout>
+                            <HorizontalStackLayout>
+                                <Label Text="{Binding Priority}" Style="{StaticResource HeadlineLabel}" />
+                                <Label Text=" - " Style="{StaticResource HeadlineLabel}" />
+                                <Label Text="{Binding Service}" Style="{StaticResource HeadlineLabel}" />
+                            </HorizontalStackLayout>
+
+                            <HorizontalStackLayout>
+                                <Label Text="{Binding DaysLeft}" Margin="0,0,4,0" Style="{StaticResource SubHeadlineLabel}"/>
+                                <Label Text="{Binding Source={StaticResource localization}, Path=CustomListItem_DaysLeft}" Style="{StaticResource SubHeadlineLabel}" />
+                                <Label Text=" • " Style="{StaticResource SubHeadlineLabel}" />
+                                <Label Text="{Binding State}" Style="{StaticResource SubHeadlineLabel}" />
+                            </HorizontalStackLayout>
+                        </VerticalStackLayout>
+
+                        <!-- Overflowing text will just be hidden behind this background color -->
+                        <HorizontalStackLayout 
+                            Grid.Column="1" 
+                            Spacing="20" 
+                            Padding="5,0"
+                            BackgroundColor="{AppThemeBinding Dark={StaticResource Grey900}, Light={StaticResource Grey50}}">
+                            <Button 
+                                IsVisible="{Binding ShowCancelButtonInList}" 
+                                Text="{Binding Source={StaticResource localization}, Path=CustomListItem_CancelButton}"
+                                Command="{Binding Source={x:Reference self}, Path=CancelCommand}"
+                                Style="{StaticResource DangerButton}"
+                                CommandParameter="{Binding Order.Id}" />
+                            <Button 
+                                IsVisible="{Binding ShowAssignButton}" 
+                                Style="{StaticResource PrimaryButton}"
+                                Text="{Binding Source={StaticResource localization}, Path=CustomListItem_ApplyButton}" 
+                                Command="{Binding Source={x:Reference self}, Path=ApplyCommand}"
+                                CommandParameter="{Binding Order.Id}" />
+                            <Button 
+                                IsVisible="{Binding ShowNextStateButton}" 
+                                Text="{Binding NextState}"
+                                Style="{StaticResource PrimaryButton}"
+                                Command="{Binding Source={x:Reference self}, Path=NextStateCommand}"
+                                CommandParameter="{Binding Order.Id}"  />
+                        </HorizontalStackLayout>
+
+                    </Grid>
+                </Frame>
+            </DataTemplate>
+        </CollectionView.ItemTemplate>
+    </CollectionView>
+</ContentView>

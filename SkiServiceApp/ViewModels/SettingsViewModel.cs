@@ -1,34 +1,35 @@
 ﻿using PropertyChanged;
 using SkiServiceApp.Common;
+using SkiServiceApp.Common.Events;
 using SkiServiceApp.Interfaces;
 using SkiServiceApp.Interfaces.API;
+using SkiServiceApp.Models;
+using SkiServiceApp.Services;
 using System.Collections.ObjectModel;
-using System.Globalization;
-using System.Windows.Input;
-using SkiServiceApp.Resources.Helper;
 
 namespace SkiServiceApp.ViewModels
 {
-    public class SettingsViewModel : BaseViewModel
+    public class SettingsViewModel : BaseNotifyHandler
     {
         private readonly IUserAPIService _userAPIService;
         private readonly IAuthService _authService;
 
-        public ObservableCollection<string> Themes { get; set; } = new ObservableCollection<string> { "System", "Dark", "Light" };
-        public ObservableCollection<string> Languages { get; set; } = new ObservableCollection<string> { "عربي", "Deutsch", "English", "Español", "Français", "Italiano", "Nederlands", "Polski", "Português", "Русский", "Türkçe" };
+        public ObservableCollection<PickerItem<string>> Themes { get; set; } = new ObservableCollection<PickerItem<string>>();
+        public ObservableCollection<string> Languages { get; set; } = new ObservableCollection<string>(Localization.LanguageMap.Keys);
+
         [OnChangedMethod(nameof(ChangeTheme))]
-        public string SelectedTheme { get; set; } = Preferences.Get("Theme", "System");
+        public PickerItem<string> SelectedTheme { get; set; }
 
         [OnChangedMethod(nameof(ChangeLanguage))]
-        public string SelectedLanguage { get; set; } = Preferences.Get("Language", "Deutsch");
+        public string SelectedLanguage { get; set; } = SettingsService.Language;
 
         [OnChangedMethod(nameof(ChangeCancelInListView))]
-        public bool CancelInListView { get; set; } = Preferences.Get("CancelInListView", false);
+        public bool CancelInListView { get; set; } = SettingsService.CancelInListView;
 
         [OnChangedMethod(nameof(ChangeAlwaysSaveLogin))]
-        public bool AlwaysSaveLogin { get; set; } = Preferences.Get("AlwaysSaveLogin", false);
+        public bool AlwaysSaveLogin { get; set; } = SettingsService.AlwaysSaveLogin;
 
-        public ICommand LogoutOnAllDevicesCommand { get; private set; }
+        public Command LogoutOnAllDevicesCommand { get; private set; }
 
         public SettingsViewModel(IUserAPIService userAPIService, IAuthService authService)
         {
@@ -36,44 +37,47 @@ namespace SkiServiceApp.ViewModels
             _authService = authService;
 
             LogoutOnAllDevicesCommand = new Command(LogoutOnAllDevices);
+
+            // set theme dropdown to current theme
+            LanguageChanged(null, null);
+            Localization.LanguageChanged += LanguageChanged;
+        }
+
+        private void LanguageChanged(object? sender, LanguageChangedEventArgs? args)
+        {
+            Themes.Clear();
+            foreach (var item in Localization.Instance.ThemeDropdown)
+            {
+                Themes.Add(item);
+            }
+            SelectedTheme = Themes.Where(x => x.BackgroundValue == SettingsService.Theme).First();
         }
 
         private async void LogoutOnAllDevices()
         {
             await _userAPIService.RevokeAsync();
-            await _authService.LogoutAsync();
+            await _authService.LogoutAsync(true);
         }
 
         private void ChangeTheme()
         {
-            Preferences.Set("Theme", SelectedTheme);
-            var app = Application.Current;
-            if (app != null)
-            {
-                app.UserAppTheme = SelectedTheme switch
-                {
-                    "Dark" => AppTheme.Dark,
-                    "Light" => AppTheme.Light,
-                    _ => AppTheme.Unspecified
-                };
-            }
+            if(SelectedTheme == null) return;
+            SettingsService.SetTheme(SelectedTheme.BackgroundValue);
         }
 
         private void ChangeLanguage()
         {
-            Preferences.Set("Language", SelectedLanguage);
-            var code = LanguageCodeHelper.GetLanguageCode(SelectedLanguage);
-            Thread.CurrentThread.CurrentUICulture = new CultureInfo(code);
+            SettingsService.SetLanguage(SelectedLanguage);
         }
 
         private void ChangeCancelInListView()
         {
-            Preferences.Set("CancelInListView", CancelInListView);
+            SettingsService.SetCancelInListView(CancelInListView);
         }
 
         private void ChangeAlwaysSaveLogin()
         {
-            Preferences.Set("AlwaysSaveLogin", AlwaysSaveLogin);
+            SettingsService.SetAlwaysSaveLogin(AlwaysSaveLogin);
         }
     }
 }

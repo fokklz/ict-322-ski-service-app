@@ -117,10 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AppLogin.LatestLoginLabel" xml:space="preserve">
+  <data name="AppLogin.LastLoginsLabel" xml:space="preserve">
     <value>Zuletzt angemeldet:</value>
   </data>
-  <data name="AppLogin.LatestUsedLabel" xml:space="preserve">
+  <data name="AppLogin.LastUsedLabel" xml:space="preserve">
     <value>Zuletzt verwendet am: </value>
   </data>
   <data name="AppLogin.PasswordLabel" xml:space="preserve">
@@ -138,8 +138,11 @@
   <data name="AppShell.FlyoutItem.DashboardButton" xml:space="preserve">
     <value>Dashboard</value>
   </data>
+  <data name="AppShell.FlyoutItem.DetailsPageButton" xml:space="preserve">
+    <value>Auftrags Informationen</value>
+  </data>
   <data name="AppShell.FlyoutItem.ListButton" xml:space="preserve">
-    <value>Liste</value>
+    <value>Alle Aufträge</value>
   </data>
   <data name="AppShell.FlyoutItem.LogoutButton" xml:space="preserve">
     <value>Ausloggen</value>
@@ -150,23 +153,172 @@
   <data name="AppShell.FlyoutItem.UserListButton" xml:space="preserve">
     <value>Deine Aufträge</value>
   </data>
-  <data name="CANNOT_UNLOCK_SELF" xml:space="preserve">
+  <data name="AppShell.Love" xml:space="preserve">
+    <value>Made by Robin and Fokko with</value>
+  </data>
+  <data name="AppShell.Title" xml:space="preserve">
+    <value>SkiService App</value>
+  </data>
+  <data name="Backend.Error.CANNOT_UNLOCK_SELF" xml:space="preserve">
     <value>Du kannst deinen eigenen Account nicht freigeben. Wende dich an den Administrator.</value>
     <comment>Fehlermeldung, falls du deinen eigenen Benutzer entblocken willst</comment>
+  </data>
+  <data name="Backend.Error.ENTRY_NOT_FOUND" xml:space="preserve">
+    <value>Eintrag konnte nicht gefunden werden.</value>
+    <comment>Fehlermeldung, falls ein Auftrag oder ähnliches nicht gefunden werden konnte</comment>
+  </data>
+  <data name="Backend.Error.INVALID_CREDENTIALS" xml:space="preserve">
+    <value>Der eingegebene Benutzername oder Passwort ist falsch.</value>
+    <comment>Fehlermeldung, falls Benutzername oder Passwort beim Einloggen falsch sind</comment>
+  </data>
+  <data name="Backend.Error.USER_LOCKED" xml:space="preserve">
+    <value>Dieser Account ist blockiert. Wende dich an den Administrator.</value>
+    <comment>Fehlermeldung, falls der Benutzer blockiert ist</comment>
+  </data>
+  <data name="Backend.Error.USER_NOT_LOCKED" xml:space="preserve">
+    <value>Der Benutzer ist nicht geblockt.</value>
+    <comment>Fehlermeldung, falls ein Benutzer entblockt werden soll, der noch nicht geblockt ist</comment>
+  </data>
+  <data name="Backend.NextState.2" xml:space="preserve">
+    <value>Beginnen</value>
+  </data>
+  <data name="Backend.NextState.3" xml:space="preserve">
+    <value>Beenden</value>
+  </data>
+  <data name="Backend.Priority.1" xml:space="preserve">
+    <value>Tief</value>
+  </data>
+  <data name="Backend.Priority.2" xml:space="preserve">
+    <value>Standard</value>
+  </data>
+  <data name="Backend.Priority.3" xml:space="preserve">
+    <value>Hoch</value>
+  </data>
+  <data name="Backend.Service.1" xml:space="preserve">
+    <value>Kleiner Service</value>
+  </data>
+  <data name="Backend.Service.2" xml:space="preserve">
+    <value>Grosser Service</value>
+  </data>
+  <data name="Backend.Service.3" xml:space="preserve">
+    <value>Rennski-Service</value>
+  </data>
+  <data name="Backend.Service.4" xml:space="preserve">
+    <value>Bindung montieren und einstellen</value>
+  </data>
+  <data name="Backend.Service.5" xml:space="preserve">
+    <value>Fell zuschneiden pro Paar</value>
+  </data>
+  <data name="Backend.Service.6" xml:space="preserve">
+    <value>Heisswachsen</value>
+  </data>
+  <data name="Backend.State.1" xml:space="preserve">
+    <value>Offen</value>
+  </data>
+  <data name="Backend.State.2" xml:space="preserve">
+    <value>InArbeit</value>
+  </data>
+  <data name="Backend.State.3" xml:space="preserve">
+    <value>Abgeschlossen</value>
+  </data>
+  <data name="CancelDialog.Submit" xml:space="preserve">
+    <value>Stornieren</value>
+  </data>
+  <data name="CancelDialog.SubTitleMiddle" xml:space="preserve">
+    <value>für</value>
+  </data>
+  <data name="CancelDialog.SubTitlePre" xml:space="preserve">
+    <value>Löschen des Auftrags</value>
+  </data>
+  <data name="CancelDialog.SubTitleSub" xml:space="preserve">
+    <value>bestätigen.</value>
+  </data>
+  <data name="CancelDialog.Title" xml:space="preserve">
+    <value>Auftrag Stornieren?</value>
   </data>
   <data name="CustomListItem.ApplyButton" xml:space="preserve">
     <value>Übernehmen</value>
   </data>
+  <data name="CustomListItem.CancelButton" xml:space="preserve">
+    <value>Stornieren</value>
+  </data>
   <data name="CustomListItem.ChangeButton" xml:space="preserve">
     <value>Ändern</value>
   </data>
-  <data name="ENTRY_NOT_FOUND" xml:space="preserve">
-    <value>Eintrag konnte nicht gefunden werden.</value>
-    <comment>Fehlermeldung, falls ein Auftrag oder ähnliches nicht gefunden werden konnte</comment>
+  <data name="CustomListItem.DaysLeft" xml:space="preserve">
+    <value>Tag(e) übrig</value>
   </data>
-  <data name="INVALID_CREDENTIALS" xml:space="preserve">
-    <value>Der eingegebene Benutzername oder Passwort ist falsch.</value>
-    <comment>Fehlermeldung, falls Benutzername oder Passwort beim Einloggen falsch sind</comment>
+  <data name="CustomListItem.Unassigned" xml:space="preserve">
+    <value>Nicht zugewiesen</value>
+  </data>
+  <data name="Dashboard.Chart.Done" xml:space="preserve">
+    <value>Erledigt</value>
+  </data>
+  <data name="Dashboard.Chart.Open" xml:space="preserve">
+    <value>Offen</value>
+  </data>
+  <data name="Dashboard.Chart.You" xml:space="preserve">
+    <value>Deine Aufträge</value>
+  </data>
+  <data name="Dashboard.SecondarySummary.Pre" xml:space="preserve">
+    <value>Du hast aktuell noch</value>
+  </data>
+  <data name="Dashboard.SecondarySummary.Sub" xml:space="preserve">
+    <value>Aufträge offen</value>
+  </data>
+  <data name="Dashboard.Summary.Middle" xml:space="preserve">
+    <value>von</value>
+  </data>
+  <data name="Dashboard.Summary.Pre" xml:space="preserve">
+    <value>Du hast</value>
+  </data>
+  <data name="Dashboard.Summary.Sub" xml:space="preserve">
+    <value>abgeschlossenen Aufträgen abgewickelt</value>
+  </data>
+  <data name="Dialog.Cancel" xml:space="preserve">
+    <value>Abbrechen</value>
+  </data>
+  <data name="Dialog.Submit" xml:space="preserve">
+    <value>Bestätigen</value>
+  </data>
+  <data name="Dialog.Title" xml:space="preserve">
+    <value>Standard Überschrift</value>
+  </data>
+  <data name="LogoutDialog.Danger" xml:space="preserve">
+    <value>Nicht Speichern</value>
+  </data>
+  <data name="LogoutDialog.Submit" xml:space="preserve">
+    <value>Speichern</value>
+  </data>
+  <data name="LogoutDialog.Text" xml:space="preserve">
+    <value>Soll dieses Konto in der Liste für die Schnell-Anmeldung gespeichert werden, damit die nächste Anmeldung durch einen einzelnen Klick von statten gehen kann</value>
+  </data>
+  <data name="LogoutDialog.Title" xml:space="preserve">
+    <value>Permanent Ausloggen</value>
+  </data>
+  <data name="ModifyDialog.EmailLabel" xml:space="preserve">
+    <value>E-Mail Adresse</value>
+  </data>
+  <data name="ModifyDialog.NameLabel" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="ModifyDialog.PhoneLabel" xml:space="preserve">
+    <value>Telefon</value>
+  </data>
+  <data name="ModifyDialog.PriorityLabel" xml:space="preserve">
+    <value>Priorität</value>
+  </data>
+  <data name="ModifyDialog.ServiceLabel" xml:space="preserve">
+    <value>Dienstleistung</value>
+  </data>
+  <data name="ModifyDialog.StateLabel" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="ModifyDialog.Submit" xml:space="preserve">
+    <value>Speichern</value>
+  </data>
+  <data name="ModifyDialog.Title" xml:space="preserve">
+    <value>Auftrag ändern</value>
   </data>
   <data name="OrderDetailPage.CancelButton" xml:space="preserve">
     <value>Stornieren</value>
@@ -174,7 +326,7 @@
   <data name="OrderDetailPage.ChangeButton" xml:space="preserve">
     <value>Ändern</value>
   </data>
-  <data name="OrderDetailPage.CustomernameLabel" xml:space="preserve">
+  <data name="OrderDetailPage.CustomerNameLabel" xml:space="preserve">
     <value>Kundenname</value>
   </data>
   <data name="OrderDetailPage.DateLabel" xml:space="preserve">
@@ -186,27 +338,31 @@
   <data name="OrderDetailPage.PhoneLabel" xml:space="preserve">
     <value>Telefon</value>
   </data>
+  <data name="OrderDetailPage.PreDaysLeft" xml:space="preserve">
+    <value>Für die Erledigung des Auftrages sind noch</value>
+  </data>
   <data name="SettingsPage.AlwaysSaveLoginLabel" xml:space="preserve">
     <value>Login immer speichern</value>
   </data>
   <data name="SettingsPage.CancelInListViewLabel" xml:space="preserve">
     <value>Stornieren in Listenansicht</value>
   </data>
+  <data name="SettingsPage.LanguageLabel" xml:space="preserve">
+    <value>Sprache</value>
+  </data>
   <data name="SettingsPage.LogoutOnAllDevicesButton" xml:space="preserve">
     <value>Auf ALLEN Geräten ausloggen</value>
   </data>
+  <data name="SettingsPage.Theme.Dark" xml:space="preserve">
+    <value>Dunkel</value>
+  </data>
+  <data name="SettingsPage.Theme.Light" xml:space="preserve">
+    <value>Hell</value>
+  </data>
+  <data name="SettingsPage.Theme.System" xml:space="preserve">
+    <value>System</value>
+  </data>
   <data name="SettingsPage.ThemeLabel" xml:space="preserve">
     <value>Theme</value>
-  </data>
-  <data name="SettingsPage_LanguageLabel" xml:space="preserve">
-    <value>Sprache</value>
-  </data>
-  <data name="USER_LOCKED" xml:space="preserve">
-    <value>Dieser Account ist blockiert. Wende dich an den Administrator.</value>
-    <comment>Fehlermeldung, falls der Benutzer blockiert ist</comment>
-  </data>
-  <data name="USER_NOT_LOCKED" xml:space="preserve">
-    <value>Der Benutzer ist nicht geblockt.</value>
-    <comment>Fehlermeldung, falls ein Benutzer entblockt werden soll, der noch nicht geblockt ist</comment>
   </data>
 </root>

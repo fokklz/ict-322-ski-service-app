@@ -3,11 +3,128 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:res="clr-namespace:SkiServiceApp.Resources.Languages"
              x:Class="SkiServiceApp.Views.DashboardPage"
-             Title="DashboardPage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+             xmlns:chart="clr-namespace:Syncfusion.Maui.Charts;assembly=Syncfusion.Maui.Charts"
+             xmlns:chartViewModels="clr-namespace:SkiServiceApp.ViewModels.Charts"
+             xmlns:components="clr-namespace:SkiServiceApp.Components"
+             Title="{Binding Source={StaticResource localization}, Path=AppShell_FlyoutItem_DashboardButton}">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Label" x:Key="SummaryLabel">
+                <Setter Property="FontSize" Value="18" />
+                <Setter Property="Margin" Value="0,0,4,0" />
+                <Setter Property="HorizontalOptions" Value="StartAndExpand"/>
+                <Setter Property="LineBreakMode" Value="WordWrap"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <Grid Margin="10, 0" >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width=".6*"/>
+            <ColumnDefinition Width=".4*"/>
+        </Grid.ColumnDefinitions>
+
+        <components:OrderList Grid.Column="0" Location="Dashboard" x:Name="OrderList"/>
+
+        <!-- Exclusive Grid for the Chart to have better control over the layout -->
+        <Grid Grid.Column="1" VerticalOptions="StartAndExpand">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Label 
+                Grid.Row="0"
+                Grid.Column="0"
+                Text="{Binding Source={StaticResource localization}, Path=AppShell_FlyoutItem_UserListButton}"
+                FontSize="34"
+                Margin="0,20,0,10"/>
+
+            <VerticalStackLayout Grid.Row="1" Grid.Column="0">
+                <chart:SfCircularChart >
+                    <chart:SfCircularChart.BindingContext>
+                        <chartViewModels:DashboardChartViewModel x:Name="DashboardChartViewModel" />
+                    </chart:SfCircularChart.BindingContext>
+
+                    <chart:SfCircularChart.Series>
+                        <chart:PieSeries 
+                            ItemsSource="{Binding Data}" 
+                            PaletteBrushes="{Binding CustomBrushes}"
+                            XBindingPath="XValue" 
+                            YBindingPath="YValue"
+                            StartAngle="270"
+                            EndAngle="630" 
+                            Radius="0.9"
+                            ShowDataLabels="False"/>
+                    </chart:SfCircularChart.Series>
+
+                    <chart:SfCircularChart.Legend>
+                        <chart:ChartLegend Placement="Bottom">
+                            <chart:ChartLegend.ItemTemplate>
+                                <DataTemplate>
+                                    <HorizontalStackLayout>
+                                        <Rectangle 
+                                            HeightRequest="12" 
+                                            WidthRequest="12" 
+                                            Margin="3"
+                                            Background="{Binding IconBrush}"/>
+                                        <Label 
+                                            Text="{Binding Text}" 
+                                            Margin="3"/>
+                                    </HorizontalStackLayout>
+                                </DataTemplate>
+                            </chart:ChartLegend.ItemTemplate>
+                        </chart:ChartLegend>
+                    </chart:SfCircularChart.Legend>
+                </chart:SfCircularChart>
+                <FlexLayout
+                    Padding="4,30,4,0"
+                    Direction="Row" 
+                    Wrap="Wrap" 
+                    AlignItems="Start"
+                    JustifyContent="Start">
+                    <Label 
+                        Text="{Binding Source={StaticResource localization}, Path=Dashboard_Summary_Pre}" 
+                        Style="{StaticResource SummaryLabel}" />
+                    <Label 
+                        Text="{Binding Source={x:Reference DashboardChartViewModel}, Path=TotalYouDone}" 
+                        Style="{StaticResource SummaryLabel}" FontAttributes="Bold" />
+                    <Label 
+                        Text="{Binding Source={StaticResource localization}, Path=Dashboard_Summary_Middle}" 
+                        Style="{StaticResource SummaryLabel}" />
+                    <Label 
+                        Text="{Binding Source={x:Reference DashboardChartViewModel}, Path=TotalDone}" 
+                        Style="{StaticResource SummaryLabel}" FontAttributes="Bold" />
+                    <Label 
+                        Text="{Binding Source={StaticResource localization}, Path=Dashboard_Summary_Sub}" 
+                        Style="{StaticResource SummaryLabel}" />
+                </FlexLayout>
+
+                <FlexLayout
+                    Padding="4,5,4,0"
+                    Direction="Row" 
+                    Wrap="Wrap" 
+                    AlignItems="Start"
+                    JustifyContent="Start">
+                    <Label 
+                        Text="{Binding Source={StaticResource localization}, Path=Dashboard_SecondarySummary_Pre}" 
+                        Style="{StaticResource SummaryLabel}" />
+                    <Label 
+                        Text="{Binding Source={x:Reference DashboardChartViewModel}, Path=TotalYou}" 
+                        Style="{StaticResource SummaryLabel}" FontAttributes="Bold" />
+                    <Label 
+                        Text="{Binding Source={StaticResource localization}, Path=Dashboard_SecondarySummary_Sub}" 
+                        Style="{StaticResource SummaryLabel}" />
+                </FlexLayout>
+            </VerticalStackLayout>
+        </Grid>
+    </Grid>
 </ContentPage>

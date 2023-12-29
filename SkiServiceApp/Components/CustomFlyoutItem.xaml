@@ -14,11 +14,16 @@
         BackgroundColor="Transparent"
         HeightRequest="49">
 
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="{x:OnPlatform iOS=50, Default=54, Android=70}" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
+        <!-- Icon for the button -->
         <Image 
             Grid.Column="0" 
             Margin="{x:OnPlatform Android='14,0,0,0'}"
@@ -30,10 +35,11 @@
                 <FontImageSource 
                     Glyph="{Binding Source={x:Reference self}, Path=Icon}" 
                     FontFamily="{Binding Source={x:Reference self}, Path=FontFamily}"
-                    Color="{AppThemeBinding Light={StaticResource Gray900}, Dark={StaticResource White}}" />
+                    Color="{AppThemeBinding Light={StaticResource OffBlack}, Dark={StaticResource OffWhite}}"/>
             </Image.Source>
         </Image>
 
+        <!-- Label for the button itself -->
         <Label
             Grid.Column="1"
             Text="{Binding Source={x:Reference self}, Path=Title}"

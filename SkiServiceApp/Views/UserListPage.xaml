@@ -4,16 +4,8 @@
              xmlns:viewModels="clr-namespace:SkiServiceApp.ViewModels;assembly=SkiServiceApp"
              xmlns:res="clr-namespace:SkiServiceApp.Resources.Languages"
              x:Class="SkiServiceApp.Views.UserListPage"
-             Title="UserListPage">
+             Title="{Binding Source={StaticResource localization}, Path=AppShell_FlyoutItem_UserListButton}">
 
-    <CollectionView ItemsSource="{Binding Items}">
-        <CollectionView.ItemTemplate>
-            <DataTemplate>
-                <components:CustomListItem PriorityService="{Binding PriorityService}"
-                                           RemainingDaysAssignment="{Binding RemainingDaysAssignment}"
-                                           AssignCommand="{Binding AssignCommand}"
-                                           Id="{Binding Id}" />
-            </DataTemplate>
-        </CollectionView.ItemTemplate>
-    </CollectionView>
+
+    <components:OrderList x:Name="OrderList" Location="UserList" />
 </ContentPage>

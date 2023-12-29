@@ -1,39 +1,32 @@
 ﻿using SkiServiceApp.Models;
 using SkiServiceApp.ViewModels;
-using SkiServiceModels;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SkiServiceApp.Views
 {
-    [QueryProperty(nameof(ServiceId), nameof(ServiceId))]
+    [QueryProperty(nameof(OrderId), nameof(OrderId))]
     public partial class OrderDetailPage : ContentPage
     {
-        private int _serviceId;
+        private int _orderId;
 
-        public int ServiceId
+        public int OrderId
         {
-            get => _serviceId;
+            get => _orderId;
             set
             {
-                if (_serviceId != value)
+                if (_orderId != value)
                 {
-                    _serviceId = value;
-                    OnPropertyChanged(nameof(ServiceId));
-                    var vm = (OrderDetailViewModel)this.BindingContext;
-                    vm?.LoadServiceDetails(_serviceId);
+                    _orderId = value;
+                    OnPropertyChanged(nameof(OrderId));
+                    var vm = BindingContext as OrderDetailViewModel;
+                    vm?.LoadServiceDetails(_orderId);
                 }
             }
         }
 
-        public OrderDetailPage()
+        public OrderDetailPage(OrderDetailViewModel viewModel)
         {
             InitializeComponent();
-            BindingContext = new OrderDetailViewModel();
+            BindingContext = viewModel;
         }
     }
 

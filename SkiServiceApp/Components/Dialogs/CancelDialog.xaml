@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SkiServiceApp.Components.Dialogs.CancelDialog"
+             x:Name="CloseDialogView">
+
+    <VerticalStackLayout>
+        <HorizontalStackLayout>
+            <Label Text="{Binding Source={StaticResource localization}, Path=CancelDialog_SubTitlePre}" Style="{StaticResource DialogText}" Margin="0,0,4,0" />
+            <Label Text="{Binding Source={x:Reference CloseDialogView}, Path=Entry.Service}" Style="{StaticResource DialogText}" FontAttributes="Bold" />
+        </HorizontalStackLayout>
+        
+        <HorizontalStackLayout>
+            <Label Text="{Binding Source={StaticResource localization}, Path=CancelDialog_SubTitleMiddle}" Style="{StaticResource DialogText}" Margin="0,0,4,0" />
+            <Label Text="{Binding Source={x:Reference CloseDialogView}, Path=Entry.Order.Name}" Style="{StaticResource DialogText}" FontAttributes="Bold" Margin="0,0,4,0" />
+            <Label Text="{Binding Source={StaticResource localization}, Path=CancelDialog_SubTitleSub}" Style="{StaticResource DialogText}" />
+        </HorizontalStackLayout>
+    </VerticalStackLayout>
+</ContentView>
