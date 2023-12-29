@@ -139,7 +139,7 @@
     <value>Dashboard</value>
   </data>
   <data name="AppShell.FlyoutItem.DetailsPageButton" xml:space="preserve">
-    <value>Auftrags Informationen</value>
+    <value>Auftragsinformationen</value>
   </data>
   <data name="AppShell.FlyoutItem.ListButton" xml:space="preserve">
     <value>Alle Aufträge</value>
@@ -216,7 +216,7 @@
     <value>Offen</value>
   </data>
   <data name="Backend.State.2" xml:space="preserve">
-    <value>InArbeit</value>
+    <value>In Arbeit</value>
   </data>
   <data name="Backend.State.3" xml:space="preserve">
     <value>Abgeschlossen</value>
@@ -228,13 +228,13 @@
     <value>für</value>
   </data>
   <data name="CancelDialog.SubTitlePre" xml:space="preserve">
-    <value>Löschen des Auftrags</value>
+    <value>Auftrag löschen</value>
   </data>
   <data name="CancelDialog.SubTitleSub" xml:space="preserve">
     <value>bestätigen.</value>
   </data>
   <data name="CancelDialog.Title" xml:space="preserve">
-    <value>Auftrag Stornieren?</value>
+    <value>Auftrag stornieren?</value>
   </data>
   <data name="CustomListItem.ApplyButton" xml:space="preserve">
     <value>Übernehmen</value>
@@ -291,7 +291,7 @@
     <value>Speichern</value>
   </data>
   <data name="LogoutDialog.Text" xml:space="preserve">
-    <value>Soll dieses Konto in der Liste für die Schnell-Anmeldung gespeichert werden, damit die nächste Anmeldung durch einen einzelnen Klick von statten gehen kann</value>
+    <value>Soll dieses Konto in der Liste für die Schnell-Anmeldung gespeichert werden, damit die nächste Anmeldung durch einen einzelnen Klick von statten gehen kann?</value>
   </data>
   <data name="LogoutDialog.Title" xml:space="preserve">
     <value>Permanent Ausloggen</value>
