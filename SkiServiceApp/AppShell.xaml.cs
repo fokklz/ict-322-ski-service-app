@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using SkiServiceApp.Common;
 using SkiServiceApp.ViewModels;
+using SkiServiceApp.Views;
 
 namespace SkiServiceApp
 {
@@ -9,6 +10,7 @@ namespace SkiServiceApp
         public AppShell(AppShellViewModel viewModel)
         {
             InitializeComponent();
+            Routing.RegisterRoute(nameof(OrderDetailPage), typeof(OrderDetailPage));
             BindingContext = viewModel;
         }
     }

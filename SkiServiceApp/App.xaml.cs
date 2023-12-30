@@ -1,22 +1,15 @@
-﻿using PropertyChanged;
-using SkiServiceApp.Common;
+﻿using SkiServiceApp.Common;
 using SkiServiceApp.Interfaces;
 using SkiServiceApp.Interfaces.API;
+using SkiServiceApp.Services;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.Runtime.CompilerServices;
 
 namespace SkiServiceApp
 {
-    public partial class App : Application, INotifyPropertyChanged
+    public partial class App : Application
     {
         private readonly IServiceProvider _serviceProvider;
-
-        public event PropertyChangedEventHandler? PropertyChanged;
-        public bool IsLoggedIn => !string.IsNullOrEmpty(Token);
-
-        [AlsoNotifyFor(nameof(IsLoggedIn))]
-        public string? Token { get; set; }
 
         public AppShell MainAppShell { get; private set; }
 
@@ -28,17 +21,13 @@ namespace SkiServiceApp
             _serviceProvider = serviceProvider;
 
             MainAppShell = serviceProvider.GetService<AppShell>();
-            MainAppLogin = serviceProvider.GetService<AppLogin>();
+            MainAppLogin = new AppLogin();
             // ensure the login page will only turn visible with the animation
             // setting opacity to 0 will hide it until the animation is called
-            MainAppLogin.Opacity = 0;
-
             MainPage = MainAppLogin;
 
-            InitializeApplicationAsync(storageService);
+            Task.Run(async () => await InitializeApplicationAsync(storageService));
         }
-
-        protected void OnPropertyChanged([CallerMemberName] string propertyName = null) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 
         private async Task InitializeApplicationAsync(IStorageService storageService)
         {
@@ -51,33 +40,14 @@ namespace SkiServiceApp
         }
 
         /// <summary>
-        /// Login the user with the given token
-        /// </summary>
-        /// <param name="token">The token to apply to the application</param>
-        public void Login(string token)
-        {
-            Token = token;
-            OnPropertyChanged(nameof(IsLoggedIn));
-            _updateAuthorizationHeaderForAllServices(token);
-        }
-
-        /// <summary>
-        /// Logout the user
-        /// </summary>
-        public void Logout()
-        {
-            Token = null;
-            OnPropertyChanged(nameof(IsLoggedIn));
-            _updateAuthorizationHeaderForAllServices(null);
-        }
-
-        /// <summary>
         /// Switch to the main app
         /// </summary>
         /// <returns>Nothing</returns>
         public async Task SwitchToMainApp()
         {
             await _animatePageTransition(MainAppShell, isAppearing: true);
+            SettingsService.LoadSettings();
+            SettingsService.ApplySettings();
             MainPage = MainAppShell;
             await _animatePageTransition(MainAppShell, isAppearing: false);
         }
@@ -88,34 +58,15 @@ namespace SkiServiceApp
         /// <returns>Nothing</returns>
         public async Task SwitchToLogin()
         {
+            MainAppLogin = new AppLogin();
+            SettingsService.LoadSettings();
+            SettingsService.ApplySettings();
             await _animatePageTransition(MainAppLogin, isAppearing: true);
             MainPage = MainAppLogin;
             await _animatePageTransition(MainAppLogin, isAppearing: false);
         }
 
-        /// <summary>
-        /// Update the authorization header for all services that are assignable from BaseApiService
-        /// </summary>
-        /// <param name="token">The token to set for the services</param>
-        private void _updateAuthorizationHeaderForAllServices(string? token)
-        {
-            Type[] apiServices = {
-                typeof(IOrderAPIService),
-                typeof(IPriorityAPIService),
-                typeof(IServiceAPIService),
-                typeof(IStateAPIService),
-                typeof(IUserAPIService)
-            };
-
-            foreach (var type in apiServices)
-            {
-                var service = _serviceProvider.GetService(type) as IBaseAPIServiceBase;
-                if (service != null)
-                {
-                    service.SetAuthorizationHeader(token);
-                }
-            }
-        }
+        
 
         /// <summary>
         /// Helper to animate the page transition
@@ -125,6 +76,8 @@ namespace SkiServiceApp
         /// <returns>Nothing</returns>
         private async Task _animatePageTransition(Page newPage, bool isAppearing)
         {
+
+#if ANDROID || IOS
             if (isAppearing)
             {
                 // Fade out and scale down the current page
@@ -150,6 +103,7 @@ namespace SkiServiceApp
                     newPage.ScaleTo(1, 250)
                 );
             }
+#endif
         }
     }
 }

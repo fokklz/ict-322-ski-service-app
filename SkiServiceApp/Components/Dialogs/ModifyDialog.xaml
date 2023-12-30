@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SkiServiceApp.Components.Dialogs.ModifyDialog"
+             x:Name="ModifyDialogView">
+    
+    <VerticalStackLayout>
+        <!-- Name Label & Input for the Order -->
+        <VerticalStackLayout Style="{StaticResource InputGroup}">
+            <Label Text="{Binding Source={StaticResource localization}, Path=ModifyDialog_NameLabel}" Style="{StaticResource InputLabel}" />
+            <Frame Style="{StaticResource InputFrame}">
+                <Entry Text="{Binding Source={x:Reference ModifyDialogView}, Path=Entry.Order.Name, Mode=TwoWay}" HorizontalOptions="FillAndExpand" />
+            </Frame>
+        </VerticalStackLayout>
+
+        <!-- Email Label & Input for the Order -->
+        <VerticalStackLayout Style="{StaticResource InputGroup}">
+            <Label Text="{Binding Source={StaticResource localization}, Path=ModifyDialog_EmailLabel}" Style="{StaticResource InputLabel}" />
+            <Frame Style="{StaticResource InputFrame}">
+                <Entry Text="{Binding Source={x:Reference ModifyDialogView}, Path=Entry.Order.Email, Mode=TwoWay}" Keyboard="Email" HorizontalOptions="FillAndExpand" />
+            </Frame>
+        </VerticalStackLayout>
+
+        <!-- Phone Label & Input for the Order -->
+        <VerticalStackLayout Style="{StaticResource InputGroup}">
+            <Label Text="{Binding Source={StaticResource localization}, Path=ModifyDialog_PhoneLabel}" Style="{StaticResource InputLabel}" />
+            <Frame Style="{StaticResource InputFrame}">
+                <Entry Text="{Binding Source={x:Reference ModifyDialogView}, Path=Entry.Order.Phone, Mode=TwoWay}" Keyboard="Telephone" HorizontalOptions="FillAndExpand"  />
+            </Frame>
+        </VerticalStackLayout>
+
+
+        <Grid Margin="0,10,0,0" HorizontalOptions="FillAndExpand">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width=".06*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            
+            <!-- Priority Picker -->
+            <VerticalStackLayout>
+                <Label Text="{Binding Source={StaticResource localization}, Path=ModifyDialog_PriorityLabel}" Style="{StaticResource InputLabel}" />
+                <Frame Style="{StaticResource InputFrame}">
+                    <Picker 
+                        ItemsSource="{Binding Source={x:Reference ModifyDialogView}, Path=Priorities}" 
+                        SelectedItem="{Binding Source={x:Reference ModifyDialogView}, Path=SelectedPriority}" 
+                        ItemDisplayBinding="{Binding DisplayText}"/>
+                </Frame>
+            </VerticalStackLayout>
+            
+            <!-- State Picker -->
+            <VerticalStackLayout Grid.Column="2">
+                <Label Text="{Binding Source={StaticResource localization}, Path=ModifyDialog_StateLabel}" Style="{StaticResource InputLabel}" />
+                <Frame Style="{StaticResource InputFrame}">
+                    <Picker 
+                        ItemsSource="{Binding Source={x:Reference ModifyDialogView}, Path=States}" 
+                        SelectedItem="{Binding Source={x:Reference ModifyDialogView}, Path=SelectedState}"
+                        ItemDisplayBinding="{Binding DisplayText}" />
+                </Frame>
+            </VerticalStackLayout>
+
+            <!-- Service Picker -->
+            <VerticalStackLayout Grid.Row="1" Grid.ColumnSpan="3" Padding="0,10,0,0">
+                <Label Text="{Binding Source={StaticResource localization}, Path=ModifyDialog_ServiceLabel}" Style="{StaticResource InputLabel}" />
+                <Frame Style="{StaticResource InputFrame}">
+                    <Picker 
+                        ItemsSource="{Binding Source={x:Reference ModifyDialogView}, Path=Services}" 
+                        SelectedItem="{Binding Source={x:Reference ModifyDialogView}, Path=SelectedService}"
+                        ItemDisplayBinding="{Binding DisplayText}" />
+                </Frame>
+            </VerticalStackLayout>
+        </Grid>
+    </VerticalStackLayout>
+</ContentView>

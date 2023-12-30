@@ -8,5 +8,12 @@ public partial class UserListPage : ContentPage
 	{
 		InitializeComponent();
 		BindingContext = viewModel;
-	}
+    }
+
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
+        OrderList.Update();
+    }
+
 }

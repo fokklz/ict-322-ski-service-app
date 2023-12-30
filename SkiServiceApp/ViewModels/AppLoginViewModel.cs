@@ -9,7 +9,7 @@ using System.Windows.Input;
 
 namespace SkiServiceApp.ViewModels
 {
-    public class AppLoginViewModel : BaseViewModel
+    public class AppLoginViewModel : BaseNotifyHandler
     {
         private readonly IAuthService _authService;
         private readonly IStorageService _storageService;
@@ -33,10 +33,10 @@ namespace SkiServiceApp.ViewModels
         public Command<StoredUserCredentials> LoginWithUserCommand { get; set; }
         public ICommand LoginCommand { get; set; }
 
-        public AppLoginViewModel(IAuthService authService, IStorageService storageService)
+        public AppLoginViewModel()
         {
-            _authService = authService;
-            _storageService = storageService;
+            _authService = ServiceLocator.GetService<IAuthService>();
+            _storageService = ServiceLocator.GetService<IStorageService>();
 
             LoginCommand = new Command(async () => {
                 // hide on screen keyboard before processing login

@@ -37,6 +37,16 @@ namespace SkiServiceApp.Services.API
         }
 
         /// <summary>
+        /// Revoke a user's token (refresh-token)
+        /// </summary>
+        /// <returns>THe user that just got logged out</returns>
+        public async Task<HTTPResponse<UserResponse>> RevokeAsync()
+        {
+            var res = await _sendRequest(HttpMethod.Post, _url("revoke"));
+            return new HTTPResponse<UserResponse>(res);
+        }
+
+        /// <summary>
         /// Unlock a user
         /// </summary>
         /// <param name="userId">The user to unlock</param>

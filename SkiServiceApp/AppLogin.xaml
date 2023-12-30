@@ -4,8 +4,10 @@
              xmlns:local="clr-namespace:SkiServiceApp"
              xmlns:viewModel="clr-namespace:SkiServiceApp.ViewModels"
              xmlns:model="clr-namespace:SkiServiceApp.Models"
+             xmlns:res="clr-namespace:SkiServiceApp.Resources.Languages"
              x:Class="SkiServiceApp.AppLogin"
-             Title="AppLogin">
+             Title="AppLogin"
+             Opacity="0">
 
     <ContentPage.Resources>
         <Style x:Key="Header" TargetType="VerticalStackLayout">
@@ -18,7 +20,7 @@
             <Setter Property="FontAttributes" Value="Bold" />
         </Style>
         <Style x:Key="StoredUserEntry" TargetType="VerticalStackLayout">
-            <Setter Property="BackgroundColor" Value="{AppThemeBinding Dark={StaticResource Gray900}, Light={StaticResource Gray100}}" />
+            <Setter Property="BackgroundColor" Value="{AppThemeBinding Dark={StaticResource Grey900}, Light={StaticResource Grey100}}" />
             <Setter Property="Margin" Value="0,9" />
             <Setter Property="Padding" Value="20" />
             <Setter Property="Spacing" Value="10" />
@@ -31,7 +33,7 @@
         <Style x:Key="Divier" TargetType="Border">
             <Setter Property="WidthRequest" Value="120" />
             <Setter Property="HeightRequest" Value="2.5" />
-            <Setter Property="BackgroundColor" Value="{AppThemeBinding Dark={StaticResource Gray900}, Light={StaticResource Gray200}}" />
+            <Setter Property="BackgroundColor" Value="{AppThemeBinding Dark={StaticResource BlueGrey900}, Light={StaticResource Grey200}}" />
         </Style>
     </ContentPage.Resources>
 
@@ -39,7 +41,7 @@
         <!-- Start of Content -->
         <VerticalStackLayout Style="{StaticResource Header}">
             <Label 
-                Text="Anmelden" 
+                Text="{Binding Source={StaticResource localization}, Path=AppLogin_SigninLabel}"
                 Style="{StaticResource HeaderLabel}"/>
         </VerticalStackLayout>
 
@@ -61,31 +63,38 @@
                 </Grid.ColumnDefinitions>
                 
                 <!-- Background -->
-                <Rectangle Fill="{StaticResource ErrorBackground}" Opacity="0.5" Grid.RowSpan="4" Grid.ColumnSpan="3" />
+                <Rectangle Fill="{AppThemeBinding Light={StaticResource RedBrush}, Dark={StaticResource RedDarkBrush}}" Opacity="0.5" Grid.RowSpan="4" Grid.ColumnSpan="3" />
 
                 <Label Grid.Row="2" Grid.Column="1" Text="{Binding Message}" VerticalOptions="Center" />
             </Grid>
         </VerticalStackLayout>
 
         <!-- Start of form -->
-        <VerticalStackLayout Margin="0,0,0,10">
+        <VerticalStackLayout Style="{StaticResource InputGroup}" Margin="0,0,0,10">
             <Label 
-                Text="Benutzername" 
+                Text="{Binding Source={StaticResource localization}, Path=AppLogin_UsernameLabel}" 
+                Style="{StaticResource InputLabel}"
                 Margin="4,0,0,-4"/>
-            <Entry 
-                Text="{Binding Username, Mode=TwoWay}" />
+            <Frame Style="{StaticResource InputFrame}">
+                <Entry 
+                    Text="{Binding Username, Mode=TwoWay}"/>
+            </Frame>
         </VerticalStackLayout>
-        <VerticalStackLayout Margin="0,0,0,10">
+        <VerticalStackLayout Style="{StaticResource InputGroup}" Margin="0,0,0,10">
             <Label 
-                Text="Passwort" 
+                Text="{Binding Source={StaticResource localization}, Path=AppLogin_PasswordLabel}"
+                Style="{StaticResource InputLabel}"
                 Margin="4,0,0,-4"/>
-            <Entry 
-                Text="{Binding Password, Mode=TwoWay}" 
-                IsPassword="True" />
+            <Frame Style="{StaticResource InputFrame}">
+                <Entry 
+                    Text="{Binding Password, Mode=TwoWay}" 
+                    IsPassword="True" />
+            </Frame>
         </VerticalStackLayout>
         <Button 
             Command="{Binding LoginCommand}" 
-            Text="Login" 
+            Style="{StaticResource PrimaryButton}"
+            Text="{Binding Source={StaticResource localization}, Path=AppLogin_SigninButton}" 
             HorizontalOptions="End"/>
 
         <!-- Lower part of the login screen -->
@@ -93,7 +102,7 @@
             <Border Style="{StaticResource Divier}" />
             <VerticalStackLayout Style="{StaticResource Header}">
                 <Label 
-                    Text="Zuvor angemeldet" 
+                    Text="{Binding Source={StaticResource localization}, Path=AppLogin_LastLoginsLabel}" 
                     Style="{StaticResource HeaderLabel}"/>
             </VerticalStackLayout>
 
@@ -116,11 +125,12 @@
                             <!-- Last login -->
                             <HorizontalStackLayout Grid.Row="1">
                                 <Label 
-                                    Text="Zuletzt verwendet am " 
-                                    Opacity="0.4" />
+                                    Text="{Binding Source={StaticResource localization}, Path=AppLogin_LastUsedLabel}"
+                                    Opacity="0.6" />
                                 <Label 
                                     Text="{Binding LastLogin, StringFormat='{0:dd.MM.yyyy}'}"
-                                    Opacity="0.5" />
+                                    Opacity="0.5"
+                                    Margin="4,0,0,0"/>
                             </HorizontalStackLayout>
                         </VerticalStackLayout>
                     </DataTemplate>

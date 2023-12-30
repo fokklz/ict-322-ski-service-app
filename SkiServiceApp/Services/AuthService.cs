@@ -1,4 +1,6 @@
 ﻿using PropertyChanged;
+using SkiServiceApp.Common;
+using SkiServiceApp.Components.Dialogs;
 using SkiServiceApp.Interfaces;
 using SkiServiceApp.Interfaces.API;
 using SkiServiceApp.Models;
@@ -13,8 +15,6 @@ namespace SkiServiceApp.Services
     {
         private readonly IUserAPIService _userAPIService;
         private readonly IStorageService _storageService;
-
-        public bool IsLoggedIn { get; private set; }
 
         public AuthService(IUserAPIService userAPIService, IStorageService storageService)
         {
@@ -37,16 +37,14 @@ namespace SkiServiceApp.Services
                 var parsed = await res.ParseSuccess();
                 if (parsed != null && parsed.Auth != null && parsed.Auth.Token != null)
                 {
-                    if (parsed.Auth.RefreshToken != null)
+                    var refreshToken = parsed.Auth.RefreshToken;
+                    if (refreshToken != null)
                     {
-                        _storageService.StoreUser(parsed.Username, parsed.Auth.Token, parsed.Auth.RefreshToken);
-
+                        _storageService.StoreUser(parsed.Username, parsed.Auth.Token, refreshToken);
                         await _storageService.SaveChangesAsync();
                     }
-
-
-                    // TODO: Store also expiring times to logout user if he stays to long
-                    (Application.Current as App)?.Login(parsed.Auth.Token);
+                    
+                    AuthManager.Login(parsed.Auth.Token, refreshToken, parsed.Id);
 
                     // keep UI work on main thread
                     return (res, new Command(() => MainThread.BeginInvokeOnMainThread(async () => await (Application.Current as App).SwitchToMainApp())));
@@ -57,8 +55,9 @@ namespace SkiServiceApp.Services
                 if (!string.IsNullOrEmpty(oldRefreshToken))
                 {
                     _storageService.RemoveUserByRefreshToken(oldRefreshToken);
+                    await _storageService.SaveChangesAsync();
                 }
-            }
+            }   
 
             return (res, null);
         }
@@ -103,11 +102,27 @@ namespace SkiServiceApp.Services
         /// Logout a user from the application
         /// </summary>
         /// <returns>a ICommand to be run when ready to navigate away</returns>
-        public async Task LogoutAsync()
+        public async Task LogoutAsync(bool force = false)
         {
-            (Application.Current as App)?.Logout();
-            // keep UI work on main thread
-            MainThread.BeginInvokeOnMainThread(async () => await (Application.Current as App).SwitchToLogin());
+            if (force || SettingsService.AlwaysSaveLogin)
+            {
+                if(force) _storageService.RemoveUserByRefreshToken(AuthManager.RefreshToken);
+                AuthManager.Logout();
+                MainThread.BeginInvokeOnMainThread(async () => await (Application.Current as App).SwitchToLogin());
+                return;
+            }
+            await DialogService.ShowDialog(new LogoutDialog(), (result) =>
+            {
+                if (result)
+                {
+                    AuthManager.Logout();
+                    MainThread.BeginInvokeOnMainThread(async () => await (Application.Current as App).SwitchToLogin());
+                }
+            },
+            titleText: Localization.Instance.LogoutDialog_Title,
+            submitText: Localization.Instance.LogoutDialog_Submit,
+            dangerText: Localization.Instance.LogoutDialog_Danger,
+            dangerCommand: new Command(() => _storageService.RemoveUserByRefreshToken(AuthManager.RefreshToken)));
         }
     }
 } 

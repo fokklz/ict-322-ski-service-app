@@ -3,9 +3,9 @@
 namespace SkiServiceApp.Common
 {
     /// <summary>
-    /// Should be to interact with ressources
+    /// Should be used to interact with ressources
     /// </summary>
-    internal class RessourceManager
+    public class RessourceManager
     {
         /// <summary>
         /// Register Syncfusion license
@@ -13,6 +13,7 @@ namespace SkiServiceApp.Common
         public static void RegisterSyncfusionLicense()
         {
             var assembly = Assembly.GetExecutingAssembly();
+            // a license can be obtained from https://www.syncfusion.com/products/communitylicense
             var resourceName = "SkiServiceApp.SyncfusionLicense.txt";
 
             using (Stream stream = assembly.GetManifestResourceStream(resourceName))

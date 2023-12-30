@@ -113,7 +113,7 @@ namespace SkiServiceApp.Services
             }
             catch (Exception ex)
             {
-                // Handle exceptions
+                // Handle exceptions (should not happen?)
                 Debug.WriteLine("AT LOADING", ex.Message);
             }
         }

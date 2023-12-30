@@ -1,0 +1,345 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+	<!-- 
+		Microsoft ResX Schema
+
+		Version 1.3
+
+		The primary goals of this format is to allow a simple XML format 
+		that is mostly human readable. The generation and parsing of the 
+		various data types are done through the TypeConverter classes 
+		associated with the data types.
+
+		Example:
+
+		... ado.net/XML headers & schema ...
+		<resheader name="resmimetype">text/microsoft-resx</resheader>
+		<resheader name="version">1.3</resheader>
+		<resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+		<resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+		<data name="Name1">this is my long string</data>
+		<data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+		<data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+			[base64 mime encoded serialized .NET Framework object]
+		</data>
+		<data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+			[base64 mime encoded string representing a byte array form of the .NET Framework object]
+		</data>
+
+		There are any number of "resheader" rows that contain simple 
+		name/value pairs.
+
+		Each data row contains a name, and value. The row also contains a 
+		type or mimetype. Type corresponds to a .NET class that support 
+		text/value conversion through the TypeConverter architecture. 
+		Classes that don't support this are serialized and stored with the 
+		mimetype set.
+
+		The mimetype is used for serialized objects, and tells the 
+		ResXResourceReader how to depersist the object. This is currently not 
+		extensible. For a given mimetype the value must be set accordingly:
+
+		Note - application/x-microsoft.net.object.binary.base64 is the format 
+		that the ResXResourceWriter will generate, however the reader can 
+		read any of the formats listed below.
+
+		mimetype: application/x-microsoft.net.object.binary.base64
+		value   : The object must be serialized with 
+			: System.Serialization.Formatters.Binary.BinaryFormatter
+			: and then encoded with base64 encoding.
+
+		mimetype: application/x-microsoft.net.object.soap.base64
+		value   : The object must be serialized with 
+			: System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+			: and then encoded with base64 encoding.
+
+		mimetype: application/x-microsoft.net.object.bytearray.base64
+		value   : The object must be serialized into a byte array 
+			: using a System.ComponentModel.TypeConverter
+			: and then encoded with base64 encoding.
+	-->
+	
+	<xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+		<xsd:element name="root" msdata:IsDataSet="true">
+			<xsd:complexType>
+				<xsd:choice maxOccurs="unbounded">
+					<xsd:element name="data">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+								<xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+							</xsd:sequence>
+							<xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+							<xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+							<xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="resheader">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+							</xsd:sequence>
+							<xsd:attribute name="name" type="xsd:string" use="required" />
+						</xsd:complexType>
+					</xsd:element>
+				</xsd:choice>
+			</xsd:complexType>
+		</xsd:element>
+	</xsd:schema>
+	<resheader name="resmimetype">
+		<value>text/microsoft-resx</value>
+	</resheader>
+	<resheader name="version">
+		<value>1.3</value>
+	</resheader>
+	<resheader name="reader">
+		<value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+	<resheader name="writer">
+		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+	<data name="AppLogin.LastLoginsLabel" xml:space="preserve">
+    <value>Log masuk terakhir:</value>
+  </data>
+  <data name="AppLogin.LastUsedLabel" xml:space="preserve">
+    <value>Terakhir digunakan pada:</value>
+  </data>
+  <data name="AppLogin.PasswordLabel" xml:space="preserve">
+    <value>Kata Laluan</value>
+  </data>
+  <data name="AppLogin.SigninButton" xml:space="preserve">
+    <value>Log Masuk</value>
+  </data>
+  <data name="AppLogin.SigninLabel" xml:space="preserve">
+    <value>Daftar Masuk</value>
+  </data>
+  <data name="AppLogin.UsernameLabel" xml:space="preserve">
+    <value>Nama Pengguna</value>
+  </data>
+  <data name="AppShell.FlyoutItem.DashboardButton" xml:space="preserve">
+    <value>Papan Pemuka</value>
+  </data>
+  <data name="AppShell.FlyoutItem.DetailsPageButton" xml:space="preserve">
+    <value>Maklumat Pesanan</value>
+  </data>
+  <data name="AppShell.FlyoutItem.ListButton" xml:space="preserve">
+    <value>Semua Pesanan</value>
+  </data>
+  <data name="AppShell.FlyoutItem.LogoutButton" xml:space="preserve">
+    <value>Log Keluar</value>
+  </data>
+  <data name="AppShell.FlyoutItem.SettingsButton" xml:space="preserve">
+    <value>Tetapan</value>
+  </data>
+  <data name="AppShell.FlyoutItem.UserListButton" xml:space="preserve">
+    <value>Pesanan Anda</value>
+  </data>
+  <data name="AppShell.Love" xml:space="preserve">
+    <value>Dibuat oleh Robin dan Fokko dengan</value>
+  </data>
+  <data name="AppShell.Title" xml:space="preserve">
+    <value>Aplikasi SkiService</value>
+  </data>
+  <data name="Backend.Error.CANNOT_UNLOCK_SELF" xml:space="preserve">
+    <value>Anda tidak boleh membuka kunci akaun anda sendiri. Sila hubungi pentadbir.</value>
+  </data>
+  <data name="Backend.Error.ENTRY_NOT_FOUND" xml:space="preserve">
+    <value>Entri tidak dapat ditemui.</value>
+  </data>
+  <data name="Backend.Error.INVALID_CREDENTIALS" xml:space="preserve">
+    <value>Nama pengguna atau kata laluan yang dimasukkan tidak betul.</value>
+  </data>
+  <data name="Backend.Error.USER_LOCKED" xml:space="preserve">
+    <value>Akaun ini dikunci. Sila hubungi pentadbir.</value>
+  </data>
+  <data name="Backend.Error.USER_NOT_LOCKED" xml:space="preserve">
+    <value>Pengguna tidak dikunci.</value>
+  </data>
+  <data name="Backend.NextState.2" xml:space="preserve">
+    <value>Mula</value>
+  </data>
+  <data name="Backend.NextState.3" xml:space="preserve">
+    <value>Selesai</value>
+  </data>
+  <data name="Backend.Priority.1" xml:space="preserve">
+    <value>Rendah</value>
+  </data>
+  <data name="Backend.Priority.2" xml:space="preserve">
+    <value>Biasa</value>
+  </data>
+  <data name="Backend.Priority.3" xml:space="preserve">
+    <value>Tinggi</value>
+  </data>
+  <data name="Backend.Service.1" xml:space="preserve">
+    <value>Servis Kecil</value>
+  </data>
+  <data name="Backend.Service.2" xml:space="preserve">
+    <value>Servis Besar</value>
+  </data>
+  <data name="Backend.Service.3" xml:space="preserve">
+    <value>Servis Ski Perlumbaan</value>
+  </data>
+  <data name="Backend.Service.4" xml:space="preserve">
+    <value>Pemasangan dan Penyesuaian Pengikat</value>
+  </data>
+  <data name="Backend.Service.5" xml:space="preserve">
+    <value>Pemotongan Kulit setiap Pasang</value>
+  </data>
+  <data name="Backend.Service.6" xml:space="preserve">
+    <value>Lilin Panas</value>
+  </data>
+  <data name="Backend.State.1" xml:space="preserve">
+    <value>Buka</value>
+  </data>
+  <data name="Backend.State.2" xml:space="preserve">
+    <value>Dalam Proses</value>
+  </data>
+  <data name="Backend.State.3" xml:space="preserve">
+    <value>Selesai</value>
+  </data>
+  <data name="CancelDialog.Submit" xml:space="preserve">
+    <value>Batal</value>
+  </data>
+  <data name="CancelDialog.SubTitleMiddle" xml:space="preserve">
+    <value>untuk</value>
+  </data>
+  <data name="CancelDialog.SubTitlePre" xml:space="preserve">
+    <value>Padam pesanan</value>
+  </data>
+  <data name="CancelDialog.SubTitleSub" xml:space="preserve">
+    <value>sahkan.</value>
+  </data>
+  <data name="CancelDialog.Title" xml:space="preserve">
+    <value>Batal pesanan?</value>
+  </data>
+  <data name="CustomListItem.ApplyButton" xml:space="preserve">
+    <value>Memohon</value>
+  </data>
+  <data name="CustomListItem.CancelButton" xml:space="preserve">
+    <value>Batal</value>
+  </data>
+  <data name="CustomListItem.ChangeButton" xml:space="preserve">
+    <value>Tukar</value>
+  </data>
+  <data name="CustomListItem.DaysLeft" xml:space="preserve">
+    <value>hari lagi</value>
+  </data>
+  <data name="CustomListItem.Unassigned" xml:space="preserve">
+    <value>Tidak Ditugaskan</value>
+  </data>
+  <data name="Dashboard.Chart.Done" xml:space="preserve">
+    <value>Selesai</value>
+  </data>
+  <data name="Dashboard.Chart.Open" xml:space="preserve">
+    <value>Buka</value>
+  </data>
+  <data name="Dashboard.Chart.You" xml:space="preserve">
+    <value>Pesanan Anda</value>
+  </data>
+  <data name="Dashboard.SecondarySummary.Pre" xml:space="preserve">
+    <value>Anda kini mempunyai</value>
+  </data>
+  <data name="Dashboard.SecondarySummary.Sub" xml:space="preserve">
+    <value>pesanan terbuka</value>
+  </data>
+  <data name="Dashboard.Summary.Middle" xml:space="preserve">
+    <value>dari</value>
+  </data>
+  <data name="Dashboard.Summary.Pre" xml:space="preserve">
+    <value>Anda telah</value>
+  </data>
+  <data name="Dashboard.Summary.Sub" xml:space="preserve">
+    <value>memproses pesanan yang selesai</value>
+  </data>
+  <data name="Dialog.Cancel" xml:space="preserve">
+    <value>Batal</value>
+  </data>
+  <data name="Dialog.Submit" xml:space="preserve">
+    <value>Sahkan</value>
+  </data>
+  <data name="Dialog.Title" xml:space="preserve">
+    <value>Pengenalan Biasa</value>
+  </data>
+  <data name="LogoutDialog.Danger" xml:space="preserve">
+    <value>Jangan Simpan</value>
+  </data>
+  <data name="LogoutDialog.Submit" xml:space="preserve">
+    <value>Simpan</value>
+  </data>
+  <data name="LogoutDialog.Text" xml:space="preserve">
+    <value>Adakah akaun ini harus disimpan dalam senarai untuk log masuk cepat supaya log masuk seterusnya boleh dilakukan dengan satu klik?</value>
+  </data>
+  <data name="LogoutDialog.Title" xml:space="preserve">
+    <value>Log Keluar Kekal</value>
+  </data>
+  <data name="ModifyDialog.EmailLabel" xml:space="preserve">
+    <value>Alamat Emel</value>
+  </data>
+  <data name="ModifyDialog.NameLabel" xml:space="preserve">
+    <value>Nama</value>
+  </data>
+  <data name="ModifyDialog.PhoneLabel" xml:space="preserve">
+    <value>Telefon</value>
+  </data>
+  <data name="ModifyDialog.PriorityLabel" xml:space="preserve">
+    <value>Keutamaan</value>
+  </data>
+  <data name="ModifyDialog.ServiceLabel" xml:space="preserve">
+    <value>Perkhidmatan</value>
+  </data>
+  <data name="ModifyDialog.StateLabel" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="ModifyDialog.Submit" xml:space="preserve">
+    <value>Simpan</value>
+  </data>
+  <data name="ModifyDialog.Title" xml:space="preserve">
+    <value>Ubahsuai Pesanan</value>
+  </data>
+  <data name="OrderDetailPage.CancelButton" xml:space="preserve">
+    <value>Batal</value>
+  </data>
+  <data name="OrderDetailPage.ChangeButton" xml:space="preserve">
+    <value>Tukar</value>
+  </data>
+  <data name="OrderDetailPage.CustomerNameLabel" xml:space="preserve">
+    <value>Nama Pelanggan</value>
+  </data>
+  <data name="OrderDetailPage.DateLabel" xml:space="preserve">
+    <value>Dihantar pada:</value>
+  </data>
+  <data name="OrderDetailPage.EmailLabel" xml:space="preserve">
+    <value>Emel</value>
+  </data>
+  <data name="OrderDetailPage.PhoneLabel" xml:space="preserve">
+    <value>Telefon</value>
+  </data>
+  <data name="OrderDetailPage.PreDaysLeft" xml:space="preserve">
+    <value>Masih ada</value>
+  </data>
+  <data name="SettingsPage.AlwaysSaveLoginLabel" xml:space="preserve">
+    <value>Simpan log masuk selalu</value>
+  </data>
+  <data name="SettingsPage.CancelInListViewLabel" xml:space="preserve">
+    <value>Batal dalam pandangan senarai</value>
+  </data>
+  <data name="SettingsPage.LanguageLabel" xml:space="preserve">
+    <value>Bahasa</value>
+  </data>
+  <data name="SettingsPage.LogoutOnAllDevicesButton" xml:space="preserve">
+    <value>Log keluar di SEMUA peranti</value>
+  </data>
+  <data name="SettingsPage.Theme.Dark" xml:space="preserve">
+    <value>Gelap</value>
+  </data>
+  <data name="SettingsPage.Theme.Light" xml:space="preserve">
+    <value>Cerah</value>
+  </data>
+  <data name="SettingsPage.Theme.System" xml:space="preserve">
+    <value>Sistem</value>
+  </data>
+  <data name="SettingsPage.ThemeLabel" xml:space="preserve">
+    <value>Tema</value>
+  </data>
+
+</root>

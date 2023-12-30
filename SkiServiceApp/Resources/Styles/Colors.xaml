@@ -4,45 +4,196 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
 
-    <!-- Note: For Android please see also Platforms\Android\Resources\values\colors.xml -->
-
-    <Color x:Key="ErrorBackground">#DDE53935</Color>
+    <Color x:Key="Transparent">Transparent</Color>
     
-    
-    <Color x:Key="Primary">#512BD4</Color>
-    <Color x:Key="PrimaryDark">#ac99ea</Color>
-    <Color x:Key="PrimaryDarkText">#242424</Color>
-    <Color x:Key="Secondary">#DFD8F7</Color>
-    <Color x:Key="SecondaryDarkText">#9880e5</Color>
-    <Color x:Key="Tertiary">#2B0B98</Color>
-
     <Color x:Key="White">White</Color>
     <Color x:Key="Black">Black</Color>
-    <Color x:Key="Magenta">#D600AA</Color>
-    <Color x:Key="MidnightBlue">#190649</Color>
-    <Color x:Key="OffBlack">#1f1f1f</Color>
+    <Color x:Key="OffWhite">#FAFAFA</Color>
+    <Color x:Key="OffBlack">#212121</Color>
+    <Color x:Key="OffWhite30">#4DFAFAFA</Color>
+    <Color x:Key="OffBlack30">#4D212121</Color>
 
-    <Color x:Key="Gray100">#E1E1E1</Color>
-    <Color x:Key="Gray200">#C8C8C8</Color>
-    <Color x:Key="Gray300">#ACACAC</Color>
-    <Color x:Key="Gray400">#919191</Color>
+    <Color x:Key="SemiTransparentOffBlack">#99212121</Color>
+
+
+    <SolidColorBrush x:Key="WhiteBrush" Color="{StaticResource White}" />
+    <SolidColorBrush x:Key="BlackBrush" Color="{StaticResource Black}" />
+
     <Color x:Key="Gray500">#6E6E6E</Color>
-    <Color x:Key="Gray600">#404040</Color>
-    <Color x:Key="Gray900">#212121</Color>
-    <Color x:Key="Gray950">#141414</Color>
 
-    <SolidColorBrush x:Key="PrimaryBrush" Color="{StaticResource Primary}"/>
-    <SolidColorBrush x:Key="SecondaryBrush" Color="{StaticResource Secondary}"/>
-    <SolidColorBrush x:Key="TertiaryBrush" Color="{StaticResource Tertiary}"/>
-    <SolidColorBrush x:Key="WhiteBrush" Color="{StaticResource White}"/>
-    <SolidColorBrush x:Key="BlackBrush" Color="{StaticResource Black}"/>
 
-    <SolidColorBrush x:Key="Gray100Brush" Color="{StaticResource Gray100}"/>
-    <SolidColorBrush x:Key="Gray200Brush" Color="{StaticResource Gray200}"/>
-    <SolidColorBrush x:Key="Gray300Brush" Color="{StaticResource Gray300}"/>
-    <SolidColorBrush x:Key="Gray400Brush" Color="{StaticResource Gray400}"/>
-    <SolidColorBrush x:Key="Gray500Brush" Color="{StaticResource Gray500}"/>
-    <SolidColorBrush x:Key="Gray600Brush" Color="{StaticResource Gray600}"/>
-    <SolidColorBrush x:Key="Gray900Brush" Color="{StaticResource Gray900}"/>
-    <SolidColorBrush x:Key="Gray950Brush" Color="{StaticResource Gray950}"/>
+    <!-- Error Colors for light/dark-->
+    <Color x:Key="Red">#EF5350</Color>
+    <Color x:Key="RedAccent">#660000</Color>
+    <Color x:Key="RedDark">#660000</Color>
+    <Color x:Key="RedDarkAccent">#400000</Color>
+        <!-- Text counter parts -->
+    <Color x:Key="RedText">#FAFAFA</Color>
+    <Color x:Key="RedDarkText">#FAFAFA</Color>
+    <SolidColorBrush x:Key="RedBrush" Color="{StaticResource Red}" />
+    <SolidColorBrush x:Key="RedDarkBrush" Color="{StaticResource RedDark}" />
+
+    <Color x:Key="Grey50">#FAFAFA</Color>
+    <Color x:Key="Grey100">#E1E1E1</Color>
+    <Color x:Key="Grey200">#C8C8C8</Color>
+    <Color x:Key="Grey300">#ACACAC</Color>
+    <Color x:Key="Grey400">#919191</Color>
+    <Color x:Key="Grey500">#6E6E6E</Color>
+    <Color x:Key="Grey600">#404040</Color>
+    <Color x:Key="Grey900">#212121</Color>
+    <Color x:Key="Grey950">#141414</Color>
+
+
+    <!-- Color palette for neutral accents & dark mode -->
+    <Color x:Key="BlueGrey50">#ECEFF1</Color>
+    <Color x:Key="BlueGrey100">#CFD8DC</Color>
+    <Color x:Key="BlueGrey200">#B0BEC5</Color>
+    <Color x:Key="BlueGrey300">#90A4AE</Color>
+    <Color x:Key="BlueGrey400">#78909C</Color>
+    <Color x:Key="BlueGrey500">#607D8B</Color>
+    <Color x:Key="BlueGrey600">#546E7A</Color>
+    <Color x:Key="BlueGrey700">#455A64</Color>
+    <Color x:Key="BlueGrey800">#37474F</Color>
+    <Color x:Key="BlueGrey900">#263238</Color>
+    <Color x:Key="BlueGrey950">#141414</Color>
+    <!-- Text counter parts -->
+    <Color x:Key="BlueGrey50Text">#212121</Color>
+    <Color x:Key="BlueGrey100Text">#212121</Color>
+    <Color x:Key="BlueGrey200Text">#212121</Color>
+    <Color x:Key="BlueGrey300Text">#212121</Color>
+    <Color x:Key="BlueGrey400Text">#212121</Color>
+    <Color x:Key="BlueGrey500Text">#212121</Color>
+    <Color x:Key="BlueGrey600Text">#FAFAFA</Color>
+    <Color x:Key="BlueGrey700Text">#FAFAFA</Color>
+    <Color x:Key="BlueGrey800Text">#FAFAFA</Color>
+    <Color x:Key="BlueGrey900Text">#FAFAFA</Color>
+    <Color x:Key="BlueGrey950Text">#FAFAFA</Color>
+    <!-- Color Brushes -->
+    <SolidColorBrush x:Key="BlueGrey50Brush" Color="{StaticResource BlueGrey50}" />
+    <SolidColorBrush x:Key="BlueGrey100Brush" Color="{StaticResource BlueGrey100}" />
+    <SolidColorBrush x:Key="BlueGrey200Brush" Color="{StaticResource BlueGrey200}" />
+    <SolidColorBrush x:Key="BlueGrey300Brush" Color="{StaticResource BlueGrey300}" />
+    <SolidColorBrush x:Key="BlueGrey400Brush" Color="{StaticResource BlueGrey400}" />
+    <SolidColorBrush x:Key="BlueGrey500Brush" Color="{StaticResource BlueGrey500}" />
+    <SolidColorBrush x:Key="BlueGrey600Brush" Color="{StaticResource BlueGrey600}" />
+    <SolidColorBrush x:Key="BlueGrey700Brush" Color="{StaticResource BlueGrey700}" />
+    <SolidColorBrush x:Key="BlueGrey800Brush" Color="{StaticResource BlueGrey800}" />
+    <SolidColorBrush x:Key="BlueGrey900Brush" Color="{StaticResource BlueGrey900}" />
+    <SolidColorBrush x:Key="BlueGrey950Brush" Color="{StaticResource BlueGrey950}" />
+
+
+
+    <!-- Primary for light theme -->
+    <Color x:Key="Indigo50">#E8EAF6</Color>
+    <Color x:Key="Indigo100">#C5CAE9</Color>
+    <Color x:Key="Indigo200">#9FA8DA</Color>
+    <Color x:Key="Indigo300">#7986CB</Color>
+    <Color x:Key="Indigo400">#5C6BC0</Color>
+    <Color x:Key="Indigo500">#3F51B5</Color>
+    <Color x:Key="Indigo600">#3949AB</Color>
+    <Color x:Key="Indigo700">#303F9F</Color>
+    <Color x:Key="Indigo800">#283593</Color>
+    <Color x:Key="Indigo900">#1A237E</Color>
+    <Color x:Key="IndigoA100">#8C9EFF</Color>
+    <Color x:Key="IndigoA200">#536DFE</Color>
+    <Color x:Key="IndigoA400">#3D5AFE</Color>
+    <Color x:Key="IndigoA700">#304FFE</Color>
+    <!-- Text counter parts -->
+    <Color x:Key="Indigo50Text">#212121</Color>
+    <Color x:Key="Indigo100Text">#212121</Color>
+    <Color x:Key="Indigo200Text">#212121</Color>
+    <Color x:Key="Indigo300Text">#FAFAFA</Color>
+    <Color x:Key="Indigo400Text">#FAFAFA</Color>
+    <Color x:Key="Indigo500Text">#FAFAFA</Color>
+    <Color x:Key="Indigo600Text">#FAFAFA</Color>
+    <Color x:Key="Indigo700Text">#FAFAFA</Color>
+    <Color x:Key="Indigo800Text">#FAFAFA</Color>
+    <Color x:Key="Indigo900Text">#FAFAFA</Color>
+    <Color x:Key="IndigoA100Text">#212121</Color>
+    <Color x:Key="IndigoA200Text">#212121</Color>
+    <Color x:Key="IndigoA400Text">#FAFAFA</Color>
+    <Color x:Key="IndigoA700Text">#FAFAFA</Color>
+    <!-- Color Brushes -->
+    <SolidColorBrush x:Key="Indigo50Brush" Color="{StaticResource Indigo50}" />
+    <SolidColorBrush x:Key="Indigo100Brush" Color="{StaticResource Indigo100}" />
+    <SolidColorBrush x:Key="Indigo200Brush" Color="{StaticResource Indigo200}" />
+    <SolidColorBrush x:Key="Indigo300Brush" Color="{StaticResource Indigo300}" />
+    <SolidColorBrush x:Key="Indigo400Brush" Color="{StaticResource Indigo400}" />
+    <SolidColorBrush x:Key="Indigo500Brush" Color="{StaticResource Indigo500}" />
+    <SolidColorBrush x:Key="Indigo600Brush" Color="{StaticResource Indigo600}" />
+    <SolidColorBrush x:Key="Indigo700Brush" Color="{StaticResource Indigo700}" />
+    <SolidColorBrush x:Key="Indigo800Brush" Color="{StaticResource Indigo800}" />
+    <SolidColorBrush x:Key="Indigo900Brush" Color="{StaticResource Indigo900}" />
+    <SolidColorBrush x:Key="IndigoA100Brush" Color="{StaticResource IndigoA100}" />
+    <SolidColorBrush x:Key="IndigoA200Brush" Color="{StaticResource IndigoA200}" />
+    <SolidColorBrush x:Key="IndigoA400Brush" Color="{StaticResource IndigoA400}" />
+    <SolidColorBrush x:Key="IndigoA700Brush" Color="{StaticResource IndigoA700}" />
+    
+
+    <!-- Primary for dark theme -->
+    <Color x:Key="Blue50">#E3F2FD</Color>
+    <Color x:Key="Blue100">#BBDEFB</Color>
+    <Color x:Key="Blue200">#90CAF9</Color>
+    <Color x:Key="Blue300">#64B5F6</Color>
+    <Color x:Key="Blue400">#42A5F5</Color>
+    <Color x:Key="Blue500">#2196F3</Color>
+    <Color x:Key="Blue600">#1E88E5</Color>
+    <Color x:Key="Blue700">#1976D2</Color>
+    <Color x:Key="Blue800">#1565C0</Color>
+    <Color x:Key="Blue900">#0D47A1</Color>
+    <Color x:Key="BlueA100">#82B1FF</Color>
+    <Color x:Key="BlueA200">#448AFF</Color>
+    <Color x:Key="BlueA400">#2979FF</Color>
+    <Color x:Key="BlueA700">#2962FF</Color>
+    <!-- Text counter parts -->
+    <Color x:Key="Blue50Text">#212121</Color>
+    <Color x:Key="Blue100Text">#212121</Color>
+    <Color x:Key="Blue200Text">#212121</Color>
+    <Color x:Key="Blue300Text">#FAFAFA</Color>
+    <Color x:Key="Blue400Text">#FAFAFA</Color>
+    <Color x:Key="Blue500Text">#FAFAFA</Color>
+    <Color x:Key="Blue600Text">#FAFAFA</Color>
+    <Color x:Key="Blue700Text">#FAFAFA</Color>
+    <Color x:Key="Blue800Text">#FAFAFA</Color>
+    <Color x:Key="Blue900Text">#FAFAFA</Color>
+    <Color x:Key="BlueA100Text">#212121</Color>
+    <Color x:Key="BlueA200Text">#212121</Color>
+    <Color x:Key="BlueA400Text">#FAFAFA</Color>
+    <Color x:Key="BlueA700Text">#FAFAFA</Color>
+    <!-- Color Brushes -->
+    <SolidColorBrush x:Key="Blue50Brush" Color="{StaticResource Blue50}" />
+    <SolidColorBrush x:Key="Blue100Brush" Color="{StaticResource Blue100}" />
+    <SolidColorBrush x:Key="Blue200Brush" Color="{StaticResource Blue200}" />
+    <SolidColorBrush x:Key="Blue300Brush" Color="{StaticResource Blue300}" />
+    <SolidColorBrush x:Key="Blue400Brush" Color="{StaticResource Blue400}" />
+    <SolidColorBrush x:Key="Blue500Brush" Color="{StaticResource Blue500}" />
+    <SolidColorBrush x:Key="Blue600Brush" Color="{StaticResource Blue600}" />
+    <SolidColorBrush x:Key="Blue700Brush" Color="{StaticResource Blue700}" />
+    <SolidColorBrush x:Key="Blue800Brush" Color="{StaticResource Blue800}" />
+    <SolidColorBrush x:Key="Blue900Brush" Color="{StaticResource Blue900}" />
+    <SolidColorBrush x:Key="BlueA100Brush" Color="{StaticResource BlueA100}" />
+    <SolidColorBrush x:Key="BlueA200Brush" Color="{StaticResource BlueA200}" />
+    <SolidColorBrush x:Key="BlueA400Brush" Color="{StaticResource BlueA400}" />
+    <SolidColorBrush x:Key="BlueA700Brush" Color="{StaticResource BlueA700}" />
+
+
+
+    <SolidColorBrush x:Key="NormalBrush">
+        <SolidColorBrush.Color>
+            <AppThemeBinding Dark="{StaticResource OffWhite}" Light="{StaticResource OffBlack}" />
+        </SolidColorBrush.Color>
+    </SolidColorBrush>
+
+
+    <SolidColorBrush x:Key="Primary">
+        <SolidColorBrush.Color>
+            <AppThemeBinding Dark="{StaticResource Blue400}" Light="{StaticResource Indigo400}" />
+        </SolidColorBrush.Color>
+    </SolidColorBrush>
+
+    <SolidColorBrush x:Key="Secondary">
+        <SolidColorBrush.Color>
+            <AppThemeBinding Dark="{StaticResource Blue400}" Light="{StaticResource Indigo400}" />
+        </SolidColorBrush.Color>
+    </SolidColorBrush>
 </ResourceDictionary>

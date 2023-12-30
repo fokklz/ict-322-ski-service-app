@@ -25,7 +25,7 @@ namespace SkiServiceApp.Models
                 _response = response;
             }
             else
-            {
+            { 
                 Debug.WriteLine("SkiService-WARNING: Response was null");
                 _response = new HttpResponseMessage(HttpStatusCode.InternalServerError);
             }

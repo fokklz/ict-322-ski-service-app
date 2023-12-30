@@ -1,3 +1,4 @@
+using SkiServiceApp.Common;
 using SkiServiceApp.Interfaces.API;
 using SkiServiceApp.ViewModels;
 
@@ -5,10 +6,10 @@ namespace SkiServiceApp;
 
 public partial class AppLogin : ContentPage
 {
-	public AppLogin(AppLoginViewModel viewModel)
+	public AppLogin()
 	{
 		InitializeComponent();
-        BindingContext = viewModel;
+        BindingContext = new AppLoginViewModel();
     }
 
     /// <summary>

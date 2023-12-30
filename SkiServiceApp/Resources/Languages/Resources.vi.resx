@@ -1,0 +1,350 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+	<!-- 
+		Microsoft ResX Schema
+
+		Version 1.3
+
+		The primary goals of this format is to allow a simple XML format 
+		that is mostly human readable. The generation and parsing of the 
+		various data types are done through the TypeConverter classes 
+		associated with the data types.
+
+		Example:
+
+		... ado.net/XML headers & schema ...
+		<resheader name="resmimetype">text/microsoft-resx</resheader>
+		<resheader name="version">1.3</resheader>
+		<resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+		<resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+		<data name="Name1">this is my long string</data>
+		<data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+		<data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+			[base64 mime encoded serialized .NET Framework object]
+		</data>
+		<data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+			[base64 mime encoded string representing a byte array form of the .NET Framework object]
+		</data>
+
+		There are any number of "resheader" rows that contain simple 
+		name/value pairs.
+
+		Each data row contains a name, and value. The row also contains a 
+		type or mimetype. Type corresponds to a .NET class that support 
+		text/value conversion through the TypeConverter architecture. 
+		Classes that don't support this are serialized and stored with the 
+		mimetype set.
+
+		The mimetype is used for serialized objects, and tells the 
+		ResXResourceReader how to depersist the object. This is currently not 
+		extensible. For a given mimetype the value must be set accordingly:
+
+		Note - application/x-microsoft.net.object.binary.base64 is the format 
+		that the ResXResourceWriter will generate, however the reader can 
+		read any of the formats listed below.
+
+		mimetype: application/x-microsoft.net.object.binary.base64
+		value   : The object must be serialized with 
+			: System.Serialization.Formatters.Binary.BinaryFormatter
+			: and then encoded with base64 encoding.
+
+		mimetype: application/x-microsoft.net.object.soap.base64
+		value   : The object must be serialized with 
+			: System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+			: and then encoded with base64 encoding.
+
+		mimetype: application/x-microsoft.net.object.bytearray.base64
+		value   : The object must be serialized into a byte array 
+			: using a System.ComponentModel.TypeConverter
+			: and then encoded with base64 encoding.
+	-->
+	
+	<xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+		<xsd:element name="root" msdata:IsDataSet="true">
+			<xsd:complexType>
+				<xsd:choice maxOccurs="unbounded">
+					<xsd:element name="data">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+								<xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+							</xsd:sequence>
+							<xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+							<xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+							<xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="resheader">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+							</xsd:sequence>
+							<xsd:attribute name="name" type="xsd:string" use="required" />
+						</xsd:complexType>
+					</xsd:element>
+				</xsd:choice>
+			</xsd:complexType>
+		</xsd:element>
+	</xsd:schema>
+	<resheader name="resmimetype">
+		<value>text/microsoft-resx</value>
+	</resheader>
+	<resheader name="version">
+		<value>1.3</value>
+	</resheader>
+	<resheader name="reader">
+		<value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+	<resheader name="writer">
+		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+	<data name="AppLogin.LastLoginsLabel" xml:space="preserve">
+    <value>Đăng nhập lần cuối:</value>
+</data>
+<data name="AppLogin.LastUsedLabel" xml:space="preserve">
+    <value>Lần sử dụng cuối:</value>
+</data>
+<data name="AppLogin.PasswordLabel" xml:space="preserve">
+    <value>Mật khẩu</value>
+</data>
+<data name="AppLogin.SigninButton" xml:space="preserve">
+    <value>Đăng nhập</value>
+</data>
+<data name="AppLogin.SigninLabel" xml:space="preserve">
+    <value>Đăng nhập</value>
+</data>
+<data name="AppLogin.UsernameLabel" xml:space="preserve">
+    <value>Tên người dùng</value>
+</data>
+<data name="AppShell.FlyoutItem.DashboardButton" xml:space="preserve">
+    <value>Bảng điều khiển</value>
+</data>
+<data name="AppShell.FlyoutItem.DetailsPageButton" xml:space="preserve">
+    <value>Thông tin đơn hàng</value>
+</data>
+<data name="AppShell.FlyoutItem.ListButton" xml:space="preserve">
+    <value>Tất cả đơn hàng</value>
+</data>
+<data name="AppShell.FlyoutItem.LogoutButton" xml:space="preserve">
+    <value>Đăng xuất</value>
+</data>
+<data name="AppShell.FlyoutItem.SettingsButton" xml:space="preserve">
+    <value>Cài đặt</value>
+</data>
+<data name="AppShell.FlyoutItem.UserListButton" xml:space="preserve">
+    <value>Đơn hàng của bạn</value>
+</data>
+<data name="AppShell.Love" xml:space="preserve">
+    <value>Được tạo bởi Robin và Fokko với</value>
+</data>
+<data name="AppShell.Title" xml:space="preserve">
+    <value>Ứng dụng SkiService</value>
+</data>
+<data name="Backend.Error.CANNOT_UNLOCK_SELF" xml:space="preserve">
+    <value>Bạn không thể mở khóa tài khoản của chính mình. Vui lòng liên hệ quản trị viên.</value>
+    <comment>Error message if you want to unlock your own user</comment>
+</data>
+<data name="Backend.Error.ENTRY_NOT_FOUND" xml:space="preserve">
+    <value>Không tìm thấy mục nhập.</value>
+    <comment>Error message if an order or similar could not be found</comment>
+</data>
+<data name="Backend.Error.INVALID_CREDENTIALS" xml:space="preserve">
+    <value>Tên đăng nhập hoặc mật khẩu không đúng.</value>
+    <comment>Error message if the username or password is incorrect when logging in</comment>
+</data>
+<data name="Backend.Error.USER_LOCKED" xml:space="preserve">
+    <value>Tài khoản này đã bị khóa. Vui lòng liên hệ quản trị viên.</value>
+    <comment>Error message if the user is locked</comment>
+</data>
+<data name="Backend.Error.USER_NOT_LOCKED" xml:space="preserve">
+    <value>Người dùng không bị khóa.</value>
+    <comment>Error message if a user is to be unlocked who is not yet locked</comment>
+</data>
+<data name="Backend.NextState.2" xml:space="preserve">
+    <value>Bắt đầu</value>
+</data>
+<data name="Backend.NextState.3" xml:space="preserve">
+    <value>Hoàn thành</value>
+</data>
+<data name="Backend.Priority.1" xml:space="preserve">
+    <value>Thấp</value>
+</data>
+<data name="Backend.Priority.2" xml:space="preserve">
+    <value>Chuẩn</value>
+</data>
+<data name="Backend.Priority.3" xml:space="preserve">
+    <value>Cao</value>
+</data>
+<data name="Backend.Service.1" xml:space="preserve">
+    <value>Dịch vụ nhỏ</value>
+</data>
+<data name="Backend.Service.2" xml:space="preserve">
+    <value>Dịch vụ lớn</value>
+</data>
+<data name="Backend.Service.3" xml:space="preserve">
+    <value>Dịch vụ trượt tuyết đua</value>
+</data>
+<data name="Backend.Service.4" xml:space="preserve">
+    <value>Lắp đặt và điều chỉnh giá đỡ</value>
+</data>
+<data name="Backend.Service.5" xml:space="preserve">
+    <value>Cắt tỉa da theo cặp</value>
+</data>
+<data name="Backend.Service.6" xml:space="preserve">
+    <value>Sáp nóng</value>
+</data>
+<data name="Backend.State.1" xml:space="preserve">
+    <value>Mở</value>
+</data>
+<data name="Backend.State.2" xml:space="preserve">
+    <value>Đang tiến hành</value>
+</data>
+<data name="Backend.State.3" xml:space="preserve">
+    <value>Hoàn tất</value>
+</data>
+<data name="CancelDialog.Submit" xml:space="preserve">
+    <value>Hủy bỏ</value>
+</data>
+<data name="CancelDialog.SubTitleMiddle" xml:space="preserve">
+    <value>cho</value>
+</data>
+<data name="CancelDialog.SubTitlePre" xml:space="preserve">
+    <value>Hủy đơn hàng</value>
+</data>
+<data name="CancelDialog.SubTitleSub" xml:space="preserve">
+    <value>xác nhận.</value>
+</data>
+<data name="CancelDialog.Title" xml:space="preserve">
+    <value>Hủy đơn hàng?</value>
+</data>
+<data name="CustomListItem.ApplyButton" xml:space="preserve">
+    <value>Áp dụng</value>
+</data>
+<data name="CustomListItem.CancelButton" xml:space="preserve">
+    <value>Hủy bỏ</value>
+</data>
+<data name="CustomListItem.ChangeButton" xml:space="preserve">
+    <value>Thay đổi</value>
+</data>
+<data name="CustomListItem.DaysLeft" xml:space="preserve">
+    <value>ngày còn lại</value>
+</data>
+<data name="CustomListItem.Unassigned" xml:space="preserve">
+    <value>Chưa được giao</value>
+</data>
+<data name="Dashboard.Chart.Done" xml:space="preserve">
+    <value>Đã xong</value>
+</data>
+<data name="Dashboard.Chart.Open" xml:space="preserve">
+    <value>Mở</value>
+</data>
+<data name="Dashboard.Chart.You" xml:space="preserve">
+    <value>Đơn hàng của bạn</value>
+</data>
+<data name="Dashboard.SecondarySummary.Pre" xml:space="preserve">
+    <value>Bạn hiện có</value>
+</data>
+<data name="Dashboard.SecondarySummary.Sub" xml:space="preserve">
+    <value>đơn hàng chưa xử lý</value>
+</data>
+<data name="Dashboard.Summary.Middle" xml:space="preserve">
+    <value>của</value>
+</data>
+<data name="Dashboard.Summary.Pre" xml:space="preserve">
+    <value>Bạn đã</value>
+</data>
+<data name="Dashboard.Summary.Sub" xml:space="preserve">
+    <value>xử lý xong đơn hàng</value>
+</data>
+<data name="Dialog.Cancel" xml:space="preserve">
+    <value>Hủy</value>
+</data>
+<data name="Dialog.Submit" xml:space="preserve">
+    <value>Xác nhận</value>
+</data>
+<data name="Dialog.Title" xml:space="preserve">
+    <value>Tiêu đề chuẩn</value>
+</data>
+<data name="LogoutDialog.Danger" xml:space="preserve">
+    <value>Không lưu</value>
+</data>
+<data name="LogoutDialog.Submit" xml:space="preserve">
+    <value>Lưu</value>
+</data>
+<data name="LogoutDialog.Text" xml:space="preserve">
+    <value>Tài khoản này có nên được lưu trong danh sách để đăng nhập nhanh không, sao cho lần đăng nhập sau có thể thực hiện chỉ với một cú nhấp chuột?</value>
+</data>
+<data name="LogoutDialog.Title" xml:space="preserve">
+    <value>Đăng xuất vĩnh viễn</value>
+</data>
+<data name="ModifyDialog.EmailLabel" xml:space="preserve">
+    <value>Địa chỉ Email</value>
+</data>
+<data name="ModifyDialog.NameLabel" xml:space="preserve">
+    <value>Tên</value>
+</data>
+<data name="ModifyDialog.PhoneLabel" xml:space="preserve">
+    <value>Điện thoại</value>
+</data>
+<data name="ModifyDialog.PriorityLabel" xml:space="preserve">
+    <value>Ưu tiên</value>
+</data>
+<data name="ModifyDialog.ServiceLabel" xml:space="preserve">
+    <value>Dịch vụ</value>
+</data>
+<data name="ModifyDialog.StateLabel" xml:space="preserve">
+    <value>Tình trạng</value>
+</data>
+<data name="ModifyDialog.Submit" xml:space="preserve">
+    <value>Lưu</value>
+</data>
+<data name="ModifyDialog.Title" xml:space="preserve">
+    <value>Chỉnh sửa đơn hàng</value>
+</data>
+<data name="OrderDetailPage.CancelButton" xml:space="preserve">
+    <value>Hủy</value>
+</data>
+<data name="OrderDetailPage.ChangeButton" xml:space="preserve">
+    <value>Thay đổi</value>
+</data>
+<data name="OrderDetailPage.CustomerNameLabel" xml:space="preserve">
+    <value>Tên khách hàng</value>
+</data>
+<data name="OrderDetailPage.DateLabel" xml:space="preserve">
+    <value>Ngày gửi:</value>
+</data>
+<data name="OrderDetailPage.EmailLabel" xml:space="preserve">
+    <value>Email</value>
+</data>
+<data name="OrderDetailPage.PhoneLabel" xml:space="preserve">
+    <value>Điện thoại</value>
+</data>
+<data name="OrderDetailPage.PreDaysLeft" xml:space="preserve">
+    <value>Vẫn còn</value>
+</data>
+<data name="SettingsPage.AlwaysSaveLoginLabel" xml:space="preserve">
+    <value>Lưu đăng nhập luôn</value>
+</data>
+<data name="SettingsPage.CancelInListViewLabel" xml:space="preserve">
+    <value>Hủy trong danh sách xem</value>
+</data>
+<data name="SettingsPage.LanguageLabel" xml:space="preserve">
+    <value>Ngôn ngữ</value>
+</data>
+<data name="SettingsPage.LogoutOnAllDevicesButton" xml:space="preserve">
+    <value>Đăng xuất trên TẤT CẢ thiết bị</value>
+</data>
+<data name="SettingsPage.Theme.Dark" xml:space="preserve">
+    <value>Tối</value>
+</data>
+<data name="SettingsPage.Theme.Light" xml:space="preserve">
+    <value>Sáng</value>
+</data>
+<data name="SettingsPage.Theme.System" xml:space="preserve">
+    <value>Hệ thống</value>
+</data>
+<data name="SettingsPage.ThemeLabel" xml:space="preserve">
+    <value>Chủ đề</value>
+</data>
+
+</root>

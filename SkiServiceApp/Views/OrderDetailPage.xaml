@@ -1,0 +1,150 @@
+﻿<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:res="clr-namespace:SkiServiceApp.Resources.Languages"
+             x:Class="SkiServiceApp.Views.OrderDetailPage"
+             x:Name="OrderDetailView"
+             Title="{Binding Entry.PrettyTitle}">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="ValueLabel" TargetType="Label" >
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="Padding" Value="0,0,5,0" />
+            </Style>
+            <Style x:Key="HeadlineLabel" TargetType="Label">
+                <Setter Property="FontSize" Value="25" />
+                <Setter Property="FontAttributes" Value="Bold" />
+            </Style>
+            <Style x:Key="SubHeadlineLabel" TargetType="Label">
+                <Setter Property="FontSize" Value="20" />
+            </Style>
+            <Style x:Key="StreamlineStacklayout" TargetType="HorizontalStackLayout">
+                <Setter Property="Padding" Value="35" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
+    <Grid RowSpacing="0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <VerticalStackLayout Grid.Row="0" Padding="35" Grid.ColumnSpan="2">
+            <Label 
+                Text="{Binding Entry.Service}"
+                Style="{StaticResource HeadlineLabel}"/>
+            <HorizontalStackLayout>
+                <Label 
+                    Text="{Binding Entry.Priority}"
+                    Style="{StaticResource SubHeadlineLabel}" />
+                <Label 
+                    Text=" • " 
+                    Style="{StaticResource SubHeadlineLabel}" />
+                <Label 
+                    Text="{Binding Entry.State}"
+                    Style="{StaticResource SubHeadlineLabel}" />
+            </HorizontalStackLayout>
+
+            <HorizontalStackLayout Margin="0,30,0,0">
+                <Label 
+                    Text="{Binding Source={StaticResource localization}, Path=OrderDetailPage_PreDaysLeft}"
+                    Style="{StaticResource SubHeadlineLabel}"  />
+                <Label 
+                    Text="{Binding Entry.DaysLeft}" 
+                    Margin="5,0,4,0" 
+                    Style="{StaticResource SubHeadlineLabel}" />
+                <Label 
+                    Text="{Binding Source={StaticResource localization}, Path=CustomListItem_DaysLeft}"
+                    Style="{StaticResource SubHeadlineLabel}"  />
+            </HorizontalStackLayout>
+
+            <Grid RowSpacing="10" Margin="0,30,0,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width=".3*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Label 
+                    Grid.Row="0" 
+                    Grid.Column="0" 
+                    Text="{Binding Source={StaticResource localization}, Path=OrderDetailPage_CustomerNameLabel}" 
+                    Style="{StaticResource ValueLabel}" />
+                <Label 
+                    Grid.Row="0" 
+                    Grid.Column="1" 
+                    Text="{Binding Entry.Order.Name}" />
+
+                <Label 
+                    Grid.Row="1" 
+                    Grid.Column="0" 
+                    Text="{Binding Source={StaticResource localization}, Path=OrderDetailPage_EmailLabel}" 
+                    Style="{StaticResource ValueLabel}" />
+                <Label 
+                    Grid.Row="1" 
+                    Grid.Column="1" 
+                    Text="{Binding Entry.Order.Email}" />
+
+                <Label 
+                    Grid.Row="2" 
+                    Grid.Column="0" 
+                    Text="{Binding Source={StaticResource localization}, Path=OrderDetailPage_PhoneLabel}" 
+                    Style="{StaticResource ValueLabel}" />
+                <Label 
+                    Grid.Row="2" 
+                    Grid.Column="1" 
+                    Text="{Binding Entry.Order.Phone}" />
+
+                <Label 
+                    Grid.Row="3" 
+                    Grid.Column="0" 
+                    Text="{Binding Source={StaticResource localization}, Path=OrderDetailPage_DateLabel}" 
+                    Style="{StaticResource ValueLabel}" />
+                <Label 
+                    Grid.Row="3" 
+                    Grid.Column="1" 
+                    Text="{Binding Entry.Order.Created}" />
+            </Grid>
+        </VerticalStackLayout>
+
+        <HorizontalStackLayout 
+            Grid.Row="1" 
+            Grid.Column="0" 
+            HorizontalOptions="StartAndExpand" 
+            Style="{StaticResource StreamlineStacklayout}" >
+            <!-- Left aligned buttons -->
+            <Button 
+                Text="{Binding Source={StaticResource localization}, Path=OrderDetailPage_CancelButton}"
+                Style="{StaticResource DangerButton}"
+                Command="{Binding CancelCommand}" 
+                IsVisible="{Binding Entry.ShowCancelButton}" />
+        </HorizontalStackLayout>
+
+        <HorizontalStackLayout 
+            Grid.Row="1" 
+            Grid.Column="1" 
+            HorizontalOptions="End"  
+            Spacing="20"
+            Style="{StaticResource StreamlineStacklayout}" >
+            <Button 
+                Text="{Binding Source={StaticResource localization}, Path=OrderDetailPage_ChangeButton}" 
+                Command="{Binding EditCommand}" />
+            <Button 
+                Text="{Binding Entry.NextState}" Command="{Binding NextStateCommand}" 
+                Style="{StaticResource PrimaryButton}" 
+                IsVisible="{Binding Entry.ShowStatusButton}"  />
+        </HorizontalStackLayout>
+    </Grid>
+
+</ContentPage>

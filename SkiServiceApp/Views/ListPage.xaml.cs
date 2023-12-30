@@ -9,4 +9,10 @@ public partial class ListPage : ContentPage
 		InitializeComponent();
         BindingContext = viewModel;
     }
+
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
+        OrderList.Update();
+    }
 }

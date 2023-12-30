@@ -4,10 +4,13 @@ using SkiServiceApp.Interfaces.API;
 using SkiServiceApp.Models;
 using SkiServiceModels.DTOs.Requests;
 using SkiServiceModels.DTOs.Responses;
+using System.Collections.Generic;
+using System.Diagnostics;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace SkiServiceApp.Services.API
 {
-    public class OrderAPIService : BaseAPIService<CreateOrderRequest, UpdateOrderRequest, OrderResponse>, IOrderAPIService
+    public class OrderAPIService : BaseAPIService<CreateOrderRequest, UpdateOrderRequest, OrderResponseAdmin>, IOrderAPIService
     {
         public OrderAPIService(IConfiguration configuration) : base(configuration, "orders")
         {
