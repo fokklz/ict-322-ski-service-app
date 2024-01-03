@@ -17,7 +17,7 @@
     </ContentView.Resources>
     
     <CollectionView 
-        ItemsSource="{Binding Source={x:Reference self}, Path=OrdersList}" 
+        ItemsSource="{Binding Source={x:Reference self}, Path=Orders}" 
         Margin="5,10,5,0">
         <CollectionView.ItemTemplate>
             <DataTemplate>

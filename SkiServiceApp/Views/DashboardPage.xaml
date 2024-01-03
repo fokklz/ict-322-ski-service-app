@@ -28,7 +28,7 @@
             <ColumnDefinition Width=".4*"/>
         </Grid.ColumnDefinitions>
 
-        <components:OrderList Grid.Column="0" Location="Dashboard" x:Name="OrderList"/>
+        <components:OrderList Grid.Column="0" x:Name="OrderList" Orders="{Binding Orders}" Location="Dashboard"/>
 
         <!-- Exclusive Grid for the Chart to have better control over the layout -->
         <Grid Grid.Column="1" VerticalOptions="StartAndExpand">
@@ -41,6 +41,7 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
+            <!-- Title -->
             <Label 
                 Grid.Row="0"
                 Grid.Column="0"
@@ -48,6 +49,7 @@
                 FontSize="34"
                 Margin="0,20,0,10"/>
 
+            <!-- Stat Chart -->
             <VerticalStackLayout Grid.Row="1" Grid.Column="0">
                 <chart:SfCircularChart >
                     <chart:SfCircularChart.BindingContext>
@@ -85,6 +87,7 @@
                         </chart:ChartLegend>
                     </chart:SfCircularChart.Legend>
                 </chart:SfCircularChart>
+                <!-- Upper summary Text -->
                 <FlexLayout
                     Padding="4,30,4,0"
                     Direction="Row" 
@@ -108,6 +111,7 @@
                         Style="{StaticResource SummaryLabel}" />
                 </FlexLayout>
 
+                <!-- Lower summary Text -->
                 <FlexLayout
                     Padding="4,5,4,0"
                     Direction="Row" 
@@ -124,6 +128,16 @@
                         Text="{Binding Source={StaticResource localization}, Path=Dashboard_SecondarySummary_Sub}" 
                         Style="{StaticResource SummaryLabel}" />
                 </FlexLayout>
+
+                <VerticalStackLayout Padding="0,25,0,0">
+                    <Button 
+                        Text="{Binding Source={StaticResource localization}, Path=AppShell_FlyoutItem_ListButton}"
+                        Command="{Binding ListCommand}"/>
+                    <Button 
+                        Text="{Binding Source={StaticResource localization}, Path=AppShell_FlyoutItem_UserListButton}"
+                        Command="{Binding UserListCommand}" 
+                        Margin="0,15,0,0" />
+                </VerticalStackLayout>
             </VerticalStackLayout>
         </Grid>
     </Grid>

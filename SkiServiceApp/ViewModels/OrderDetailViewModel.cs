@@ -16,24 +16,22 @@ namespace SkiServiceApp.ViewModels
     public class OrderDetailViewModel : BaseNotifyHandler
     {
         private readonly IOrderAPIService _orderAPIService;
-        private readonly OrderService _orderService;
-
 
         public CustomListItem Entry { get; set; }
 
-        public ICommand CancelCommand { get; set; }
-        public ICommand EditCommand { get; set; }
-        public ICommand NextStateCommand { get; set; }
+        public Command ApplyCommand { get; set; }
+        public Command CancelCommand { get; set; }
+        public Command EditCommand { get; set; }
+        public Command NextStateCommand { get; set; }
 
         public OrderDetailViewModel()
         {
             _orderAPIService = ServiceLocator.GetService<IOrderAPIService>();
-            _orderService = ServiceLocator.GetService<OrderService>();
 
             CancelCommand = new Command(async () => await ExecuteCancelCommand());
             EditCommand = new Command(async () => await ExecuteEditCommand());
-            NextStateCommand = new Command(async () => await ExecuteStatusCommand());
-
+            NextStateCommand = new Command(async () => await ExecuteNextStateCommand());
+            ApplyCommand = new Command(async () => await ExecuteApplyCommand());
         }
 
         public async Task LoadServiceDetails(int serviceId)
@@ -42,7 +40,6 @@ namespace SkiServiceApp.ViewModels
             if (data != null)
             {
                 Entry = new CustomListItem(await data.ParseSuccess());
-                OnPropertyChanged(nameof(Entry));
             }
         }
 
@@ -52,9 +49,10 @@ namespace SkiServiceApp.ViewModels
             {
                 if (result)
                 {
-                    await _orderAPIService.DeleteAsync(Entry.Order.Id);
-                    await Task.Run(async () => await _orderService.Update());
-                    await Shell.Current.GoToAsync("..");
+                    await Entry.Cancel(async () =>
+                    {
+                        await Shell.Current.GoToAsync("..");
+                    });
                 }
             },
             submitText: Localization.Instance.CancelDialog_Submit,
@@ -68,7 +66,7 @@ namespace SkiServiceApp.ViewModels
             {
                 if (result)
                 {
-                    await _orderAPIService.UpdateAsync(Entry.Order.Id, new UpdateOrderRequest
+                    await Entry.UpdateDetails(new UpdateOrderRequest
                     {
                         ServiceId = dialogInstance.SelectedService.BackgroundValue,
                         PriorityId = dialogInstance.SelectedPriority.BackgroundValue,
@@ -78,25 +76,23 @@ namespace SkiServiceApp.ViewModels
                         Email = dialogInstance.Entry.Order.Email,
                         Phone = dialogInstance.Entry.Order.Phone,
                     });
-                    await Task.Run(async () => await _orderService.Update());
-                    await LoadServiceDetails(Entry.Order.Id);
                 }
             },
             submitText: Localization.Instance.ModifyDialog_Submit,
             titleText: Localization.Instance.ModifyDialog_Title);
         }
 
-        private async Task ExecuteStatusCommand()
+        private async Task ExecuteNextStateCommand()
         {
-            await _orderAPIService.UpdateAsync(Entry.Order.Id, new UpdateOrderRequest
+            if (Entry.Order.State.Id < 3)
             {
-                ServiceId = Entry.Order.Service.Id,
-                PriorityId = Entry.Order.Priority.Id,
-                StateId = Entry.Order.State.Id + 1,
-                UserId = Entry.Order.User?.Id
-            });
-            await Task.Run(async () => await _orderService.Update());
-            await LoadServiceDetails(Entry.Order.Id);
+                await Entry.GoNextState();
+            }
+        }
+
+        private async Task ExecuteApplyCommand()
+        {
+            await Entry.Apply();
         }
     }
 }

@@ -10,9 +10,15 @@ public partial class ListPage : ContentPage
         BindingContext = viewModel;
     }
 
+    /// <summary>
+    /// Ensure the order list is updated when the page is shown.
+    /// </summary>
     protected override void OnAppearing()
     {
+        var context = BindingContext as ListViewModel;
+
         base.OnAppearing();
-        OrderList.Update();
+        
+        context?.Orders.Update();
     }
 }

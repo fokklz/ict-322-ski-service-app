@@ -36,6 +36,7 @@
         </Grid.ColumnDefinitions>
 
         <VerticalStackLayout Grid.Row="0" Padding="35" Grid.ColumnSpan="2">
+            <!-- Heading -->
             <Label 
                 Text="{Binding Entry.Service}"
                 Style="{StaticResource HeadlineLabel}"/>
@@ -76,6 +77,7 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
+                <!-- Name Display -->
                 <Label 
                     Grid.Row="0" 
                     Grid.Column="0" 
@@ -86,6 +88,7 @@
                     Grid.Column="1" 
                     Text="{Binding Entry.Order.Name}" />
 
+                <!-- Email Display -->
                 <Label 
                     Grid.Row="1" 
                     Grid.Column="0" 
@@ -96,6 +99,7 @@
                     Grid.Column="1" 
                     Text="{Binding Entry.Order.Email}" />
 
+                <!-- Phone Display -->
                 <Label 
                     Grid.Row="2" 
                     Grid.Column="0" 
@@ -106,6 +110,7 @@
                     Grid.Column="1" 
                     Text="{Binding Entry.Order.Phone}" />
 
+                <!-- Date Display -->
                 <Label 
                     Grid.Row="3" 
                     Grid.Column="0" 
@@ -137,13 +142,21 @@
             HorizontalOptions="End"  
             Spacing="20"
             Style="{StaticResource StreamlineStacklayout}" >
+            <!-- Right aligned buttons -->
+            <Button  
+                Command="{Binding EditCommand}"
+                IsVisible="{Binding Entry.IsAssigned}"
+                Text="{Binding Source={StaticResource localization}, Path=OrderDetailPage_ChangeButton}"/>
             <Button 
-                Text="{Binding Source={StaticResource localization}, Path=OrderDetailPage_ChangeButton}" 
-                Command="{Binding EditCommand}" />
+                Command="{Binding ApplyCommand}" 
+                IsVisible="{Binding Entry.ShowAssignButton}"
+                Text="{Binding Source={StaticResource localization}, Path=CustomListItem_ApplyButton}" 
+                Style="{StaticResource PrimaryButton}" />
             <Button 
-                Text="{Binding Entry.NextState}" Command="{Binding NextStateCommand}" 
-                Style="{StaticResource PrimaryButton}" 
-                IsVisible="{Binding Entry.ShowStatusButton}"  />
+                Command="{Binding NextStateCommand}" 
+                IsVisible="{Binding Entry.ShowNextStateButton}"
+                Text="{Binding Entry.NextState}" 
+                Style="{StaticResource PrimaryButton}"   />
         </HorizontalStackLayout>
     </Grid>
 
