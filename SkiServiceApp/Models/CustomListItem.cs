@@ -12,8 +12,7 @@ namespace SkiServiceApp.Models
     /// <summary>
     /// Item used for the OrderList containing all the displaying lokic on a per order basis
     /// </summary>
-    [AddINotifyPropertyChangedInterface]
-    public class CustomListItem
+    public class CustomListItem : BaseNotifyHandler
     {
         private readonly IOrderAPIService _orderAPIService;
         /// <summary>
@@ -66,19 +65,19 @@ namespace SkiServiceApp.Models
         /// Show cancel button if the order is assigned and the setting is enabled, for quick canceling
         /// </summary>
         [DependsOn(nameof(IsAssigned))]
-        public bool ShowCancelButtonInList => IsAssigned && SettingsService.CancelInListView && Order.State.Id != 3;
+        public bool ShowCancelButtonInList => IsAssigned && SettingsService.CancelInListView && Order.State.Id < 3;
 
         /// <summary>
         /// Show the cancel button if the order is assigned, so the user can cancel it (will only apply to the detail view)
         /// </summary>
         [DependsOn(nameof(IsAssigned))]
-        public bool ShowCancelButton => IsAssigned && Order.State.Id != 3;
+        public bool ShowCancelButton => IsAssigned && Order.State.Id < 3;
 
         /// <summary>
         /// Show the next state button if the order is assigned and the setting is enabled, for quick state changing
         /// </summary>
         [DependsOn(nameof(IsAssigned))]
-        public bool ShowNextStateButton => IsAssigned && Order.State.Id != 3;
+        public bool ShowNextStateButton => IsAssigned && Order.State.Id < 3;
 
         public CustomListItem(OrderResponseAdmin orderResponse)
         {
@@ -128,34 +127,103 @@ namespace SkiServiceApp.Models
         /// Apply for the order, will update the order in the backend and then update the UI with the new data aswell
         /// Allows for a done callback to be passed, which will be called after the order has been updated (allowing to hook a resorting)
         /// </summary>
-        /// <param name="done"></param>
-        public void Apply(Action done = null)
+        /// <param name="done">The action that is called when the update is done</param>
+        public async Task Apply(Action? done = null)
         {
-            Task.Run(async () =>
+            var newOrderResponse = await _orderAPIService.UpdateAsync(Order.Id, new UpdateOrderRequest
             {
-                var newOrderResponse = await _orderAPIService.UpdateAsync(Order.Id, new UpdateOrderRequest
-                {
-                    ServiceId = Order.Service.Id,
-                    PriorityId = Order.Priority.Id,
-                    StateId = Order.State.Id,
-                    UserId = AuthManager.UserId
-                });
+                ServiceId = Order.Service.Id,
+                PriorityId = Order.Priority.Id,
+                StateId = Order.State.Id,
+                UserId = AuthManager.UserId
+            });
 
-                if (newOrderResponse.IsSuccess)
+            if (newOrderResponse.IsSuccess)
+            {
+                var parsed = await newOrderResponse.ParseSuccess();
+                MainThread.BeginInvokeOnMainThread(() =>
                 {
-                    var parsed = await newOrderResponse.ParseSuccess();
+                    // update the order with the new data
+                    Order = parsed;
+                    Update();
+
+                    done?.Invoke();
+                });
+            }
+        }
+
+        /// <summary>
+        /// Go to the next state for the order, will update the order in the backend and then update the UI with the new data aswell
+        /// </summary>
+        /// <param name="done">The action that should be performed when the update to the backend and the Item has been done</param>
+        public async Task GoNextState(Action? done = null)
+        {
+            var newOrderResponse = await _orderAPIService.UpdateAsync(Order.Id, new UpdateOrderRequest
+            {
+                ServiceId = Order.Service.Id,
+                PriorityId = Order.Priority.Id,
+                StateId = Order.State.Id + 1,
+                UserId = Order.User?.Id
+            });
+
+            if (newOrderResponse.IsSuccess)
+            {
+                var parsed = await newOrderResponse.ParseSuccess();
+                MainThread.BeginInvokeOnMainThread(() =>
+                {
+                    // update the order with the new data
+                    Order = parsed;
+                    Update();
+
+                    done?.Invoke();
+                });
+            }
+        }
+
+        /// <summary>
+        /// Simplify the canceling of an order, will update the order 
+        /// in the backend and then call a action with the deleted order id
+        /// </summary>
+        /// <param name="done">Action to call when the canelation has been processed</param>
+        public async Task Cancel(Action done)
+        {
+            var deleteResponse = await _orderAPIService.DeleteAsync(Order.Id);
+            if (deleteResponse.IsSuccess)
+            {
+                var parsed = await deleteResponse.ParseSuccess();
+                if (parsed != null && parsed.Id > 0)
+                {
+                    MainThread.BeginInvokeOnMainThread(() =>
+                    {
+                        // mark the order as deleted, so it will be removed from the list
+                        Order.IsDeleted = true;
+                        Update();
+
+                        done.Invoke();
+                    });
+                }
+            }
+        }
+
+        /// <summary>
+        /// Update the details for a order, will send the model to the backend and then update the UI with the new data aswell
+        /// </summary>
+        /// <param name="update">The model to use for the Update containing all data</param>
+        public async Task UpdateDetails(UpdateOrderRequest update)
+        {
+            var updateOrderResponse = await _orderAPIService.UpdateAsync(Order.Id, update);
+            if (updateOrderResponse.IsSuccess)
+            {
+                var parsed = await updateOrderResponse.ParseSuccess();
+                if (parsed != null)
+                {
                     MainThread.BeginInvokeOnMainThread(() =>
                     {
                         Order = parsed;
                         Update();
-
-                        if (done != null)
-                        {
-                            done.Invoke();
-                        }
                     });
                 }
-            });
+            }
         }
     }
 }

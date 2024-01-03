@@ -42,7 +42,6 @@ namespace SkiServiceApp
 
             builder.Services.AddSingleton<DialogService>();
             builder.Services.AddSingleton<SettingsService>();
-            builder.Services.AddSingleton<OrderService>(); 
 
             builder.Services.AddSingleton<AppShellViewModel>();
             builder.Services.AddSingleton<AppShell>();

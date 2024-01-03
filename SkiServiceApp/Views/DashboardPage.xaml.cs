@@ -13,10 +13,15 @@ public partial class DashboardPage : ContentPage
 		BindingContext = viewModel;
     }
 
+	/// <summary>
+	/// Ensure the chart is updated when the page is shown as well as the order list.
+	/// </summary>
 	protected override void OnAppearing()
-	{
+    {
+        var context = BindingContext as DashboardViewModel;
+
         base.OnAppearing();
-        OrderList.Update();
-        DashboardChartViewModel.Update.Invoke();
+		context?.Orders.Update();
+        DashboardChartViewModel.Update?.Invoke();
     }
 }

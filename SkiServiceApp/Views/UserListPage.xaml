@@ -5,7 +5,5 @@
              xmlns:res="clr-namespace:SkiServiceApp.Resources.Languages"
              x:Class="SkiServiceApp.Views.UserListPage"
              Title="{Binding Source={StaticResource localization}, Path=AppShell_FlyoutItem_UserListButton}">
-
-
-    <components:OrderList x:Name="OrderList" Location="UserList" />
+    <components:OrderList x:Name="OrderList" Orders="{Binding Orders}" Location="UserList" />
 </ContentPage>

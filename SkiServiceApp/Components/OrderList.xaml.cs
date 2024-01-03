@@ -1,6 +1,6 @@
 using PropertyChanged;
 using SkiServiceApp.Common;
-using SkiServiceApp.Common.Extensions;
+using SkiServiceApp.Common.Types;
 using SkiServiceApp.Components.Dialogs;
 using SkiServiceApp.Interfaces.API;
 using SkiServiceApp.Models;
@@ -18,14 +18,29 @@ namespace SkiServiceApp.Components;
 
 public partial class OrderList : ContentView, INotifyPropertyChanged
 {
-
-    private readonly OrderService _orderService;
-    private readonly IOrderAPIService _orderAPIService;
-    private readonly DialogService _dialogService;
+    public static readonly BindableProperty OrdersProperty =
+        BindableProperty.Create(nameof(Orders), typeof(OrderCollection), typeof(OrderList), propertyChanged: OnOrderPropertyChanged);
 
     public static readonly BindableProperty LocationProperty =
         BindableProperty.Create(nameof(Location), typeof(string), typeof(OrderList), "Dashboard", propertyChanged: OnLocationPropertyChanged);
 
+    public new event PropertyChangedEventHandler? PropertyChanged;
+
+    /// <summary>
+    /// Collection of orders to display.
+    /// </summary>
+    public OrderCollection Orders
+    {
+        get => (OrderCollection)GetValue(OrdersProperty);
+        set
+        {
+            SetValue(OrdersProperty, value);
+        }
+    }
+
+    /// <summary>
+    /// The location where the list is used, usefull for updating the dashboard chart for example.
+    /// </summary>
     public string Location
     {
         get => (string)GetValue(LocationProperty);
@@ -35,105 +50,146 @@ public partial class OrderList : ContentView, INotifyPropertyChanged
         }
     }
 
+    /// <summary>
+    /// Hook to call PropertyChanged when the Orders property changes. Since Fody.PropertyChanged is not working on BindableProperties.
+    /// </summary>
+    /// <param name="bindable">The control</param>
+    /// <param name="oldValue">The previous value</param>
+    /// <param name="newValue">The current value</param>
+    private static void OnOrderPropertyChanged(BindableObject bindable, object oldValue, object newValue)
+    {
+        var control = (OrderList)bindable;
+        control.PropertyChanged?.Invoke(control, new PropertyChangedEventArgs(nameof(Orders)));
+    }
+
+    /// <summary>
+    /// Hook to call PropertyChanged when the Location property changes. Since Fody.PropertyChanged is not working on BindableProperties.
+    /// </summary>
+    /// <param name="bindable">The control</param>
+    /// <param name="oldValue">The previous value</param>
+    /// <param name="newValue">The current value</param>
     private static void OnLocationPropertyChanged(BindableObject bindable, object oldValue, object newValue)
     {
         var control = (OrderList)bindable;
-        string newLocationValue = (string)newValue;
-
-        control.Location = newLocationValue;
+        control.PropertyChanged?.Invoke(control, new PropertyChangedEventArgs(nameof(Location)));
     }
 
-    public BatchObservableCollection<CustomListItem> OrdersList { get; set; }
+    /// <summary>
+    /// Apply to a Order. (each item)
+    /// </summary>
+    public ICommand ApplyCommand => new Command<int>(async (id) => await ExecuteApplyCommand(id));
 
-    public ICommand ApplyCommand => new Command<int>(Apply);
-    public ICommand ModifyCommand => new Command<int>(async (id) => await Modify(id));
+    /// <summary>
+    /// Go to the next state of a Order. (each item)
+    /// </summary>
+    public ICommand NextStateCommand => new Command<int>(async (id) => await ExecuteNextStateCommand(id));
 
-    public ICommand CancelCommand => new Command<int>(async (id) => await Cancel(id));
+    /// <summary>
+    /// Modify a Order. (each item)
+    /// </summary>
+    public ICommand ModifyCommand => new Command<int>(async (id) => await ExecuteModifyCommand(id));
 
-    public ICommand NextStateCommand => new Command<int>(async (id) => await NextState(id));
+    /// <summary>
+    /// Cancel a Order. (each item)
+    /// </summary>
+    public ICommand CancelCommand => new Command<int>(async (id) => await ExecuteCancelCommand(id));
 
     public OrderList()
     {
-        _orderService = ServiceLocator.GetService<OrderService>();
-        _orderAPIService = ServiceLocator.GetService<IOrderAPIService>();
-        _dialogService = ServiceLocator.GetService<DialogService>();
-
         InitializeComponent();
-
-        _orderService.PropertyChanged += (sender, e) =>
-        {
-            Debug.WriteLine($"Property changed: {e.PropertyName}");
-            OrdersList = Location switch
-            {
-                "UserList" => _orderService.ApplyUserListFilter(),
-                "List" => _orderService.AppyListFilter(),
-                _ => _orderService.ApplyDashboardFilter(),
-            };
-            OnPropertyChanged(nameof(OrdersList));
-        };
     }
 
-
-    public void Update()
+    /// <summary>
+    /// Move the order to the next state. & Sort the list.
+    /// </summary>
+    /// <param name="id">The Id to change the State for</param>
+    public async Task ExecuteNextStateCommand(int id)
     {
-        _ = Task.Run(_orderService.Update);
-    }
-
-    public async Task NextState(int id)
-    {
-        var orderItem = OrdersList.Where(x => x.Order.Id == id).First();
-        await _orderAPIService.UpdateAsync(id, new UpdateOrderRequest
+        var orderItem = Orders.Where(x => x.Order.Id == id).First();
+        await Task.Run(async () =>
         {
-            ServiceId = orderItem.Order.Service.Id,
-            PriorityId = orderItem.Order.Priority.Id,
-            StateId = orderItem.Order.State.Id + 1,
-            UserId = orderItem.Order.User?.Id
-        });
-        _ = Task.Run(_orderService.Update);
-
-        if (Location.Equals("Dashboard"))
-        {
-            DashboardChartViewModel.Update.Invoke();
-        }
-    }
-
-    public void Apply(int id)
-    {
-        var orderItem = OrdersList.Where(x => x.Order.Id == id).First();
-        orderItem.Apply(() =>
-        {
-            OrdersList = Location switch
+            await orderItem.GoNextState(() =>
             {
-                "UserList" => _orderService.ApplyUserListFilter(OrdersList),
-                "List" => _orderService.AppyListFilter(OrdersList),
-                _ => _orderService.ApplyDashboardFilter(OrdersList),
-            };
-            OnPropertyChanged(nameof(OrdersList));
+                Orders.SortAndNotify();
 
-            if (Location.Equals("Dashboard"))
-            {
-                DashboardChartViewModel.Update.Invoke();
-            }
+                if (Location.Equals("Dashboard"))
+                {
+                    DashboardChartViewModel.Update?.Invoke();
+                }
+            });
         });
     }
 
-    public async Task Cancel(int id)
+    /// <summary>
+    /// Apply to the order. & Sort the list.
+    /// </summary>
+    /// <param name="id">The Id of the Order the current user Should be added</param>
+    public async Task ExecuteApplyCommand(int id)
     {
-        var orderItem = OrdersList.Where(x => x.Order.Id == id).First();
+        var orderItem = Orders.Where(x => x.Order.Id == id).First();
+        await Task.Run(async () =>
+        {
+            await orderItem.Apply(() =>
+            {
+                Orders.SortAndNotify();
+
+                if (Location.Equals("Dashboard"))
+                {
+                    DashboardChartViewModel.Update?.Invoke();
+                }
+            });
+        });
+    }
+
+    /// <summary>
+    /// Cancel the order. & Sort the list.
+    /// </summary>
+    /// <param name="id">The Id of the Order that should be canceld</param>
+    public async Task ExecuteCancelCommand(int id)
+    {
+        var orderItem = Orders.Where(x => x.Order.Id == id).First();
         await DialogService.ShowDialog(new CancelDialog(orderItem), async (result) =>
         {
             if (result)
             {
-                await _orderAPIService.DeleteAsync(id);
-                _ = Task.Run(_orderService.Update);
+                await orderItem.Cancel(() =>
+                {
+                    // remove the item from the list when it has been canceled
+                    Orders.RemoveAt(Orders.IndexOf(orderItem));
+                    Orders.SortAndNotify();
+
+                    if (Location.Equals("Dashboard"))
+                    {
+                        DashboardChartViewModel.Update?.Invoke();
+                    }
+                });
             }
         },
         submitText: Localization.Instance.CancelDialog_Submit,
         titleText: Localization.Instance.CancelDialog_Title) ;
     }
 
-    public async Task Modify(int id)
+    /// <summary>
+    /// Redirect to the OrderDetailPage so the user can modify the order.
+    /// </summary>
+    /// <param name="id">The Id of the Order of interest</param>
+    public async Task ExecuteModifyCommand(int id)
     {
         await Shell.Current.GoToAsync($"{nameof(OrderDetailPage)}?OrderId={id}");
+    }
+
+
+    /// <summary>
+    /// Allow to update the list from the outside.
+    /// Should be used in views inside OnAppearing.
+    /// </summary>
+    /// <param name="done">a optional action to perform when the update is done</param>
+    public void Update(Action? done = null)
+    {
+        Task.Run(async () =>
+        {
+            await Orders.Update(done);
+            OnPropertyChanged(nameof(Orders));
+        }).ConfigureAwait(false);
     }
 }

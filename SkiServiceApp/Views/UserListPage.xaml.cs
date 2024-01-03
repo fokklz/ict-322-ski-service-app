@@ -10,10 +10,16 @@ public partial class UserListPage : ContentPage
 		BindingContext = viewModel;
     }
 
+    /// <summary>
+    /// Ensure the order list is updated when the page is shown.
+    /// </summary>
     protected override void OnAppearing()
     {
+        var context = BindingContext as UserListViewModel;
+
         base.OnAppearing();
-        OrderList.Update();
+
+        context?.Orders.Update();
     }
 
 }

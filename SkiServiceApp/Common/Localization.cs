@@ -183,6 +183,7 @@ namespace SkiServiceApp.Common
         public string Dashboard_SecondarySummary_Pre => GetResource("Dashboard.SecondarySummary.Pre");
         [DependsOn(nameof(CurrentCulture))]
         public string Dashboard_SecondarySummary_Sub => GetResource("Dashboard.SecondarySummary.Sub");
+
         [DependsOn(nameof(CurrentCulture))]
         public string AppShell_Love => GetResource("AppShell.Love");
         [DependsOn(nameof(CurrentCulture))]
