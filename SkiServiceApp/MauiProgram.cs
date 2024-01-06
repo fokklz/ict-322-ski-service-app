@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Maui;
 using Microsoft.Extensions.Logging;
 using SkiServiceApp.Common;
+using SkiServiceApp.Common.Helpers;
 using SkiServiceApp.Interfaces;
 using SkiServiceApp.Interfaces.API;
 using SkiServiceApp.Services;
@@ -20,7 +21,8 @@ namespace SkiServiceApp
         public static MauiApp CreateMauiApp()
         {
             var builder = MauiApp.CreateBuilder();
-            RessourceManager.RegisterSyncfusionLicense();
+
+            SkiServiceApp.Common.ResourceManager.RegisterSyncfusionLicense();
             builder.UseMauiApp<App>().ConfigureSyncfusionCore().ConfigureFonts(fonts =>
             {
                 fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
@@ -29,6 +31,9 @@ namespace SkiServiceApp
                 fonts.AddFont("Font Awesome 6 Free-Solid-900.otf", "FASolid");
                 fonts.AddFont("Font Awesome 6 Brands-Regular-400.otf", "FABrands");
             }).UseMauiCommunityToolkit();
+
+            builder.Services.AddSingleton<IMainThreadInvoker, MainThreadInvoker>();
+
             builder.Services.AddSingleton<IStorageService, StorageService>();
             // all api services need the auth service
             builder.Services.AddSingleton<IAuthService, AuthService>();
@@ -41,7 +46,6 @@ namespace SkiServiceApp
             builder.Services.AddSingleton<IOrderAPIService, OrderAPIService>();
 
             builder.Services.AddSingleton<DialogService>();
-            builder.Services.AddSingleton<SettingsService>();
 
             builder.Services.AddSingleton<AppShellViewModel>();
             builder.Services.AddSingleton<AppShell>();

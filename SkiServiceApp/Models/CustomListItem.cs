@@ -1,8 +1,8 @@
 ﻿using PropertyChanged;
 using SkiServiceApp.Common;
 using SkiServiceApp.Common.Events;
+using SkiServiceApp.Interfaces;
 using SkiServiceApp.Interfaces.API;
-using SkiServiceApp.Services;
 using SkiServiceModels.DTOs.Requests;
 using SkiServiceModels.DTOs.Responses;
 using System.Diagnostics;
@@ -15,6 +15,7 @@ namespace SkiServiceApp.Models
     public class CustomListItem : BaseNotifyHandler
     {
         private readonly IOrderAPIService _orderAPIService;
+        private readonly IMainThreadInvoker _mainThreadInvoker;
         /// <summary>
         /// The raw order data received from the API
         /// </summary>
@@ -65,7 +66,7 @@ namespace SkiServiceApp.Models
         /// Show cancel button if the order is assigned and the setting is enabled, for quick canceling
         /// </summary>
         [DependsOn(nameof(IsAssigned))]
-        public bool ShowCancelButtonInList => IsAssigned && SettingsService.CancelInListView && Order.State.Id < 3;
+        public bool ShowCancelButtonInList => IsAssigned && SettingsManager.CancelInListView && Order.State.Id < 3;
 
         /// <summary>
         /// Show the cancel button if the order is assigned, so the user can cancel it (will only apply to the detail view)
@@ -84,6 +85,7 @@ namespace SkiServiceApp.Models
             Order = orderResponse;
 
             _orderAPIService = ServiceLocator.GetService<IOrderAPIService>();
+            _mainThreadInvoker = ServiceLocator.GetService<IMainThreadInvoker>();
 
             Update();
             Localization.LanguageChanged += UpdateLanguage;
@@ -141,7 +143,7 @@ namespace SkiServiceApp.Models
             if (newOrderResponse.IsSuccess)
             {
                 var parsed = await newOrderResponse.ParseSuccess();
-                MainThread.BeginInvokeOnMainThread(() =>
+                _mainThreadInvoker.BeginInvokeOnMainThread(() =>
                 {
                     // update the order with the new data
                     Order = parsed;
@@ -169,7 +171,7 @@ namespace SkiServiceApp.Models
             if (newOrderResponse.IsSuccess)
             {
                 var parsed = await newOrderResponse.ParseSuccess();
-                MainThread.BeginInvokeOnMainThread(() =>
+                _mainThreadInvoker.BeginInvokeOnMainThread(() =>
                 {
                     // update the order with the new data
                     Order = parsed;
@@ -193,7 +195,7 @@ namespace SkiServiceApp.Models
                 var parsed = await deleteResponse.ParseSuccess();
                 if (parsed != null && parsed.Id > 0)
                 {
-                    MainThread.BeginInvokeOnMainThread(() =>
+                    _mainThreadInvoker.BeginInvokeOnMainThread(() =>
                     {
                         // mark the order as deleted, so it will be removed from the list
                         Order.IsDeleted = true;
@@ -209,7 +211,7 @@ namespace SkiServiceApp.Models
         /// Update the details for a order, will send the model to the backend and then update the UI with the new data aswell
         /// </summary>
         /// <param name="update">The model to use for the Update containing all data</param>
-        public async Task UpdateDetails(UpdateOrderRequest update)
+        public async Task UpdateDetails(UpdateOrderRequest update, Action? done = null)
         {
             var updateOrderResponse = await _orderAPIService.UpdateAsync(Order.Id, update);
             if (updateOrderResponse.IsSuccess)
@@ -217,10 +219,12 @@ namespace SkiServiceApp.Models
                 var parsed = await updateOrderResponse.ParseSuccess();
                 if (parsed != null)
                 {
-                    MainThread.BeginInvokeOnMainThread(() =>
+                    _mainThreadInvoker.BeginInvokeOnMainThread(() =>
                     {
                         Order = parsed;
                         Update();
+
+                        done?.Invoke();
                     });
                 }
             }

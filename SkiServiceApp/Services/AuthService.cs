@@ -47,7 +47,15 @@ namespace SkiServiceApp.Services
                     AuthManager.Login(parsed.Auth.Token, refreshToken, parsed.Id);
 
                     // keep UI work on main thread
-                    return (res, new Command(() => MainThread.BeginInvokeOnMainThread(async () => await (Application.Current as App).SwitchToMainApp())));
+                    return (res, new Command(() => ServiceLocator.GetService<IMainThreadInvoker>()
+                        .BeginInvokeOnMainThread(async () =>
+                        {
+                            var app = Application.Current as App;
+                            if(app != null)
+                            {
+                                await app.SwitchToMainApp();
+                            }
+                        })));
                 }
             }
             else
@@ -104,11 +112,20 @@ namespace SkiServiceApp.Services
         /// <returns>a ICommand to be run when ready to navigate away</returns>
         public async Task LogoutAsync(bool force = false)
         {
-            if (force || SettingsService.AlwaysSaveLogin)
+            var invoker = ServiceLocator.GetService<IMainThreadInvoker>();
+            Action final = async () =>
+            {
+                var app = Application.Current as App;
+                if (app != null)
+                {
+                    await app.SwitchToLogin();
+                }
+            };
+            if (force || SettingsManager.AlwaysSaveLogin)
             {
                 if(force) _storageService.RemoveUserByRefreshToken(AuthManager.RefreshToken);
                 AuthManager.Logout();
-                MainThread.BeginInvokeOnMainThread(async () => await (Application.Current as App).SwitchToLogin());
+                invoker.BeginInvokeOnMainThread(final);
                 return;
             }
             await DialogService.ShowDialog(new LogoutDialog(), (result) =>
@@ -116,7 +133,7 @@ namespace SkiServiceApp.Services
                 if (result)
                 {
                     AuthManager.Logout();
-                    MainThread.BeginInvokeOnMainThread(async () => await (Application.Current as App).SwitchToLogin());
+                    invoker.BeginInvokeOnMainThread(final);
                 }
             },
             titleText: Localization.Instance.LogoutDialog_Title,

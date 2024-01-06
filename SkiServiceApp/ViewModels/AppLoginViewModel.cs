@@ -13,6 +13,7 @@ namespace SkiServiceApp.ViewModels
     {
         private readonly IAuthService _authService;
         private readonly IStorageService _storageService;
+        private readonly IMainThreadInvoker _mainThreadInvoker;
 
         public ObservableCollection<StoredUserCredentials> ReversedUsers => _storageService.ReversedUsers;
 
@@ -37,12 +38,13 @@ namespace SkiServiceApp.ViewModels
         {
             _authService = ServiceLocator.GetService<IAuthService>();
             _storageService = ServiceLocator.GetService<IStorageService>();
+            _mainThreadInvoker = ServiceLocator.GetService<IMainThreadInvoker>();
 
             LoginCommand = new Command(async () => {
                 // hide on screen keyboard before processing login
-                #if ANDROID || IOS
-                MainThread.BeginInvokeOnMainThread(Platforms.KeyboardHelper.HideKeyboard);
-                #endif
+#if ANDROID || IOS
+                _mainThreadInvoker.BeginInvokeOnMainThread(Platforms.KeyboardHelper.HideKeyboard);
+#endif
                 await Login(); 
             });
             LoginWithUserCommand = new Command<StoredUserCredentials>(async (u) => { 

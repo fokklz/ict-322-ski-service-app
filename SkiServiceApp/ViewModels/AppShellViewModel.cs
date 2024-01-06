@@ -16,12 +16,12 @@ namespace SkiServiceApp.ViewModels
         {
             _authService = authService;
 
-            LogoutCommand = new Command(Logout);
+            LogoutCommand = new Command(async () => await Logout());
         }
 
-        public async void Logout()
+        public async Task Logout(bool force = false)
         {
-            await _authService.LogoutAsync();
+            await _authService.LogoutAsync(force);
         }
     }
 }
