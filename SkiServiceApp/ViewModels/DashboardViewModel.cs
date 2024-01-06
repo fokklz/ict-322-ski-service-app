@@ -46,7 +46,7 @@ namespace SkiServiceApp.ViewModels
 
         public DashboardViewModel()
         {
-            Orders.Update().ConfigureAwait(false);
+            Orders.Update();
         }
     }
 }

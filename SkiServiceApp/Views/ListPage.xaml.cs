@@ -1,3 +1,5 @@
+using SkiServiceApp.Common;
+using SkiServiceApp.Interfaces;
 using SkiServiceApp.ViewModels;
 
 namespace SkiServiceApp.Views;
@@ -18,7 +20,8 @@ public partial class ListPage : ContentPage
         var context = BindingContext as ListViewModel;
 
         base.OnAppearing();
-        
+
         context?.Orders.Update();
+        ServiceLocator.GetService<ISearchService>().ClearSearch();
     }
 }

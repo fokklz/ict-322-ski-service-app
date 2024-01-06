@@ -3,7 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:SkiServiceApp"
              xmlns:common="clr-namespace:SkiServiceApp.Common"
-             xmlns:helpers="clr-namespace:SkiServiceApp.Resources.Helper"
              x:Class="SkiServiceApp.App">
     <Application.Resources>
         <ResourceDictionary>
@@ -11,10 +10,7 @@
                 <ResourceDictionary Source="Resources/Styles/Colors.xaml" />
                 <ResourceDictionary Source="Resources/Styles/Styles.xaml" />
             </ResourceDictionary.MergedDictionaries>
-            <helpers:InverseBoolConverter x:Key="InverseBoolConverter" />
             <common:Localization x:Key="localization" />
-
-
             <Style x:Key="DialogHeading" TargetType="Label">
                 <Setter Property="FontSize" Value="25" />
             </Style>

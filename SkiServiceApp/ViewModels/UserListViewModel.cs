@@ -39,7 +39,7 @@ namespace SkiServiceApp.ViewModels
 
         public UserListViewModel()
         {
-            Orders.Update().ConfigureAwait(false);
+            Orders.Update();
         }
 
         private async void NavigateToDetailAsync(OrderResponse service)

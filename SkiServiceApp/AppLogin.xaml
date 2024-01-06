@@ -6,8 +6,7 @@
              xmlns:model="clr-namespace:SkiServiceApp.Models"
              xmlns:res="clr-namespace:SkiServiceApp.Resources.Languages"
              x:Class="SkiServiceApp.AppLogin"
-             Title="AppLogin"
-             Opacity="0">
+             Title="AppLogin">
 
     <ContentPage.Resources>
         <Style x:Key="Header" TargetType="VerticalStackLayout">
@@ -77,6 +76,7 @@
                 Margin="4,0,0,-4"/>
             <Frame Style="{StaticResource InputFrame}">
                 <Entry 
+                    x:Name="UnfocusMe"
                     Text="{Binding Username, Mode=TwoWay}"/>
             </Frame>
         </VerticalStackLayout>

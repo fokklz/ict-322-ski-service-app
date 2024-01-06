@@ -6,8 +6,8 @@ namespace SkiServiceApp.Interfaces
 {
     public interface IAuthService
     { 
-        Task<(HTTPResponse<LoginResponse>, ICommand)> LoginAsync(string username, string password, bool rememberMe);
-        Task<(HTTPResponse<LoginResponse>, ICommand)> LoginAsyncWithToken(string token, string refreshToken);
+        Task<HTTPResponse<LoginResponse>> LoginAsync(string username, string password, bool rememberMe);
+        Task<HTTPResponse<LoginResponse>> LoginAsyncWithToken(string token, string refreshToken);
         Task LogoutAsync(bool force = false);
     }
 }

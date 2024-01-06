@@ -35,7 +35,7 @@ namespace SkiServiceApp.ViewModels
 
         public ListViewModel()
         {
-            Orders.Update().ConfigureAwait(false);
+            Orders.Update();
         }
     }
 }

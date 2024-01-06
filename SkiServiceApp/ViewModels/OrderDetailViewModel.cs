@@ -1,15 +1,9 @@
 ﻿using SkiServiceApp.Common;
-using SkiServiceApp.Models;
-using System.Windows.Input;
-using System.Threading.Tasks;
-using System.Diagnostics;
-using SkiServiceApp.Resources.Helper;
-using SkiServiceModels.DTOs.Responses;
-using SkiServiceApp.Interfaces.API;
-using SkiServiceApp.Services;
 using SkiServiceApp.Components.Dialogs;
+using SkiServiceApp.Interfaces.API;
+using SkiServiceApp.Models;
+using SkiServiceApp.Services;
 using SkiServiceModels.DTOs.Requests;
-using SkiServiceApp.Views;
 
 namespace SkiServiceApp.ViewModels
 {

@@ -35,7 +35,7 @@ cd ict-322-ski-service-app
 
 ### Running the Backend
 
-For the app to work, the backend must be running. Since the backend is not hosted anywhere, you will need to run it locally. <br />
+For the app to work, the backend must be running. Since the backend is not hosted anywhere, you will need to run it locally. 
 To run the backend, you can use the following command in the root directory of the project. (`ict-322-ski-service-app`)
 
 ```shell
@@ -51,7 +51,7 @@ docker compose down
 
 ### Running the App
 
-To run the app, you can open the `SkiServiceApp.sln` file in Visual Studio 2022 and run the app with the green play button. <br />
+To run the app, you can open the `SkiServiceApp.sln` file in Visual Studio 2022 and run the app with the green play button.
 For the most part, the app was developed with Android in mind. The device used was a `Tablet 420 8In`. <br />
 
 By default, the app will try to search for local connections. You can alter this behavior by defining `API:BaseURL` in the `appsettings.json` file - be careful with emulators because they use special local IPs to access the host machine. <br />

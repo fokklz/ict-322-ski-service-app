@@ -41,10 +41,7 @@ namespace SkiServiceApp.ViewModels
             _mainThreadInvoker = ServiceLocator.GetService<IMainThreadInvoker>();
 
             LoginCommand = new Command(async () => {
-                // hide on screen keyboard before processing login
-#if ANDROID || IOS
-                _mainThreadInvoker.BeginInvokeOnMainThread(Platforms.KeyboardHelper.HideKeyboard);
-#endif
+                // TODO: Hide Keyboard
                 await Login(); 
             });
             LoginWithUserCommand = new Command<StoredUserCredentials>(async (u) => { 
@@ -76,32 +73,31 @@ namespace SkiServiceApp.ViewModels
             RememberMe = true;
         }
 
-        private async Task _handleLogin(HTTPResponse<LoginResponse> res, ICommand command)
+        private async Task _handleLogin(HTTPResponse<LoginResponse> res)
         {
             if (res.IsSuccess)
             {
                 IsLoginSuccess = true;
                 Message = string.Empty;
-                command?.Execute(null);
             }
             else
             {
                 var error = await res.ParseError();
                 IsLoginSuccess = false;
-                Message = error?.MessageCode ?? "Server Error";
+                Message = Localization.Instance.GetResource($"Backend.Error.{error?.MessageCode ?? "Server Error"}");
             }
         }
 
         public async Task LoginUsingCredentials(StoredUserCredentials credentials)
         {
-            var (res, command) = await _authService.LoginAsyncWithToken(credentials.Token, credentials.RefreshToken);
-            await _handleLogin(res, command);
+            var res = await _authService.LoginAsyncWithToken(credentials.Token, credentials.RefreshToken);
+            await _handleLogin(res);
         }
 
         public async Task Login()
         {
-            var (res, command) = await _authService.LoginAsync(Username, Password, RememberMe);
-            await _handleLogin(res, command);
+            var res = await _authService.LoginAsync(Username, Password, RememberMe);
+            await _handleLogin(res);
         }
     }
 }

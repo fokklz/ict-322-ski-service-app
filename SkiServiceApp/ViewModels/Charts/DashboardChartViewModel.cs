@@ -1,4 +1,5 @@
 ﻿using SkiServiceApp.Common;
+using SkiServiceApp.Interfaces;
 using SkiServiceApp.Interfaces.API;
 using SkiServiceApp.Models.Charts;
 
@@ -6,6 +7,8 @@ namespace SkiServiceApp.ViewModels.Charts
 {
     public class DashboardChartViewModel : BaseNotifyHandler
     {
+        private readonly IMainThreadInvoker _mainThreadInvoker = ServiceLocator.GetService<IMainThreadInvoker>();
+
         public static Action? Update { get; private set; }
 
         public List<ChartDataPoint> Data { get; set; } = new List<ChartDataPoint>();
@@ -26,13 +29,13 @@ namespace SkiServiceApp.ViewModels.Charts
         public DashboardChartViewModel()
         {
             Task.Run(UpdateStats);
-            Update = async () => await UpdateStats();
-            Localization.LanguageChanged += async (s,e) => await UpdateStats();
+            Update = UpdateStats;
+            Localization.LanguageChanged += (s,e) => UpdateStats();
         }
 
-        public async Task UpdateStats()
+        public void UpdateStats()
         {
-            await Task.Run(async () =>
+            _ = Task.Run(async () =>
             {
                 var _orderService = ServiceLocator.GetService<IOrderAPIService>();
                 if(_orderService == null) return;
@@ -64,7 +67,7 @@ namespace SkiServiceApp.ViewModels.Charts
 
                     totalYou -= totalYouDone;
 
-                    MainThread.BeginInvokeOnMainThread(() =>
+                    _mainThreadInvoker.BeginInvokeOnMainThread(() =>
                     {
                         TotalDone = totalDone;
                         TotalYouDone = totalYouDone;

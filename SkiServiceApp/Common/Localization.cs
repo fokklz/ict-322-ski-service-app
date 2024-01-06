@@ -1,5 +1,6 @@
 ﻿using PropertyChanged;
 using SkiServiceApp.Common.Events;
+using SkiServiceApp.Interfaces;
 using SkiServiceApp.Models;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -9,6 +10,8 @@ namespace SkiServiceApp.Common
 {
     public class Localization : INotifyPropertyChanged
     {
+        private IMainThreadInvoker _mainThreadInvoker => ServiceLocator.GetService<IMainThreadInvoker>();
+
         /// <summary>
         /// All supported languages with their corresponding culture code
         /// </summary>
@@ -88,7 +91,10 @@ namespace SkiServiceApp.Common
                 code = "de";
             }
             var culture = new CultureInfo(code);
+            Thread.CurrentThread.CurrentUICulture = culture;
+            Thread.CurrentThread.CurrentCulture = culture;
             Instance.CurrentCulture = culture;
+            UpdateFlyoutItemTitles();
             LanguageChanged?.Invoke(Instance, new LanguageChangedEventArgs(language, code));
         }
 
@@ -97,7 +103,7 @@ namespace SkiServiceApp.Common
         /// since they for some reason don't update automatically with INotifyPropertyChanged
         /// we utilize the automation id to get the correct resource key
         /// </summary>
-        private void UpdateFlyoutItemTitles()
+        private static void UpdateFlyoutItemTitles()
         {
             if (Shell.Current?.Items is null)
                 return;
@@ -109,7 +115,7 @@ namespace SkiServiceApp.Common
                     var id = flyoutItem.AutomationId;
                     if (id is null)
                         continue;
-                    flyoutItem.Title = GetResource(id.Replace('_', '.'));
+                    flyoutItem.Title = Instance.GetResource(id.Replace('_', '.'));
                 }
             }
         }
@@ -129,17 +135,7 @@ namespace SkiServiceApp.Common
         /// Accessor for the current culture of the app
         /// Also updates the flyout item titles when the culture is changed since they don't update automatically
         /// </summary>
-        public CultureInfo CurrentCulture {
-            get => Thread.CurrentThread.CurrentUICulture;
-            set
-            {
-                Thread.CurrentThread.CurrentUICulture = value;
-                Thread.CurrentThread.CurrentCulture = value;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(CurrentCulture)));
-                UpdateFlyoutItemTitles();
-            }
-        }
-
+        public CultureInfo CurrentCulture { get; set; }
 
         [DependsOn(nameof(CurrentCulture))]
         public ObservableCollection<PickerItem<string>> ThemeDropdown => new ObservableCollection<PickerItem<string>> {
