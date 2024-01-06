@@ -6,7 +6,7 @@ namespace SkiServiceApp.Common
     /// Responsible for managing the authentication state of the application
     /// also allows for quick access to the current user id and token
     /// </summary>
-    public class AuthManager : BaseNotifyHandler
+    public static class AuthManager
     {
 
         /// <summary>

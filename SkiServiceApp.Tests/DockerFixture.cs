@@ -8,13 +8,13 @@ namespace SkiServiceApp.Tests
         public DockerFixture()
         {
             _client = new HttpClient();
-            ExecuteCommand("docker-compose -f ..\\..\\..\\..\\docker-compose.tests.yml up -d");
+            ExecuteCommand("docker-compose -f ..\\..\\..\\docker-compose.yml up -d");
             WaitForService().GetAwaiter().GetResult();
         }
 
         public void Dispose()
         {
-            ExecuteCommand("docker-compose -f ..\\..\\..\\..\\docker-compose.tests.yml down --volumes --remove-orphans");
+            ExecuteCommand("docker-compose -f ..\\..\\..\\docker-compose.yml down --volumes --remove-orphans");
         }
 
         private void ExecuteCommand(string command)

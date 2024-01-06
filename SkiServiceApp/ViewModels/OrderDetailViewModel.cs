@@ -43,7 +43,7 @@ namespace SkiServiceApp.ViewModels
             }
         }
 
-        private async Task ExecuteCancelCommand()
+        public async Task ExecuteCancelCommand()
         {
             await DialogService.ShowDialog(new CancelDialog(Entry), async (result) =>
             {
@@ -59,7 +59,7 @@ namespace SkiServiceApp.ViewModels
             titleText: Localization.Instance.CancelDialog_Title);
         }
 
-        private async Task ExecuteEditCommand()
+        public async Task ExecuteEditCommand()
         {
             var dialogInstance = new ModifyDialog(Entry);
             await DialogService.ShowDialog(dialogInstance, async (result) =>
@@ -82,7 +82,7 @@ namespace SkiServiceApp.ViewModels
             titleText: Localization.Instance.ModifyDialog_Title);
         }
 
-        private async Task ExecuteNextStateCommand()
+        public async Task ExecuteNextStateCommand()
         {
             if (Entry.Order.State.Id < 3)
             {
@@ -90,7 +90,7 @@ namespace SkiServiceApp.ViewModels
             }
         }
 
-        private async Task ExecuteApplyCommand()
+        public async Task ExecuteApplyCommand()
         {
             await Entry.Apply();
         }

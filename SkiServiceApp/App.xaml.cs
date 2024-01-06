@@ -1,7 +1,6 @@
 ﻿using SkiServiceApp.Common;
 using SkiServiceApp.Interfaces;
 using SkiServiceApp.Interfaces.API;
-using SkiServiceApp.Services;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
@@ -46,8 +45,8 @@ namespace SkiServiceApp
         public async Task SwitchToMainApp()
         {
             await _animatePageTransition(MainAppShell, isAppearing: true);
-            SettingsService.LoadSettings();
-            SettingsService.ApplySettings();
+            SettingsManager.LoadSettings();
+            SettingsManager.ApplySettings();
             MainPage = MainAppShell;
             await _animatePageTransition(MainAppShell, isAppearing: false);
         }
@@ -59,8 +58,8 @@ namespace SkiServiceApp
         public async Task SwitchToLogin()
         {
             MainAppLogin = new AppLogin();
-            SettingsService.LoadSettings();
-            SettingsService.ApplySettings();
+            SettingsManager.LoadSettings();
+            SettingsManager.ApplySettings();
             await _animatePageTransition(MainAppLogin, isAppearing: true);
             MainPage = MainAppLogin;
             await _animatePageTransition(MainAppLogin, isAppearing: false);

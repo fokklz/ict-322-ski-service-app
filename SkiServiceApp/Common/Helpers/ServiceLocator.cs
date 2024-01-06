@@ -13,6 +13,6 @@
             ServiceProvider = serviceProvider;
         }
 
-        public static T? GetService<T>() => ServiceProvider.GetService<T>();
+        public static T GetService<T>() => ServiceProvider.GetService<T>()!;
     }
 }

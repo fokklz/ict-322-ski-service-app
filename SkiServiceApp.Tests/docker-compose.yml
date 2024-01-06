@@ -11,7 +11,7 @@ services:
   skiservice-tests:
     image: fokklz/skiservice-api
     volumes:
-      - ./Logs/tests:/Logs
+      - ./Logs:/Logs
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ConnectionStrings__DefaultConnection=Server=mssql-tests;Database=JetStream;User ID=SA;Password=AStrong!Passw0rd;TrustServerCertificate=True;

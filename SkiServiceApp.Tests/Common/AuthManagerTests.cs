@@ -31,7 +31,7 @@ namespace SkiServiceApp.Tests.Common
         }
 
         [Fact]
-        public async Task LoginChangedEventCalledOnLogin()
+        public async Task LoginChanged_CalledOnLogin()
         {
             var eventCalled = 0;
             AuthManager.LoginChanged += (sender, args) => { eventCalled += 1; };
@@ -42,7 +42,7 @@ namespace SkiServiceApp.Tests.Common
         }
 
         [Fact]
-        public async Task LoginChangedEventCalledOnLogout()
+        public async Task LoginChanged_CalledOnLogout()
         {
             var eventCalled = 0;
             AuthManager.LoginChanged += (sender, args) => { eventCalled += 1; };

@@ -4,7 +4,6 @@ using SkiServiceApp.Common.Events;
 using SkiServiceApp.Interfaces;
 using SkiServiceApp.Interfaces.API;
 using SkiServiceApp.Models;
-using SkiServiceApp.Services;
 using System.Collections.ObjectModel;
 
 namespace SkiServiceApp.ViewModels
@@ -21,13 +20,13 @@ namespace SkiServiceApp.ViewModels
         public PickerItem<string> SelectedTheme { get; set; }
 
         [OnChangedMethod(nameof(ChangeLanguage))]
-        public string SelectedLanguage { get; set; } = SettingsService.Language;
+        public string SelectedLanguage { get; set; } = SettingsManager.Language;
 
         [OnChangedMethod(nameof(ChangeCancelInListView))]
-        public bool CancelInListView { get; set; } = SettingsService.CancelInListView;
+        public bool CancelInListView { get; set; } = SettingsManager.CancelInListView;
 
         [OnChangedMethod(nameof(ChangeAlwaysSaveLogin))]
-        public bool AlwaysSaveLogin { get; set; } = SettingsService.AlwaysSaveLogin;
+        public bool AlwaysSaveLogin { get; set; } = SettingsManager.AlwaysSaveLogin;
 
         public Command LogoutOnAllDevicesCommand { get; private set; }
 
@@ -36,11 +35,17 @@ namespace SkiServiceApp.ViewModels
             _userAPIService = userAPIService;
             _authService = authService;
 
-            LogoutOnAllDevicesCommand = new Command(LogoutOnAllDevices);
+            LogoutOnAllDevicesCommand = new Command(async () => await LogoutOnAllDevices());
 
             // set theme dropdown to current theme
             LanguageChanged(null, null);
             Localization.LanguageChanged += LanguageChanged;
+        }
+
+        public async Task LogoutOnAllDevices()
+        {
+            await _userAPIService.RevokeAsync();
+            await _authService.LogoutAsync(true);
         }
 
         private void LanguageChanged(object? sender, LanguageChangedEventArgs? args)
@@ -50,34 +55,28 @@ namespace SkiServiceApp.ViewModels
             {
                 Themes.Add(item);
             }
-            SelectedTheme = Themes.Where(x => x.BackgroundValue == SettingsService.Theme).First();
-        }
-
-        private async void LogoutOnAllDevices()
-        {
-            await _userAPIService.RevokeAsync();
-            await _authService.LogoutAsync(true);
+            SelectedTheme = Themes.Where(x => x.BackgroundValue == SettingsManager.Theme).FirstOrDefault() ?? Localization.Instance.ThemeDropdown[0];
         }
 
         private void ChangeTheme()
         {
             if(SelectedTheme == null) return;
-            SettingsService.SetTheme(SelectedTheme.BackgroundValue);
+            SettingsManager.SetTheme(SelectedTheme.BackgroundValue);
         }
 
         private void ChangeLanguage()
         {
-            SettingsService.SetLanguage(SelectedLanguage);
+            SettingsManager.SetLanguage(SelectedLanguage);
         }
 
         private void ChangeCancelInListView()
         {
-            SettingsService.SetCancelInListView(CancelInListView);
+            SettingsManager.SetCancelInListView(CancelInListView);
         }
 
         private void ChangeAlwaysSaveLogin()
         {
-            SettingsService.SetAlwaysSaveLogin(AlwaysSaveLogin);
+            SettingsManager.SetAlwaysSaveLogin(AlwaysSaveLogin);
         }
     }
 }

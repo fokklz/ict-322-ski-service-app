@@ -122,14 +122,7 @@ namespace SkiServiceApp.Common
         /// <returns>The resolved value as string</returns>
         public string GetResource(string key)
         {
-            try
-            {
-                return Resources.Languages.Resources.ResourceManager.GetString(key, CurrentCulture) ?? key;
-            }
-            catch (Exception)
-            {
-                return key;
-            }
+            return ResourceManager.GetLanguageResource(key, CurrentCulture);
         }
 
         /// <summary>
@@ -183,7 +176,6 @@ namespace SkiServiceApp.Common
         public string Dashboard_SecondarySummary_Pre => GetResource("Dashboard.SecondarySummary.Pre");
         [DependsOn(nameof(CurrentCulture))]
         public string Dashboard_SecondarySummary_Sub => GetResource("Dashboard.SecondarySummary.Sub");
-
         [DependsOn(nameof(CurrentCulture))]
         public string AppShell_Love => GetResource("AppShell.Love");
         [DependsOn(nameof(CurrentCulture))]
@@ -230,7 +222,6 @@ namespace SkiServiceApp.Common
         public string SettingsPage_CancelInListViewLabel => GetResource("SettingsPage.CancelInListViewLabel");
         [DependsOn(nameof(CurrentCulture))]
         public string SettingsPage_LogoutOnAllDevicesButton => GetResource("SettingsPage.LogoutOnAllDevicesButton");
-
         [DependsOn(nameof(CurrentCulture))]
         public string Dialog_Cancel => GetResource("Dialog.Cancel"); 
         [DependsOn(nameof(CurrentCulture))]

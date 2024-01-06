@@ -3,7 +3,6 @@ using SkiServiceApp.Common;
 using SkiServiceApp.Common.Events;
 using SkiServiceApp.Interfaces;
 using SkiServiceApp.Interfaces.API;
-using SkiServiceApp.Services;
 using SkiServiceModels.DTOs.Requests;
 using SkiServiceModels.DTOs.Responses;
 using System.Diagnostics;
@@ -67,7 +66,7 @@ namespace SkiServiceApp.Models
         /// Show cancel button if the order is assigned and the setting is enabled, for quick canceling
         /// </summary>
         [DependsOn(nameof(IsAssigned))]
-        public bool ShowCancelButtonInList => IsAssigned && SettingsService.CancelInListView && Order.State.Id < 3;
+        public bool ShowCancelButtonInList => IsAssigned && SettingsManager.CancelInListView && Order.State.Id < 3;
 
         /// <summary>
         /// Show the cancel button if the order is assigned, so the user can cancel it (will only apply to the detail view)

@@ -1,12 +1,9 @@
-﻿using Microsoft.Extensions.Configuration;
-using Moq;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using SkiServiceApp.Common;
 using SkiServiceApp.Interfaces;
 using SkiServiceApp.Interfaces.API;
 using SkiServiceApp.Models;
 using SkiServiceApp.Services.API;
-using SkiServiceApp.Tests.Util;
 using SkiServiceApp.Tests.Util.Helper;
 using SkiServiceModels.DTOs.Requests;
 using SkiServiceModels.DTOs.Responses;
@@ -16,29 +13,20 @@ using System.Text;
 namespace SkiServiceApp.Tests.Models
 {
     [Collection("Docker Collection")]
-    public class CustomListItemTests
+    public class CustomListItemTests : IDisposable
     {
-        private readonly OrderAPIService _orderAPIService;
+        private readonly Environment _environment;
+        private readonly IOrderAPIService _orderAPIService;
 
         private CustomListItem _sample;
 
         public CustomListItemTests()
         {
-            // login to allow applying
-            AuthHelper.Login();
-            new Localization();
+            _environment = new Environment().UseAuth();
 
-            // setup order api service
-            var configurationMock = new Mock<IConfiguration>();
-            configurationMock.Setup(x => x["API:BaseURL"]).Returns("http://localhost:9000/api/");
-            _orderAPIService = new OrderAPIService(configurationMock.Object);
+            _environment.AddService<IOrderAPIService>(new OrderAPIService(_environment.ConfigurationMock.Object));
 
-            // setup service locator needed for the customlistitem
-            var serviceProviderMock = new Mock<IServiceProvider>();
-            serviceProviderMock.Setup(x => x.GetService(typeof(IOrderAPIService))).Returns(_orderAPIService);
-            serviceProviderMock.Setup(x => x.GetService(typeof(IMainThreadInvoker))).Returns(new MainThreadInvoker());
-
-            ServiceLocator.Initialize(serviceProviderMock.Object);
+            _orderAPIService = ServiceLocator.GetService<IOrderAPIService>();
 
             GetSample().GetAwaiter().GetResult();
         }
@@ -154,8 +142,7 @@ namespace SkiServiceApp.Tests.Models
                 Assert.True((await GetOrder()).IsDeleted);
             });
 
-            // Reset
-            // Removing a user from a order is not possible. The backend does not support it.
+            // Reset not supported from the backend
         }
 
 
@@ -176,6 +163,9 @@ namespace SkiServiceApp.Tests.Models
             });
         }
 
-
+        public void Dispose()
+        {
+            _environment.Dispose();
+        }
     }
 }

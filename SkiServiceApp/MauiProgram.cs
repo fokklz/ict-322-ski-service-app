@@ -21,7 +21,8 @@ namespace SkiServiceApp
         public static MauiApp CreateMauiApp()
         {
             var builder = MauiApp.CreateBuilder();
-            RessourceManager.RegisterSyncfusionLicense();
+
+            SkiServiceApp.Common.ResourceManager.RegisterSyncfusionLicense();
             builder.UseMauiApp<App>().ConfigureSyncfusionCore().ConfigureFonts(fonts =>
             {
                 fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
@@ -45,7 +46,6 @@ namespace SkiServiceApp
             builder.Services.AddSingleton<IOrderAPIService, OrderAPIService>();
 
             builder.Services.AddSingleton<DialogService>();
-            builder.Services.AddSingleton<SettingsService>();
 
             builder.Services.AddSingleton<AppShellViewModel>();
             builder.Services.AddSingleton<AppShell>();

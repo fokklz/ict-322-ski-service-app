@@ -1,41 +1,44 @@
-﻿using SkiServiceApp.Common;
-using SkiServiceApp.Common.Helpers;
-using System.ComponentModel;
-using System.Diagnostics;
+﻿using SkiServiceApp.Common.Helpers;
 
-namespace SkiServiceApp.Services
+namespace SkiServiceApp.Common
 {
-    public class SettingsService : INotifyPropertyChanged
+    public static class SettingsManager
     {
         /// <summary>
         /// Current language setting
         /// </summary>
-        public static string Language { get; set; }
+        public static string Language { get; private set; }
 
         /// <summary>
         /// Current theme setting
         /// </summary>
-        public static string Theme { get; set; }
+        public static string Theme { get; private set; }
 
         /// <summary>
         /// Current cancel in list view setting
         /// </summary>
-        public static bool CancelInListView { get; set; }
+        public static bool CancelInListView { get; private set; }
 
         /// <summary>
         /// Current always save login setting
         /// </summary>
-        public static bool AlwaysSaveLogin { get; set; } 
+        public static bool AlwaysSaveLogin { get; private set; }
+
+        /// <summary>
+        /// The preferences API to use for storing settings
+        /// - needed for unit testing
+        /// </summary>
+        public static IPreferences PreferencesAPI { get; set; } = Preferences.Default;
 
         /// <summary>
         /// Load settings from local storage (user based)
         /// </summary>
         public static void LoadSettings()
         {
-            Language = Preferences.Get($"{SettingsKey.Language}.{AuthManager.UserId}", "Deutsch");
-            Theme = Preferences.Get($"{SettingsKey.Theme}.{AuthManager.UserId}", "System");
-            CancelInListView = Preferences.Get($"{SettingsKey.CancelInListView}.{AuthManager.UserId}", false);
-            AlwaysSaveLogin = Preferences.Get($"{SettingsKey.AlwaysSaveLogin}.{AuthManager.UserId}", false);
+            Language = PreferencesAPI.Get($"{SettingsKey.Language}.{AuthManager.UserId}", "Deutsch");
+            Theme = PreferencesAPI.Get($"{SettingsKey.Theme}.{AuthManager.UserId}", "System");
+            CancelInListView = PreferencesAPI.Get($"{SettingsKey.CancelInListView}.{AuthManager.UserId}", false);
+            AlwaysSaveLogin = PreferencesAPI.Get($"{SettingsKey.AlwaysSaveLogin}.{AuthManager.UserId}", false);
         }
 
         /// <summary>
@@ -45,10 +48,10 @@ namespace SkiServiceApp.Services
         public static void SetLanguage(string language)
         {
             Language = language;
-            Preferences.Set($"{SettingsKey.Language}.{AuthManager.UserId}", language);
+            PreferencesAPI.Set($"{SettingsKey.Language}.{AuthManager.UserId}", language);
             ApplyLanguage();
         }
-        
+
         /// <summary>
         /// Set the theme setting for the current logged in user
         /// </summary>
@@ -56,8 +59,7 @@ namespace SkiServiceApp.Services
         public static void SetTheme(string theme)
         {
             Theme = theme;
-            Debug.WriteLine($"Set theme to {theme} with key {SettingsKey.Theme}.{AuthManager.UserId}");
-            Preferences.Set($"{SettingsKey.Theme}.{AuthManager.UserId}", theme);
+            PreferencesAPI.Set($"{SettingsKey.Theme}.{AuthManager.UserId}", theme);
             ApplyTheme();
         }
 
@@ -68,7 +70,7 @@ namespace SkiServiceApp.Services
         public static void SetCancelInListView(bool cancelInListView)
         {
             CancelInListView = cancelInListView;
-            Preferences.Set($"{SettingsKey.CancelInListView}.{AuthManager.UserId}", cancelInListView);
+            PreferencesAPI.Set($"{SettingsKey.CancelInListView}.{AuthManager.UserId}", cancelInListView);
         }
 
         /// <summary>
@@ -78,10 +80,8 @@ namespace SkiServiceApp.Services
         public static void SetAlwaysSaveLogin(bool alwaysSaveLogin)
         {
             AlwaysSaveLogin = alwaysSaveLogin;
-            Preferences.Set($"{SettingsKey.AlwaysSaveLogin}.{AuthManager.UserId}", alwaysSaveLogin);
+            PreferencesAPI.Set($"{SettingsKey.AlwaysSaveLogin}.{AuthManager.UserId}", alwaysSaveLogin);
         }
-
-        public event PropertyChangedEventHandler? PropertyChanged;
 
         public static void ApplyTheme()
         {
