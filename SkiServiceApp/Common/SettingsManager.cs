@@ -1,4 +1,5 @@
 ﻿using SkiServiceApp.Common.Helpers;
+using System.Diagnostics;
 
 namespace SkiServiceApp.Common
 {
@@ -33,12 +34,13 @@ namespace SkiServiceApp.Common
         /// <summary>
         /// Load settings from local storage (user based)
         /// </summary>
-        public static void LoadSettings()
+        public static void LoadSettings(int? userId = null)
         {
-            Language = PreferencesAPI.Get($"{SettingsKey.Language}.{AuthManager.UserId}", "Deutsch");
-            Theme = PreferencesAPI.Get($"{SettingsKey.Theme}.{AuthManager.UserId}", "System");
-            CancelInListView = PreferencesAPI.Get($"{SettingsKey.CancelInListView}.{AuthManager.UserId}", false);
-            AlwaysSaveLogin = PreferencesAPI.Get($"{SettingsKey.AlwaysSaveLogin}.{AuthManager.UserId}", false);
+            Language = PreferencesAPI.Get($"{SettingsKey.Language}.{userId ?? AuthManager.UserId}", "Deutsch");
+            Debug.WriteLine($"Loaded language: {Language} ---------------------------------------------------------------");
+            Theme = PreferencesAPI.Get($"{SettingsKey.Theme}.{userId ?? AuthManager.UserId}", "System");
+            CancelInListView = PreferencesAPI.Get($"{SettingsKey.CancelInListView}.{userId ?? AuthManager.UserId}", false);
+            AlwaysSaveLogin = PreferencesAPI.Get($"{SettingsKey.AlwaysSaveLogin}.{userId ?? AuthManager.UserId}", false);
         }
 
         /// <summary>

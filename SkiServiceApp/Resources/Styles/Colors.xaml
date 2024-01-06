@@ -12,6 +12,8 @@
     <Color x:Key="OffBlack">#212121</Color>
     <Color x:Key="OffWhite30">#4DFAFAFA</Color>
     <Color x:Key="OffBlack30">#4D212121</Color>
+    <Color x:Key="OffWhite60">#99FAFAFA</Color>
+    <Color x:Key="OffBlack60">#99212121</Color>
 
     <Color x:Key="SemiTransparentOffBlack">#99212121</Color>
 

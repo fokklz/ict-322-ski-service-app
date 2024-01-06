@@ -1,7 +1,9 @@
-﻿using SkiServiceApp.Models;
+﻿using SkiServiceApp.Common.Events;
+using SkiServiceApp.Common.Helpers;
+using SkiServiceApp.Interfaces;
+using SkiServiceApp.Models;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
-using System.Diagnostics;
 
 namespace SkiServiceApp.Common.Types
 {
@@ -12,8 +14,12 @@ namespace SkiServiceApp.Common.Types
     /// </summary>
     public class OrderCollection : ObservableCollection<CustomListItem>, INotifyCollectionChanged
     {
+        private readonly IMainThreadInvoker _mainThreadInvoker;
+
         private readonly Func<Task<IEnumerable<CustomListItem>>> origin;
         private Func<IEnumerable<CustomListItem>, IEnumerable<CustomListItem>>? sorting = null;
+
+        private IEnumerable<CustomListItem> _originalItems;
 
         /// <summary>
         /// Toggle notification suppression for the collection.
@@ -23,16 +29,44 @@ namespace SkiServiceApp.Common.Types
         public OrderCollection(Func<Task<IEnumerable<CustomListItem>>> originFunc, Func<IEnumerable<CustomListItem>, IEnumerable<CustomListItem>>? sortingFunc = null) : base() {
             origin = originFunc;
             sorting = sortingFunc;
+
+            _mainThreadInvoker = ServiceLocator.GetService<IMainThreadInvoker>();
+
+            SearchHelper.SearchChanged += SearchEvent_SearchChanged;
+        }
+
+        /// <summary>
+        /// Will resort the collection when the search changes.
+        /// </summary>
+        /// <param name="sender">The sender instance of the Event</param>
+        /// <param name="e">The parameters for the Event</param>
+        private void SearchEvent_SearchChanged(object? sender, SearchChangedEventArgs e)
+        {
+            Task.Run(() =>
+            {
+                if (!e.IsSearching)
+                {
+                    SortAndNotify(_originalItems);
+                }
+                else
+                {
+                    SortAndNotify(_originalItems.Where(e.Predicate).ToList());
+                }
+            }).ConfigureAwait(false);
         }
 
         /// <summary>
         /// Update the collection with the latest data from the API. & Sort them.
         /// </summary>
-        public async Task Update(Action? done = null)
+        public void Update(Action? done = null)
         {
-            var newItems = await origin.Invoke();
-            SortAndNotify(newItems);
-            done?.Invoke();
+            origin.Invoke().ContinueWith(x =>
+            {
+                var newItems = x.Result;
+                _originalItems = newItems;
+                SortAndNotify(newItems);
+                done?.Invoke();
+            }).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -44,8 +78,7 @@ namespace SkiServiceApp.Common.Types
             if (sorting != null)
             {
                 var sorted = sorting.Invoke(items ?? this).ToList();
-                Debug.WriteLine($"Sorting {sorted.Count} items.");
-                MainThread.BeginInvokeOnMainThread(() =>
+                _mainThreadInvoker.BeginInvokeOnMainThread(() =>
                 {
                     SuppressNotification = true;
                     Clear();
@@ -54,9 +87,13 @@ namespace SkiServiceApp.Common.Types
                         Add(item);
                     }
                     SuppressNotification = false;
+                    OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
                 });
             }
-            OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
+            else
+            {
+                OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
+            }
         }
 
         /// <summary>

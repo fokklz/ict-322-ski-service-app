@@ -2,13 +2,14 @@
 using SkiServiceApp.Interfaces;
 using SkiServiceApp.Interfaces.API;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Runtime.CompilerServices;
 
 namespace SkiServiceApp
 {
     public partial class App : Application
     {
-        private readonly IServiceProvider _serviceProvider;
+        private readonly IMainThreadInvoker _mainThreadInvoker = ServiceLocator.GetService<IMainThreadInvoker>();
 
         public AppShell MainAppShell { get; private set; }
 
@@ -17,24 +18,42 @@ namespace SkiServiceApp
         public App(IServiceProvider serviceProvider, IStorageService storageService)
         {
             InitializeComponent();
-            _serviceProvider = serviceProvider;
 
             MainAppShell = serviceProvider.GetService<AppShell>();
             MainAppLogin = new AppLogin();
+#if ANDROID || IOS
+            MainAppLogin.Opacity = 0;
+#endif
             // ensure the login page will only turn visible with the animation
             // setting opacity to 0 will hide it until the animation is called
             MainPage = MainAppLogin;
 
-            Task.Run(async () => await InitializeApplicationAsync(storageService));
+            InitializeApplicationAsync(storageService);
         }
 
         private async Task InitializeApplicationAsync(IStorageService storageService)
         {
             await storageService.InitializeAsync();
             // Ensure UI operations are performed on the main thread
-            MainThread.BeginInvokeOnMainThread(async () =>
+            _mainThreadInvoker.BeginInvokeOnMainThread(async () =>
             {
                 await SwitchToLogin();
+
+                AuthManager.LoginChanged += async (s, e) =>
+                {
+                    SettingsManager.LoadSettings(e.UserId);
+
+                    if (e.IsLoggedIn)
+                    {
+                        await SwitchToMainApp();
+                    }
+                    else
+                    {
+                        await SwitchToLogin();
+                    }
+
+                    SettingsManager.ApplySettings();
+                };
             });
         }
 
@@ -45,8 +64,6 @@ namespace SkiServiceApp
         public async Task SwitchToMainApp()
         {
             await _animatePageTransition(MainAppShell, isAppearing: true);
-            SettingsManager.LoadSettings();
-            SettingsManager.ApplySettings();
             MainPage = MainAppShell;
             await _animatePageTransition(MainAppShell, isAppearing: false);
         }
@@ -58,8 +75,9 @@ namespace SkiServiceApp
         public async Task SwitchToLogin()
         {
             MainAppLogin = new AppLogin();
-            SettingsManager.LoadSettings();
-            SettingsManager.ApplySettings();
+#if ANDROID || IOS
+            MainAppLogin.Opacity = 0;
+#endif
             await _animatePageTransition(MainAppLogin, isAppearing: true);
             MainPage = MainAppLogin;
             await _animatePageTransition(MainAppLogin, isAppearing: false);

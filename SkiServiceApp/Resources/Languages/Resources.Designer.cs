@@ -718,6 +718,15 @@ namespace SkiServiceApp.Resources.Languages {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Suchen ähnelt.
+        /// </summary>
+        public static string OrderList_Search {
+            get {
+                return ResourceManager.GetString("OrderList.Search", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Login immer speichern ähnelt.
         /// </summary>
         public static string SettingsPage_AlwaysSaveLoginLabel {

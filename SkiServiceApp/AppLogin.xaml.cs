@@ -9,6 +9,7 @@ public partial class AppLogin : ContentPage
 	public AppLogin()
 	{
 		InitializeComponent();
+        BindingContextChanged += OnBindingContextChanged;
         BindingContext = new AppLoginViewModel();
     }
 
@@ -22,5 +23,15 @@ public partial class AppLogin : ContentPage
         {
             viewModel.ResetLoginState();
         }
+    }
+
+    /// <summary>
+    /// Unfocus the control when the binding context changes.
+    /// </summary>
+    /// <param name="sender">The sender of the Event</param>
+    /// <param name="e">The params of the Event</param>
+    private void OnBindingContextChanged(object sender, EventArgs e)
+    {
+        UnfocusMe.Unfocus();
     }
 }

@@ -33,6 +33,7 @@ namespace SkiServiceApp
             }).UseMauiCommunityToolkit();
 
             builder.Services.AddSingleton<IMainThreadInvoker, MainThreadInvoker>();
+            builder.Services.AddSingleton<ISearchService, SearchService>();
 
             builder.Services.AddSingleton<IStorageService, StorageService>();
             // all api services need the auth service
@@ -44,8 +45,6 @@ namespace SkiServiceApp
             // service with dependencies on the above services
             builder.Services.AddSingleton<IUserAPIService, UserAPIService>();
             builder.Services.AddSingleton<IOrderAPIService, OrderAPIService>();
-
-            builder.Services.AddSingleton<DialogService>();
 
             builder.Services.AddSingleton<AppShellViewModel>();
             builder.Services.AddSingleton<AppShell>();

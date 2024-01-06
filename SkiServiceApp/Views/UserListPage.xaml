@@ -4,6 +4,7 @@
              xmlns:viewModels="clr-namespace:SkiServiceApp.ViewModels;assembly=SkiServiceApp"
              xmlns:res="clr-namespace:SkiServiceApp.Resources.Languages"
              x:Class="SkiServiceApp.Views.UserListPage"
-             Title="{Binding Source={StaticResource localization}, Path=AppShell_FlyoutItem_UserListButton}">
+             Title="{Binding Source={StaticResource localization}, Path=AppShell_FlyoutItem_UserListButton}"
+             Padding="10,10,10,0">
     <components:OrderList x:Name="OrderList" Orders="{Binding Orders}" Location="UserList" />
 </ContentPage>

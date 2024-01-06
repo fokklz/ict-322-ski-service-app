@@ -1,5 +1,5 @@
 using SkiServiceApp.Common;
-using SkiServiceApp.Services;
+using SkiServiceApp.Interfaces;
 using SkiServiceApp.ViewModels;
 using SkiServiceApp.ViewModels.Charts;
 
@@ -21,7 +21,8 @@ public partial class DashboardPage : ContentPage
         var context = BindingContext as DashboardViewModel;
 
         base.OnAppearing();
-		context?.Orders.Update();
+        context?.Orders.Update();
+        ServiceLocator.GetService<ISearchService>().ClearSearch();
         DashboardChartViewModel.Update?.Invoke();
     }
-}
+}   

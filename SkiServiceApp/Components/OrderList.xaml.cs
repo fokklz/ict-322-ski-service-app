@@ -1,23 +1,22 @@
-using PropertyChanged;
+using CommunityToolkit.Maui.Core.Platform;
 using SkiServiceApp.Common;
+using SkiServiceApp.Common.Helpers;
 using SkiServiceApp.Common.Types;
 using SkiServiceApp.Components.Dialogs;
-using SkiServiceApp.Interfaces.API;
-using SkiServiceApp.Models;
+using SkiServiceApp.Interfaces;
 using SkiServiceApp.Services;
 using SkiServiceApp.ViewModels.Charts;
 using SkiServiceApp.Views;
-using SkiServiceModels.DTOs.Requests;
-using SkiServiceModels.DTOs.Responses;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.Windows.Input;
 
 namespace SkiServiceApp.Components;
 
 public partial class OrderList : ContentView, INotifyPropertyChanged
 {
+
+    public ISearchService SearchService => ServiceLocator.GetService<ISearchService>();
+
     public static readonly BindableProperty OrdersProperty =
         BindableProperty.Create(nameof(Orders), typeof(OrderCollection), typeof(OrderList), propertyChanged: OnOrderPropertyChanged);
 
@@ -51,6 +50,126 @@ public partial class OrderList : ContentView, INotifyPropertyChanged
     }
 
     /// <summary>
+    /// Apply to a Order. (each item)
+    /// </summary>
+    public ICommand ApplyCommand => new Command<int>(async (id) => await ExecuteApplyCommand(id));
+
+    /// <summary>
+    /// Go to the next state of a Order. (each item)
+    /// </summary>
+    public ICommand NextStateCommand => new Command<int>(async (id) => await ExecuteNextStateCommand(id));
+
+    /// <summary>
+    /// Modify a Order. (each item)
+    /// </summary>
+    public ICommand ModifyCommand => new Command<int>(async (id) => await ExecuteModifyCommand(id));
+
+    /// <summary>
+    /// Cancel a Order. (each item)
+    /// </summary>
+    public ICommand CancelCommand => new Command<int>(async (id) => await ExecuteCancelCommand(id));
+
+    public OrderList()
+    {
+        InitializeComponent();
+        this.BindingContextChanged += OnBindingContextChanged;
+
+        SearchHelper.SearchChanged += async (sender, e) =>
+        {
+#if !MACCATALYST
+            if (!e.IsSearching)
+            {
+                _ = await UnfocusMe.HideKeyboardAsync();
+            }
+#endif
+        };
+    }
+
+    /// <summary>
+    /// Move the order to the next state. & Sort the list.
+    /// </summary>
+    /// <param name="id">The Id to change the State for</param>
+    public async Task ExecuteNextStateCommand(int id)
+    {
+        var orderItem = Orders.Where(x => x.Order.Id == id).First();
+        _ = Task.Run(async () =>
+        {
+            await orderItem.GoNextState(() =>
+            {
+                Orders.SortAndNotify();
+
+                if (Location.Equals("Dashboard"))
+                {
+                    DashboardChartViewModel.Update?.Invoke();
+                }
+            });
+        }).ConfigureAwait(false);
+    }
+
+    /// <summary>
+    /// Apply to the order. & Sort the list.
+    /// </summary>
+    /// <param name="id">The Id of the Order the current user Should be added</param>
+    public async Task ExecuteApplyCommand(int id)
+    {
+        var orderItem = Orders.Where(x => x.Order.Id == id).First();
+        _  = Task.Run(async () =>
+        {
+            await orderItem.Apply(() =>
+            {
+                Orders.SortAndNotify();
+
+                if (Location.Equals("Dashboard"))
+                {
+                    DashboardChartViewModel.Update?.Invoke();
+                }
+            });
+        }).ConfigureAwait(false);
+    }
+
+    /// <summary>
+    /// Cancel the order. & Sort the list.
+    /// </summary>
+    /// <param name="id">The Id of the Order that should be canceld</param>
+    public async Task ExecuteCancelCommand(int id)
+    {
+        var orderItem = Orders.Where(x => x.Order.Id == id).First();
+        _  = Task.Run(async () =>
+        {
+            await DialogService.ShowDialog(new CancelDialog(orderItem), async (result) =>
+            {
+                if (result)
+                {
+                    await orderItem.Cancel(() =>
+                    {
+                        // remove the item from the list when it has been canceled
+                        Orders.RemoveAt(Orders.IndexOf(orderItem));
+                        Orders.SortAndNotify();
+
+                        if (Location.Equals("Dashboard"))
+                        {
+                            DashboardChartViewModel.Update?.Invoke();
+                        }
+                    });
+                }
+            },
+            submitText: Localization.Instance.CancelDialog_Submit,
+            titleText: Localization.Instance.CancelDialog_Title);
+        }).ConfigureAwait(false);
+    }
+
+    /// <summary>
+    /// Redirect to the OrderDetailPage so the user can modify the order.
+    /// </summary>
+    /// <param name="id">The Id of the Order of interest</param>
+    public async Task ExecuteModifyCommand(int id)
+    {
+        await Shell.Current.GoToAsync($"{nameof(OrderDetailPage)}?OrderId={id}");
+    }
+
+
+
+    /// <summary>
     /// Hook to call PropertyChanged when the Orders property changes. Since Fody.PropertyChanged is not working on BindableProperties.
     /// </summary>
     /// <param name="bindable">The control</param>
@@ -75,121 +194,12 @@ public partial class OrderList : ContentView, INotifyPropertyChanged
     }
 
     /// <summary>
-    /// Apply to a Order. (each item)
+    /// Unfocus the control when the binding context changes.
     /// </summary>
-    public ICommand ApplyCommand => new Command<int>(async (id) => await ExecuteApplyCommand(id));
-
-    /// <summary>
-    /// Go to the next state of a Order. (each item)
-    /// </summary>
-    public ICommand NextStateCommand => new Command<int>(async (id) => await ExecuteNextStateCommand(id));
-
-    /// <summary>
-    /// Modify a Order. (each item)
-    /// </summary>
-    public ICommand ModifyCommand => new Command<int>(async (id) => await ExecuteModifyCommand(id));
-
-    /// <summary>
-    /// Cancel a Order. (each item)
-    /// </summary>
-    public ICommand CancelCommand => new Command<int>(async (id) => await ExecuteCancelCommand(id));
-
-    public OrderList()
+    /// <param name="sender">The sender of the Event</param>
+    /// <param name="e">The params of the Event</param>
+    private void OnBindingContextChanged(object? sender, EventArgs e)
     {
-        InitializeComponent();
-    }
-
-    /// <summary>
-    /// Move the order to the next state. & Sort the list.
-    /// </summary>
-    /// <param name="id">The Id to change the State for</param>
-    public async Task ExecuteNextStateCommand(int id)
-    {
-        var orderItem = Orders.Where(x => x.Order.Id == id).First();
-        await Task.Run(async () =>
-        {
-            await orderItem.GoNextState(() =>
-            {
-                Orders.SortAndNotify();
-
-                if (Location.Equals("Dashboard"))
-                {
-                    DashboardChartViewModel.Update?.Invoke();
-                }
-            });
-        });
-    }
-
-    /// <summary>
-    /// Apply to the order. & Sort the list.
-    /// </summary>
-    /// <param name="id">The Id of the Order the current user Should be added</param>
-    public async Task ExecuteApplyCommand(int id)
-    {
-        var orderItem = Orders.Where(x => x.Order.Id == id).First();
-        await Task.Run(async () =>
-        {
-            await orderItem.Apply(() =>
-            {
-                Orders.SortAndNotify();
-
-                if (Location.Equals("Dashboard"))
-                {
-                    DashboardChartViewModel.Update?.Invoke();
-                }
-            });
-        });
-    }
-
-    /// <summary>
-    /// Cancel the order. & Sort the list.
-    /// </summary>
-    /// <param name="id">The Id of the Order that should be canceld</param>
-    public async Task ExecuteCancelCommand(int id)
-    {
-        var orderItem = Orders.Where(x => x.Order.Id == id).First();
-        await DialogService.ShowDialog(new CancelDialog(orderItem), async (result) =>
-        {
-            if (result)
-            {
-                await orderItem.Cancel(() =>
-                {
-                    // remove the item from the list when it has been canceled
-                    Orders.RemoveAt(Orders.IndexOf(orderItem));
-                    Orders.SortAndNotify();
-
-                    if (Location.Equals("Dashboard"))
-                    {
-                        DashboardChartViewModel.Update?.Invoke();
-                    }
-                });
-            }
-        },
-        submitText: Localization.Instance.CancelDialog_Submit,
-        titleText: Localization.Instance.CancelDialog_Title) ;
-    }
-
-    /// <summary>
-    /// Redirect to the OrderDetailPage so the user can modify the order.
-    /// </summary>
-    /// <param name="id">The Id of the Order of interest</param>
-    public async Task ExecuteModifyCommand(int id)
-    {
-        await Shell.Current.GoToAsync($"{nameof(OrderDetailPage)}?OrderId={id}");
-    }
-
-
-    /// <summary>
-    /// Allow to update the list from the outside.
-    /// Should be used in views inside OnAppearing.
-    /// </summary>
-    /// <param name="done">a optional action to perform when the update is done</param>
-    public void Update(Action? done = null)
-    {
-        Task.Run(async () =>
-        {
-            await Orders.Update(done);
-            OnPropertyChanged(nameof(Orders));
-        }).ConfigureAwait(false);
+        UnfocusMe.Unfocus();
     }
 }

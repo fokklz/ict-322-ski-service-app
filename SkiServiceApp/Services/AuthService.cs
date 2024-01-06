@@ -29,7 +29,7 @@ namespace SkiServiceApp.Services
         /// <param name="res">The response obtained by Login or Refresh</param>
         /// <param name="oldRefreshToken">used to remove this refresh token if the response turns out to be falsy</param>
         /// <returns>The Response, The command to switch to main app</returns>
-        private async Task<(HTTPResponse<LoginResponse>, ICommand)> _handleLoginResponse(HTTPResponse<LoginResponse> res, string oldRefreshToken = null)
+        private async Task<HTTPResponse<LoginResponse>> _handleLoginResponse(HTTPResponse<LoginResponse> res, string oldRefreshToken = null)
         {
             if (res.IsSuccess)
             {
@@ -46,16 +46,7 @@ namespace SkiServiceApp.Services
                     
                     AuthManager.Login(parsed.Auth.Token, refreshToken, parsed.Id);
 
-                    // keep UI work on main thread
-                    return (res, new Command(() => ServiceLocator.GetService<IMainThreadInvoker>()
-                        .BeginInvokeOnMainThread(async () =>
-                        {
-                            var app = Application.Current as App;
-                            if(app != null)
-                            {
-                                await app.SwitchToMainApp();
-                            }
-                        })));
+                    return res;
                 }
             }
             else
@@ -65,9 +56,9 @@ namespace SkiServiceApp.Services
                     _storageService.RemoveUserByRefreshToken(oldRefreshToken);
                     await _storageService.SaveChangesAsync();
                 }
-            }   
+            }
 
-            return (res, null);
+            return res;
         }
 
         /// <summary>
@@ -76,7 +67,7 @@ namespace SkiServiceApp.Services
         /// <param name="token">The token of the user</param>
         /// <param name="refreshToken">The refresh token of the user</param>
         /// <returns>The Response, The command to switch to main app</returns>
-        public async Task<(HTTPResponse<LoginResponse>, ICommand)> LoginAsyncWithToken(string token, string refreshToken)
+        public async Task<HTTPResponse<LoginResponse>> LoginAsyncWithToken(string token, string refreshToken)
         {
             var data = new RefreshRequest
             {
@@ -94,7 +85,7 @@ namespace SkiServiceApp.Services
         /// <param name="password">The password of the user</param>
         /// <param name="rememberMe">Whether the user should be remembered for future logins</param>
         /// <returns>The Response, The command to switch to main app</returns>
-        public async Task<(HTTPResponse<LoginResponse>, ICommand)> LoginAsync(string username, string password, bool rememberMe)
+        public async Task<HTTPResponse<LoginResponse>> LoginAsync(string username, string password, bool rememberMe)
         {
             var data = new LoginRequest
             {
@@ -112,20 +103,10 @@ namespace SkiServiceApp.Services
         /// <returns>a ICommand to be run when ready to navigate away</returns>
         public async Task LogoutAsync(bool force = false)
         {
-            var invoker = ServiceLocator.GetService<IMainThreadInvoker>();
-            Action final = async () =>
-            {
-                var app = Application.Current as App;
-                if (app != null)
-                {
-                    await app.SwitchToLogin();
-                }
-            };
             if (force || SettingsManager.AlwaysSaveLogin)
             {
                 if(force) _storageService.RemoveUserByRefreshToken(AuthManager.RefreshToken);
                 AuthManager.Logout();
-                invoker.BeginInvokeOnMainThread(final);
                 return;
             }
             await DialogService.ShowDialog(new LogoutDialog(), (result) =>
@@ -133,7 +114,6 @@ namespace SkiServiceApp.Services
                 if (result)
                 {
                     AuthManager.Logout();
-                    invoker.BeginInvokeOnMainThread(final);
                 }
             },
             titleText: Localization.Instance.LogoutDialog_Title,

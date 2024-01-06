@@ -2,7 +2,9 @@
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SkiServiceApp.Components.OrderList"
-             x:Name="self">
+             x:Name="self"
+             VerticalOptions="FillAndExpand"
+             HorizontalOptions="FillAndExpand">
 
     <ContentView.Resources>
         <ResourceDictionary>
@@ -15,74 +17,143 @@
             </Style>
         </ResourceDictionary>
     </ContentView.Resources>
-    
-    <CollectionView 
-        ItemsSource="{Binding Source={x:Reference self}, Path=Orders}" 
-        Margin="5,10,5,0">
-        <CollectionView.ItemTemplate>
-            <DataTemplate>
-                <Frame  
-                    Padding="15" 
-                    Margin="10,0,10,15" 
-                    CornerRadius="5" 
-                    BorderColor="{AppThemeBinding Dark={StaticResource OffBlack}, Light={StaticResource Grey100}}" 
-                    BackgroundColor="{AppThemeBinding Dark={StaticResource Grey900}, Light={StaticResource Grey50}}"
-                    HasShadow="False">
-                    <Frame.GestureRecognizers>
-                        <TapGestureRecognizer 
-                            Command="{Binding Source={x:Reference self}, Path=ModifyCommand}"
-                            CommandParameter="{Binding Order.Id}"/>
-                    </Frame.GestureRecognizers>
-                    <Grid  ColumnSpacing="10" >
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="Auto"/>
-                        </Grid.ColumnDefinitions>
 
-                        <VerticalStackLayout>
-                            <HorizontalStackLayout>
-                                <Label Text="{Binding Priority}" Style="{StaticResource HeadlineLabel}" />
-                                <Label Text=" - " Style="{StaticResource HeadlineLabel}" />
-                                <Label Text="{Binding Service}" Style="{StaticResource HeadlineLabel}" />
+    <Grid 
+        RowSpacing="8" 
+        ColumnSpacing="8" 
+        VerticalOptions="FillAndExpand"
+        HorizontalOptions="FillAndExpand">
+        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width=".5*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Frame 
+            Grid.Column="0"
+            Grid.Row="0"
+            Padding="10,0"
+            Style="{StaticResource InputFrame}">
+            <Picker 
+                ItemsSource="{Binding Source={x:Reference self}, Path=SearchService.SearchFields}"
+                ItemDisplayBinding="{Binding DisplayText}"
+                SelectedItem="{Binding Source={x:Reference self}, Path=SearchService.SelectedSearchField}" 
+                VerticalOptions="Center" />
+        </Frame>
+
+        <Frame 
+            Grid.Row="0"
+            Grid.Column="1"
+            Grid.ColumnSpan="2"
+            Margin="0,0,5,0"
+            Style="{StaticResource InputFrame}"
+            ZIndex="899"
+            HorizontalOptions="FillAndExpand">
+            <Entry 
+                x:Name="UnfocusMe"
+                Text="{Binding Source={x:Reference self}, Path=SearchService.SearchBinding}"
+                Placeholder="{Binding Source={StaticResource localization}, Path=OrderList_Search}"/>
+        </Frame>
+
+        <Button 
+            Grid.Row="0"
+            Grid.Column="2"
+            ZIndex="900"
+            HorizontalOptions="End"
+            Margin="0,0,25,0"
+            IsVisible="{Binding Source={x:Reference self}, Path=SearchService.IsSearching}"
+            Command="{Binding Source={x:Reference self}, Path=SearchService.ClearCommand}"
+            BorderWidth="0"
+            BackgroundColor="Transparent"
+            Opacity="0.5"
+            Padding="0">
+            <Button.ImageSource>
+                <FontImageSource
+                    Glyph="&#xf2d3;" 
+                    FontFamily="FASolid"
+                    Color="{AppThemeBinding Light={StaticResource OffBlack}, Dark={StaticResource OffWhite}}"/>
+            </Button.ImageSource>
+        </Button>
+
+        <CollectionView 
+            Grid.Row="1"
+            Grid.Column="0"
+            Grid.ColumnSpan="3"
+            x:Name="Collection"
+            ItemsSource="{Binding Source={x:Reference self}, Path=Orders}"
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="FillAndExpand">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame  
+                        Padding="15" 
+                        Margin="0,0,0,8" 
+                        CornerRadius="5" 
+                        HorizontalOptions="FillAndExpand"
+                        BorderColor="{AppThemeBinding Dark={StaticResource OffBlack}, Light={StaticResource Grey100}}" 
+                        BackgroundColor="{AppThemeBinding Dark={StaticResource Grey900}, Light={StaticResource Grey50}}"
+                        HasShadow="False">
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer 
+                                Command="{Binding Source={x:Reference self}, Path=ModifyCommand}"
+                                CommandParameter="{Binding Order.Id}"/>
+                        </Frame.GestureRecognizers>
+                        <Grid  ColumnSpacing="10" >
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <VerticalStackLayout>
+                                <HorizontalStackLayout>
+                                    <Label Text="{Binding Priority}" Style="{StaticResource HeadlineLabel}" />
+                                    <Label Text=" - " Style="{StaticResource HeadlineLabel}" />
+                                    <Label Text="{Binding Service}" Style="{StaticResource HeadlineLabel}" />
+                                </HorizontalStackLayout>
+
+                                <HorizontalStackLayout>
+                                    <Label Text="{Binding DaysLeft}" Margin="0,0,4,0" Style="{StaticResource SubHeadlineLabel}"/>
+                                    <Label Text="{Binding Source={StaticResource localization}, Path=CustomListItem_DaysLeft}" Style="{StaticResource SubHeadlineLabel}" />
+                                    <Label Text=" • " Style="{StaticResource SubHeadlineLabel}" />
+                                    <Label Text="{Binding State}" Style="{StaticResource SubHeadlineLabel}" />
+                                </HorizontalStackLayout>
+                            </VerticalStackLayout>
+
+                            <!-- Overflowing text will just be hidden behind this background color -->
+                            <HorizontalStackLayout 
+                                Grid.Column="1" 
+                                Spacing="20" 
+                                Padding="5,0"
+                                BackgroundColor="{AppThemeBinding Dark={StaticResource Grey900}, Light={StaticResource Grey50}}">
+                                <Button 
+                                    IsVisible="{Binding ShowCancelButtonInList}" 
+                                    Text="{Binding Source={StaticResource localization}, Path=CustomListItem_CancelButton}"
+                                    Command="{Binding Source={x:Reference self}, Path=CancelCommand}"
+                                    Style="{StaticResource DangerButton}"
+                                    CommandParameter="{Binding Order.Id}" />
+                                <Button 
+                                    IsVisible="{Binding ShowAssignButton}" 
+                                    Style="{StaticResource PrimaryButton}"
+                                    Text="{Binding Source={StaticResource localization}, Path=CustomListItem_ApplyButton}" 
+                                    Command="{Binding Source={x:Reference self}, Path=ApplyCommand}"
+                                    CommandParameter="{Binding Order.Id}" />
+                                <Button 
+                                    IsVisible="{Binding ShowNextStateButton}" 
+                                    Text="{Binding NextState}"
+                                    Style="{StaticResource PrimaryButton}"
+                                    Command="{Binding Source={x:Reference self}, Path=NextStateCommand}"
+                                    CommandParameter="{Binding Order.Id}"  />
                             </HorizontalStackLayout>
 
-                            <HorizontalStackLayout>
-                                <Label Text="{Binding DaysLeft}" Margin="0,0,4,0" Style="{StaticResource SubHeadlineLabel}"/>
-                                <Label Text="{Binding Source={StaticResource localization}, Path=CustomListItem_DaysLeft}" Style="{StaticResource SubHeadlineLabel}" />
-                                <Label Text=" • " Style="{StaticResource SubHeadlineLabel}" />
-                                <Label Text="{Binding State}" Style="{StaticResource SubHeadlineLabel}" />
-                            </HorizontalStackLayout>
-                        </VerticalStackLayout>
-
-                        <!-- Overflowing text will just be hidden behind this background color -->
-                        <HorizontalStackLayout 
-                            Grid.Column="1" 
-                            Spacing="20" 
-                            Padding="5,0"
-                            BackgroundColor="{AppThemeBinding Dark={StaticResource Grey900}, Light={StaticResource Grey50}}">
-                            <Button 
-                                IsVisible="{Binding ShowCancelButtonInList}" 
-                                Text="{Binding Source={StaticResource localization}, Path=CustomListItem_CancelButton}"
-                                Command="{Binding Source={x:Reference self}, Path=CancelCommand}"
-                                Style="{StaticResource DangerButton}"
-                                CommandParameter="{Binding Order.Id}" />
-                            <Button 
-                                IsVisible="{Binding ShowAssignButton}" 
-                                Style="{StaticResource PrimaryButton}"
-                                Text="{Binding Source={StaticResource localization}, Path=CustomListItem_ApplyButton}" 
-                                Command="{Binding Source={x:Reference self}, Path=ApplyCommand}"
-                                CommandParameter="{Binding Order.Id}" />
-                            <Button 
-                                IsVisible="{Binding ShowNextStateButton}" 
-                                Text="{Binding NextState}"
-                                Style="{StaticResource PrimaryButton}"
-                                Command="{Binding Source={x:Reference self}, Path=NextStateCommand}"
-                                CommandParameter="{Binding Order.Id}"  />
-                        </HorizontalStackLayout>
-
-                    </Grid>
-                </Frame>
-            </DataTemplate>
-        </CollectionView.ItemTemplate>
-    </CollectionView>
+                        </Grid>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
 </ContentView>

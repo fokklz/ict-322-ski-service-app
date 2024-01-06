@@ -5,7 +5,15 @@ VisualStudioVersion = 17.8.34316.72
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SkiServiceApp", "SkiServiceApp\SkiServiceApp.csproj", "{D3171805-CE5A-4FF5-98EC-D8BDAAB6E617}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SkiServiceApp.Tests", "SkiServiceApp.Tests\SkiServiceApp.Tests.csproj", "{57FF35A0-202F-4E5C-9702-F03575650320}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SkiServiceApp.Tests", "SkiServiceApp.Tests\SkiServiceApp.Tests.csproj", "{57FF35A0-202F-4E5C-9702-F03575650320}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Projektmappenelemente", "Projektmappenelemente", "{4791CE6B-69A3-459B-B785-FCE150821E71}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		docker-compose.yml = docker-compose.yml
+		LICENSE = LICENSE
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

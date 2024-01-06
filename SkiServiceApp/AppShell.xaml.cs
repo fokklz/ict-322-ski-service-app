@@ -1,5 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using SkiServiceApp.Common;
+﻿using SkiServiceApp.Common;
+using SkiServiceApp.Interfaces;
 using SkiServiceApp.ViewModels;
 using SkiServiceApp.Views;
 

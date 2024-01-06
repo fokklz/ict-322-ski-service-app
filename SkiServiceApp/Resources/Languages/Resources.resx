@@ -341,6 +341,9 @@
   <data name="OrderDetailPage.PreDaysLeft" xml:space="preserve">
     <value>Für die Erledigung des Auftrages sind noch</value>
   </data>
+  <data name="OrderList.Search" xml:space="preserve">
+    <value>Suchen</value>
+  </data>
   <data name="SettingsPage.AlwaysSaveLoginLabel" xml:space="preserve">
     <value>Login immer speichern</value>
   </data>

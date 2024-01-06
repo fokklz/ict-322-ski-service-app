@@ -19,126 +19,113 @@
         </ResourceDictionary>
     </ContentPage.Resources>
 
-    <Grid Margin="10, 0" >
+    <Grid ColumnSpacing="8" Margin="10,10,10,0">
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width=".6*"/>
             <ColumnDefinition Width=".4*"/>
         </Grid.ColumnDefinitions>
 
-        <components:OrderList Grid.Column="0" x:Name="OrderList" Orders="{Binding Orders}" Location="Dashboard"/>
+        <components:OrderList Grid.Row="0" Grid.RowSpan="3" Grid.Column="0" x:Name="OrderList" Orders="{Binding Orders}" Location="Dashboard" HorizontalOptions="FillAndExpand"/>
 
-        <!-- Exclusive Grid for the Chart to have better control over the layout -->
-        <Grid Grid.Column="1" VerticalOptions="StartAndExpand">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
+        <Label 
+             Grid.Row="0"
+             Grid.Column="1"
+             Text="{Binding Source={StaticResource localization}, Path=AppShell_FlyoutItem_UserListButton}"
+             FontSize="34"/>
 
-            <!-- Title -->
-            <Label 
-                Grid.Row="0"
-                Grid.Column="0"
-                Text="{Binding Source={StaticResource localization}, Path=AppShell_FlyoutItem_UserListButton}"
-                FontSize="34"
-                Margin="0,20,0,10"/>
+        <VerticalStackLayout Grid.Row="1" Grid.Column="1">
+            <chart:SfCircularChart >
+                <chart:SfCircularChart.BindingContext>
+                    <chartViewModels:DashboardChartViewModel x:Name="DashboardChartViewModel" />
+                </chart:SfCircularChart.BindingContext>
 
-            <!-- Stat Chart -->
-            <VerticalStackLayout Grid.Row="1" Grid.Column="0">
-                <chart:SfCircularChart >
-                    <chart:SfCircularChart.BindingContext>
-                        <chartViewModels:DashboardChartViewModel x:Name="DashboardChartViewModel" />
-                    </chart:SfCircularChart.BindingContext>
+                <chart:SfCircularChart.Series>
+                    <chart:PieSeries 
+                ItemsSource="{Binding Data}" 
+                PaletteBrushes="{Binding CustomBrushes}"
+                XBindingPath="XValue" 
+                YBindingPath="YValue"
+                StartAngle="270"
+                EndAngle="630" 
+                Radius="0.9"
+                ShowDataLabels="False"/>
+                </chart:SfCircularChart.Series>
 
-                    <chart:SfCircularChart.Series>
-                        <chart:PieSeries 
-                            ItemsSource="{Binding Data}" 
-                            PaletteBrushes="{Binding CustomBrushes}"
-                            XBindingPath="XValue" 
-                            YBindingPath="YValue"
-                            StartAngle="270"
-                            EndAngle="630" 
-                            Radius="0.9"
-                            ShowDataLabels="False"/>
-                    </chart:SfCircularChart.Series>
+                <chart:SfCircularChart.Legend>
+                    <chart:ChartLegend Placement="Bottom">
+                        <chart:ChartLegend.ItemTemplate>
+                            <DataTemplate>
+                                <HorizontalStackLayout>
+                                    <Rectangle 
+                                HeightRequest="12" 
+                                WidthRequest="12" 
+                                Margin="3"
+                                Background="{Binding IconBrush}"/>
+                                    <Label 
+                                Text="{Binding Text}" 
+                                Margin="3"/>
+                                </HorizontalStackLayout>
+                            </DataTemplate>
+                        </chart:ChartLegend.ItemTemplate>
+                    </chart:ChartLegend>
+                </chart:SfCircularChart.Legend>
+            </chart:SfCircularChart>
+            <!-- Upper summary Text -->
+            <FlexLayout
+                Padding="4,30,4,0"
+                Direction="Row" 
+                Wrap="Wrap" 
+                AlignItems="Start"
+                JustifyContent="Start">
+                <Label 
+                    Text="{Binding Source={StaticResource localization}, Path=Dashboard_Summary_Pre}" 
+                    Style="{StaticResource SummaryLabel}" />
+                <Label 
+                    Text="{Binding Source={x:Reference DashboardChartViewModel}, Path=TotalYouDone}" 
+                    Style="{StaticResource SummaryLabel}" FontAttributes="Bold" />
+                <Label 
+                    Text="{Binding Source={StaticResource localization}, Path=Dashboard_Summary_Middle}" 
+                    Style="{StaticResource SummaryLabel}" />
+                <Label 
+                    Text="{Binding Source={x:Reference DashboardChartViewModel}, Path=TotalDone}" 
+                    Style="{StaticResource SummaryLabel}" FontAttributes="Bold" />
+                <Label 
+                    Text="{Binding Source={StaticResource localization}, Path=Dashboard_Summary_Sub}" 
+                    Style="{StaticResource SummaryLabel}" />
+            </FlexLayout>
 
-                    <chart:SfCircularChart.Legend>
-                        <chart:ChartLegend Placement="Bottom">
-                            <chart:ChartLegend.ItemTemplate>
-                                <DataTemplate>
-                                    <HorizontalStackLayout>
-                                        <Rectangle 
-                                            HeightRequest="12" 
-                                            WidthRequest="12" 
-                                            Margin="3"
-                                            Background="{Binding IconBrush}"/>
-                                        <Label 
-                                            Text="{Binding Text}" 
-                                            Margin="3"/>
-                                    </HorizontalStackLayout>
-                                </DataTemplate>
-                            </chart:ChartLegend.ItemTemplate>
-                        </chart:ChartLegend>
-                    </chart:SfCircularChart.Legend>
-                </chart:SfCircularChart>
-                <!-- Upper summary Text -->
-                <FlexLayout
-                    Padding="4,30,4,0"
-                    Direction="Row" 
-                    Wrap="Wrap" 
-                    AlignItems="Start"
-                    JustifyContent="Start">
-                    <Label 
-                        Text="{Binding Source={StaticResource localization}, Path=Dashboard_Summary_Pre}" 
-                        Style="{StaticResource SummaryLabel}" />
-                    <Label 
-                        Text="{Binding Source={x:Reference DashboardChartViewModel}, Path=TotalYouDone}" 
-                        Style="{StaticResource SummaryLabel}" FontAttributes="Bold" />
-                    <Label 
-                        Text="{Binding Source={StaticResource localization}, Path=Dashboard_Summary_Middle}" 
-                        Style="{StaticResource SummaryLabel}" />
-                    <Label 
-                        Text="{Binding Source={x:Reference DashboardChartViewModel}, Path=TotalDone}" 
-                        Style="{StaticResource SummaryLabel}" FontAttributes="Bold" />
-                    <Label 
-                        Text="{Binding Source={StaticResource localization}, Path=Dashboard_Summary_Sub}" 
-                        Style="{StaticResource SummaryLabel}" />
-                </FlexLayout>
+            <!-- Lower summary Text -->
+            <FlexLayout
+                Padding="4,5,4,0"
+                Direction="Row" 
+                Wrap="Wrap" 
+                AlignItems="Start"
+                JustifyContent="Start">
+                <Label 
+                    Text="{Binding Source={StaticResource localization}, Path=Dashboard_SecondarySummary_Pre}" 
+                    Style="{StaticResource SummaryLabel}" />
+                <Label 
+                    Text="{Binding Source={x:Reference DashboardChartViewModel}, Path=TotalYou}" 
+                    Style="{StaticResource SummaryLabel}" FontAttributes="Bold" />
+                <Label 
+                    Text="{Binding Source={StaticResource localization}, Path=Dashboard_SecondarySummary_Sub}" 
+                    Style="{StaticResource SummaryLabel}" />
+            </FlexLayout>
 
-                <!-- Lower summary Text -->
-                <FlexLayout
-                    Padding="4,5,4,0"
-                    Direction="Row" 
-                    Wrap="Wrap" 
-                    AlignItems="Start"
-                    JustifyContent="Start">
-                    <Label 
-                        Text="{Binding Source={StaticResource localization}, Path=Dashboard_SecondarySummary_Pre}" 
-                        Style="{StaticResource SummaryLabel}" />
-                    <Label 
-                        Text="{Binding Source={x:Reference DashboardChartViewModel}, Path=TotalYou}" 
-                        Style="{StaticResource SummaryLabel}" FontAttributes="Bold" />
-                    <Label 
-                        Text="{Binding Source={StaticResource localization}, Path=Dashboard_SecondarySummary_Sub}" 
-                        Style="{StaticResource SummaryLabel}" />
-                </FlexLayout>
-
-                <VerticalStackLayout Padding="0,25,0,0">
-                    <Button 
-                        Text="{Binding Source={StaticResource localization}, Path=AppShell_FlyoutItem_ListButton}"
-                        Command="{Binding ListCommand}"/>
-                    <Button 
-                        Text="{Binding Source={StaticResource localization}, Path=AppShell_FlyoutItem_UserListButton}"
-                        Command="{Binding UserListCommand}" 
-                        Margin="0,15,0,0" />
-                </VerticalStackLayout>
+            <VerticalStackLayout Padding="0,25,0,0">
+                <Button 
+                    Text="{Binding Source={StaticResource localization}, Path=AppShell_FlyoutItem_ListButton}"
+                    Command="{Binding ListCommand}"/>
+                <Button 
+                    Text="{Binding Source={StaticResource localization}, Path=AppShell_FlyoutItem_UserListButton}"
+                    Command="{Binding UserListCommand}" 
+                    Margin="0,15,0,0" />
             </VerticalStackLayout>
-        </Grid>
+        </VerticalStackLayout>
     </Grid>
 </ContentPage>
