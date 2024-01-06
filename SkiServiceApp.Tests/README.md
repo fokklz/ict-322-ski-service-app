@@ -3,7 +3,7 @@
 <!--TOC-->
   - [Overview](#overview)
   - [Test Structure](#test-structure)
-    - [Mirroring Example:](#mirroring-example)
+    - [Mirroring Example](#mirroring-example)
   - [Docker Integration](#docker-integration)
   - [Running the Tests](#running-the-tests)
 <!--/TOC-->
@@ -26,7 +26,7 @@ For every component, service, or feature in the `SkiServiceApp` you want to test
 create a corresponding test file in `SkiServiceApp.Tests`. 
 This mirroring ensures that navigating the test project is intuitive and easy to understand.
 
-### Mirroring Example:
+### Mirroring Example
 
 If you have a class you want to test in `SkiServiceApp.Common`, you should place the corresponding test in `SkiServiceApp.Tests.Common`.
 
