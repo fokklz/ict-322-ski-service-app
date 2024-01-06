@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics;
 
-namespace SkiServiceApp.Tests
+namespace SkiServiceApp.Tests.Utils
 {
     public class DockerFixture : IDisposable
     {

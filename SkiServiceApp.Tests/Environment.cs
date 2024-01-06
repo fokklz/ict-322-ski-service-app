@@ -62,7 +62,7 @@ namespace SkiServiceApp.Tests
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="instance"></param>
-        public void AddService<T>(T instance) 
+        public void AddService<T>(T instance)
             where T : class
         {
             ServiceProviderMock.Setup(x => x.GetService(typeof(T))).Returns(instance);

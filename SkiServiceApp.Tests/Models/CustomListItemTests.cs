@@ -1,10 +1,8 @@
 ﻿using Newtonsoft.Json;
 using SkiServiceApp.Common;
-using SkiServiceApp.Interfaces;
 using SkiServiceApp.Interfaces.API;
 using SkiServiceApp.Models;
 using SkiServiceApp.Services.API;
-using SkiServiceApp.Tests.Util.Helper;
 using SkiServiceModels.DTOs.Requests;
 using SkiServiceModels.DTOs.Responses;
 using System.Net.Http.Headers;
