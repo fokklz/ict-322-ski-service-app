@@ -50,40 +50,6 @@ public partial class OrderList : ContentView, INotifyPropertyChanged
     }
 
     /// <summary>
-    /// Hook to call PropertyChanged when the Orders property changes. Since Fody.PropertyChanged is not working on BindableProperties.
-    /// </summary>
-    /// <param name="bindable">The control</param>
-    /// <param name="oldValue">The previous value</param>
-    /// <param name="newValue">The current value</param>
-    private static void OnOrderPropertyChanged(BindableObject bindable, object oldValue, object newValue)
-    {
-        var control = (OrderList)bindable;
-        control.PropertyChanged?.Invoke(control, new PropertyChangedEventArgs(nameof(Orders)));
-    }
-
-    /// <summary>
-    /// Hook to call PropertyChanged when the Location property changes. Since Fody.PropertyChanged is not working on BindableProperties.
-    /// </summary>
-    /// <param name="bindable">The control</param>
-    /// <param name="oldValue">The previous value</param>
-    /// <param name="newValue">The current value</param>
-    private static void OnLocationPropertyChanged(BindableObject bindable, object oldValue, object newValue)
-    {
-        var control = (OrderList)bindable;
-        control.PropertyChanged?.Invoke(control, new PropertyChangedEventArgs(nameof(Location)));
-    }
-
-    /// <summary>
-    /// Unfocus the control when the binding context changes.
-    /// </summary>
-    /// <param name="sender">The sender of the Event</param>
-    /// <param name="e">The params of the Event</param>
-    private void OnBindingContextChanged(object sender, EventArgs e)
-    {
-        UnfocusMe.Unfocus();
-    }
-
-    /// <summary>
     /// Apply to a Order. (each item)
     /// </summary>
     public ICommand ApplyCommand => new Command<int>(async (id) => await ExecuteApplyCommand(id));
@@ -110,9 +76,12 @@ public partial class OrderList : ContentView, INotifyPropertyChanged
 
         SearchHelper.SearchChanged += async (sender, e) =>
         {
+#if !MACCATALYST
             if (!e.IsSearching)
             {
+                _ = await UnfocusMe.HideKeyboardAsync();
             }
+#endif
         };
     }
 
@@ -196,5 +165,41 @@ public partial class OrderList : ContentView, INotifyPropertyChanged
     public async Task ExecuteModifyCommand(int id)
     {
         await Shell.Current.GoToAsync($"{nameof(OrderDetailPage)}?OrderId={id}");
+    }
+
+
+
+    /// <summary>
+    /// Hook to call PropertyChanged when the Orders property changes. Since Fody.PropertyChanged is not working on BindableProperties.
+    /// </summary>
+    /// <param name="bindable">The control</param>
+    /// <param name="oldValue">The previous value</param>
+    /// <param name="newValue">The current value</param>
+    private static void OnOrderPropertyChanged(BindableObject bindable, object oldValue, object newValue)
+    {
+        var control = (OrderList)bindable;
+        control.PropertyChanged?.Invoke(control, new PropertyChangedEventArgs(nameof(Orders)));
+    }
+
+    /// <summary>
+    /// Hook to call PropertyChanged when the Location property changes. Since Fody.PropertyChanged is not working on BindableProperties.
+    /// </summary>
+    /// <param name="bindable">The control</param>
+    /// <param name="oldValue">The previous value</param>
+    /// <param name="newValue">The current value</param>
+    private static void OnLocationPropertyChanged(BindableObject bindable, object oldValue, object newValue)
+    {
+        var control = (OrderList)bindable;
+        control.PropertyChanged?.Invoke(control, new PropertyChangedEventArgs(nameof(Location)));
+    }
+
+    /// <summary>
+    /// Unfocus the control when the binding context changes.
+    /// </summary>
+    /// <param name="sender">The sender of the Event</param>
+    /// <param name="e">The params of the Event</param>
+    private void OnBindingContextChanged(object? sender, EventArgs e)
+    {
+        UnfocusMe.Unfocus();
     }
 }

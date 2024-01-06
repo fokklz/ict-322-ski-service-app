@@ -75,9 +75,11 @@
                 Style="{StaticResource InputLabel}"
                 Margin="4,0,0,-4"/>
             <Frame Style="{StaticResource InputFrame}">
-                <Entry 
-                    x:Name="UnfocusMe"
-                    Text="{Binding Username, Mode=TwoWay}"/>
+                <VerticalStackLayout>
+                    <Entry 
+                        x:Name="UnfocusMe"
+                        Text="{Binding Username, Mode=TwoWay}"/>
+                </VerticalStackLayout>
             </Frame>
         </VerticalStackLayout>
         <VerticalStackLayout Style="{StaticResource InputGroup}" Margin="0,0,0,10">
@@ -86,9 +88,11 @@
                 Style="{StaticResource InputLabel}"
                 Margin="4,0,0,-4"/>
             <Frame Style="{StaticResource InputFrame}">
-                <Entry 
-                    Text="{Binding Password, Mode=TwoWay}" 
-                    IsPassword="True" />
+                <VerticalStackLayout>
+                    <Entry 
+                        Text="{Binding Password, Mode=TwoWay}" 
+                        IsPassword="True" />
+                </VerticalStackLayout>
             </Frame>
         </VerticalStackLayout>
         <Button 

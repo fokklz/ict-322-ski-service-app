@@ -145,6 +145,8 @@ namespace SkiServiceApp.Common
         };
 
         [DependsOn(nameof(CurrentCulture))]
+        public string OrderList_Search => GetResource("OrderList.Search");
+        [DependsOn(nameof(CurrentCulture))]
         public string AppLogin_LastLoginsLabel => GetResource("AppLogin.LastLoginsLabel");
         [DependsOn(nameof(CurrentCulture))]
         public string AppLogin_LastUsedLabel => GetResource("AppLogin.LastUsedLabel");

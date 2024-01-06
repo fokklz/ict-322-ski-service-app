@@ -56,7 +56,8 @@
             HorizontalOptions="FillAndExpand">
             <Entry 
                 x:Name="UnfocusMe"
-                Text="{Binding Source={x:Reference self}, Path=SearchService.SearchBinding}"  />
+                Text="{Binding Source={x:Reference self}, Path=SearchService.SearchBinding}"
+                Placeholder="{Binding Source={StaticResource localization}, Path=OrderList_Search}"/>
         </Frame>
 
         <Button 
@@ -64,6 +65,7 @@
             Grid.Column="2"
             ZIndex="900"
             HorizontalOptions="End"
+            Margin="0,0,25,0"
             IsVisible="{Binding Source={x:Reference self}, Path=SearchService.IsSearching}"
             Command="{Binding Source={x:Reference self}, Path=SearchService.ClearCommand}"
             BorderWidth="0"

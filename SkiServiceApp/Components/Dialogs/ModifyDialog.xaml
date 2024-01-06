@@ -9,7 +9,9 @@
         <VerticalStackLayout Style="{StaticResource InputGroup}">
             <Label Text="{Binding Source={StaticResource localization}, Path=ModifyDialog_NameLabel}" Style="{StaticResource InputLabel}" />
             <Frame Style="{StaticResource InputFrame}">
-                <Entry Text="{Binding Source={x:Reference ModifyDialogView}, Path=Entry.Order.Name, Mode=TwoWay}" HorizontalOptions="FillAndExpand" />
+                <VerticalStackLayout>
+                    <Entry Text="{Binding Source={x:Reference ModifyDialogView}, Path=Entry.Order.Name, Mode=TwoWay}" HorizontalOptions="FillAndExpand" />
+                </VerticalStackLayout>
             </Frame>
         </VerticalStackLayout>
 
@@ -17,7 +19,9 @@
         <VerticalStackLayout Style="{StaticResource InputGroup}">
             <Label Text="{Binding Source={StaticResource localization}, Path=ModifyDialog_EmailLabel}" Style="{StaticResource InputLabel}" />
             <Frame Style="{StaticResource InputFrame}">
-                <Entry Text="{Binding Source={x:Reference ModifyDialogView}, Path=Entry.Order.Email, Mode=TwoWay}" Keyboard="Email" HorizontalOptions="FillAndExpand" />
+                <VerticalStackLayout>
+                    <Entry Text="{Binding Source={x:Reference ModifyDialogView}, Path=Entry.Order.Email, Mode=TwoWay}" Keyboard="Email" HorizontalOptions="FillAndExpand" />
+                </VerticalStackLayout>
             </Frame>
         </VerticalStackLayout>
 
@@ -25,7 +29,9 @@
         <VerticalStackLayout Style="{StaticResource InputGroup}">
             <Label Text="{Binding Source={StaticResource localization}, Path=ModifyDialog_PhoneLabel}" Style="{StaticResource InputLabel}" />
             <Frame Style="{StaticResource InputFrame}">
-                <Entry Text="{Binding Source={x:Reference ModifyDialogView}, Path=Entry.Order.Phone, Mode=TwoWay}" Keyboard="Telephone" HorizontalOptions="FillAndExpand"  />
+                <VerticalStackLayout>
+                    <Entry Text="{Binding Source={x:Reference ModifyDialogView}, Path=Entry.Order.Phone, Mode=TwoWay}" Keyboard="Telephone" HorizontalOptions="FillAndExpand"  />
+                </VerticalStackLayout>
             </Frame>
         </VerticalStackLayout>
 

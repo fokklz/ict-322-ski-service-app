@@ -1,5 +1,4 @@
-﻿using CommunityToolkit.Maui.Core.Platform;
-using PropertyChanged;
+﻿using PropertyChanged;
 using SkiServiceApp.Common;
 using SkiServiceApp.Common.Events;
 using SkiServiceApp.Common.Helpers;
@@ -89,7 +88,7 @@ namespace SkiServiceApp.Services
 
         private void OnSelectedSearchFieldChanged()
         {
-            SearchHelper.OnSearchChanged(new SearchChangedEventArgs(Search, SelectedSearchField.BackgroundValue));
+            if (!string.IsNullOrEmpty(Search)) SearchHelper.OnSearchChanged(new SearchChangedEventArgs(Search, SelectedSearchField.BackgroundValue));
         }
     }
 }

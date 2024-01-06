@@ -28,7 +28,7 @@ namespace SkiServiceApp
             // setting opacity to 0 will hide it until the animation is called
             MainPage = MainAppLogin;
 
-            InitializeApplicationAsync(storageService).Wait();
+            InitializeApplicationAsync(storageService);
         }
 
         private async Task InitializeApplicationAsync(IStorageService storageService)
